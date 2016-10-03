@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Capstone;
-//Daniel Comment
+//Daniel Comment through netbeans
 
 import java.io.File;
 import java.io.FileOutputStream;
