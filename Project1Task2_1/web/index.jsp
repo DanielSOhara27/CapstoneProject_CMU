@@ -19,7 +19,8 @@
         <select name ="operation">
                 <option value="DownloadData">Download Data</option>            
                 <option value="UploadFiles">Upload Files</option>
-                <option value="HumanObservation">Human Observation Submittal</option>                
+                <option value="HumanObservation">Human Observation Submittal</option>
+                <option value="CreateTableJSP">Create Table</option>
         </select>
         <input type="submit" value="Go" />
         <br><br><br>

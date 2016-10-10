@@ -2,21 +2,19 @@
 <!DOCTYPE glassfish-web-app PUBLIC "-//GlassFish.org//DTD GlassFish Application Server 3.1 Servlet 3.0//EN" "http://glassfish.org/dtds/glassfish-web-app_3_0-1.dtd">
 <glassfish-web-app error-url="">
   <context-root>/Capstone</context-root>
+  <servlet>
+    <servlet-name>CreateTable</servlet-name>
+  </servlet>
   <class-loader delegate="true"/>
   <jsp-config>
     <property name="keepgenerated" value="true">
       <description>Keep a copy of the generated servlet class' java code.</description>
     </property>
-    
-     <multipart-config>
+    <multipart-config>
       <location>/tmp</location>
       <max-file-size>20848820</max-file-size>
       <max-request-size>418018841</max-request-size>
       <file-size-threshold>1048576</file-size-threshold>
- </multipart-config>
- 
-    
-    
-    
+    </multipart-config>
   </jsp-config>
 </glassfish-web-app>
