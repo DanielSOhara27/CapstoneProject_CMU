@@ -10,20 +10,13 @@ package Capstone;
 // Natt OK
 //Sophie finally working.
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
+import java.io.*;
+import javax.servlet.http.*;
 import java.util.logging.Level;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
+
 
 /**
  *
@@ -42,39 +35,7 @@ public class UploadFileServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");        
-        
-        // set destination place
-        final String path = "C:/Desktop";
-        final Part filePart = request.getPart("file");
-        final String fileName = getFileName(filePart);
-        
-        OutputStream out = null;
-        InputStream filecontent = null;
-        final PrintWriter writer = response.getWriter();
-        
-        out = new FileOutputStream(new File(path + File.separator + fileName));
-        filecontent = filePart.getInputStream();
-        int read = 0;
-        final byte[] bytes = new byte[1024];
-        while ((read = filecontent.read(bytes)) != -1) {
-            out.write(bytes, 0, read);
-        }
-        writer.println("New file " + fileName + " created at " + path);
-     //   LOGGER.log(Level.INFO, "File{0}being uploaded to {1}", 
-              //  new Object[]{fileName, path});
-        if (out != null) {
-            out.close();
-        }
-        if (filecontent != null) {
-            filecontent.close();
-        }
-        if (writer != null) {
-            writer.close();
-        }
-    }
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -88,7 +49,7 @@ public class UploadFileServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+      //  processRequest(request, response);
     }
 
     /**
@@ -104,22 +65,52 @@ public class UploadFileServlet extends HttpServlet {
             throws ServletException, IOException {
         
         // set destination place
-        final String path = "C:/Desktop";
+        final String path = "C:\\Users\\Ellie\\Desktop";
         final Part filePart = request.getPart("file");
+        System.out.println("here" + filePart);
         final String fileName = getFileName(filePart);
-        
+                
         OutputStream out = null;
         InputStream filecontent = null;
         final PrintWriter writer = response.getWriter();
+       
         
         out = new FileOutputStream(new File(path + File.separator + fileName));
         filecontent = filePart.getInputStream();
+        System.out.println("hello" + filecontent);
+        
+                BufferedReader br = null;
+        StringBuilder sb = new StringBuilder();
+        
+        String line;
+        try
+        {
+            br = new BufferedReader(new InputStreamReader(filecontent));
+            while((line = br.readLine()) != null)
+            {
+             sb.append(line);
+             System.out.println(line);
+            }
+            
+        
+        }
+        catch(IOException e)
+        {
+         e.printStackTrace();
+        }
+        
+        
+        
         int read = 0;
         final byte[] bytes = new byte[1024];
         while ((read = filecontent.read(bytes)) != -1) {
             out.write(bytes, 0, read);
         }
+        
+        
+
         writer.println("New file " + fileName + " created at " + path);
+        
      //   LOGGER.log(Level.INFO, "File{0}being uploaded to {1}", 
               //  new Object[]{fileName, path});
         if (out != null) {
