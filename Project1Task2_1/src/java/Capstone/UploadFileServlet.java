@@ -10,12 +10,23 @@ package Capstone;
 // Natt OK
 //Sophie finally working.
 
-import java.io.*;
-import javax.servlet.http.*;
-import java.util.logging.Level;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+
+
+
+
 
 
 /**
@@ -26,26 +37,19 @@ import javax.servlet.annotation.WebServlet;
 @MultipartConfig
 public class UploadFileServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    UploadFileApplication ufa = null;
+    
+        private static final long serialVersionUID = 1L;
+     
+    // location to store file uploaded
+    private static final String UPLOAD_DIRECTORY = "C:\\Users\\Ellie\\Documents\\UploadTests";
+ 
+    // upload settings
+    private static final int MEMORY_THRESHOLD   = 1024 * 1024 * 3;  // 3MB
+    private static final int MAX_FILE_SIZE      = 1024 * 1024 * 40; // 40MB
+    private static final int MAX_REQUEST_SIZE   = 1024 * 1024 * 50; // 50MB
+ 
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -64,65 +68,68 @@ public class UploadFileServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        // set destination place
-        final String path = "C:\\Users\\Ellie\\Desktop";
-        final Part filePart = request.getPart("file");
-        System.out.println("here" + filePart);
-        final String fileName = getFileName(filePart);
-                
-        OutputStream out = null;
-        InputStream filecontent = null;
-        final PrintWriter writer = response.getWriter();
-       
-        
-        out = new FileOutputStream(new File(path + File.separator + fileName));
-        filecontent = filePart.getInputStream();
-        System.out.println("hello" + filecontent);
-        
-                BufferedReader br = null;
-        StringBuilder sb = new StringBuilder();
-        
-        String line;
-        try
-        {
-            br = new BufferedReader(new InputStreamReader(filecontent));
-            while((line = br.readLine()) != null)
-            {
-             sb.append(line);
-             System.out.println(line);
-            }
-            
-        
-        }
-        catch(IOException e)
-        {
-         e.printStackTrace();
-        }
-        
-        
-        
-        int read = 0;
-        final byte[] bytes = new byte[1024];
-        while ((read = filecontent.read(bytes)) != -1) {
-            out.write(bytes, 0, read);
-        }
-        
+        ufa = new UploadFileApplication();
         
 
-        writer.println("New file " + fileName + " created at " + path);
-        
-     //   LOGGER.log(Level.INFO, "File{0}being uploaded to {1}", 
-              //  new Object[]{fileName, path});
-        if (out != null) {
-            out.close();
-        }
-        if (filecontent != null) {
-            filecontent.close();
-        }
-        if (writer != null) {
-            writer.close();
-        }
+        //process only if its multipart content
+
+        if(ServletFileUpload.isMultipartContent(request)){
+
+            try {
+
+                List<FileItem> multiparts = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
+
+ 
+
+                for(FileItem item : multiparts){
+
+                    if(!item.isFormField()){
+
+                        String name = new File(item.getName()).getName();
+
+                        System.out.println("name "+name);
+
+                        item.write(
+                                
+
+                          new File("C:\\Users\\Ellie\\Documents\\UploadTests" + File.separator + name));
+                        System.out.println("gets here");
+
+                    }
+
+                }
+
+ 
+
+               //File uploaded successfully
+
+               request.setAttribute("message", "File Uploaded Successfully");
+
+            } catch (Exception ex) {
+
+               request.setAttribute("message", "File Upload Failed due to " + ex);
+
+            }
+
+ 
+
+        }else{
+
+            request.setAttribute("message",
+
+                   "Sorry this Servlet only handles file upload request");
+     }
+
+ 
+
+        request.getRequestDispatcher("/result.jsp").forward(request, response);
+
+ 
+
     }
+
+    
+
 
     /**
      * Returns a short description of the servlet.
@@ -134,18 +141,6 @@ public class UploadFileServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>.
     
-    
-    
-    private String getFileName(final Part part) {
-        final String partHeader = part.getHeader("content-disposition");
-      //  LOGGER.log(Level.INFO, "Part Header = {0}", partHeader);
-        for (String content : part.getHeader("content-disposition").split(";")) {
-            if (content.trim().startsWith("filename")) {
-                return content.substring(
-                        content.indexOf('=') + 1).trim().replace("\"", "");
-            }
-        }
-        return null;
-    }
+
 
 }
