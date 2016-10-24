@@ -35,12 +35,12 @@ public class UploadDownloadServlet extends HttpServlet {
     
     
     
-    UploadDownloadModel udm = null;
+    
     
     
     public void init ()
     {
-        udm = new UploadDownloadModel();
+        
     }
 
     @Override

@@ -1,4 +1,4 @@
-<%-- 
+    <%-- 
     Document   : result
     Created on : Feb 1, 2016, 8:18:26 PM
     Author     : Ellie
@@ -16,10 +16,10 @@
     <body>
         <h1> This is the upload form</h1><br>
         <h2>Please submit your zipped file here: </h2>
-        <form action ="UploadFileServlet" method ="POST" enctype="multipart/form-data">  
+        <form action ="uploadFile" method ="POST" enctype="multipart/form-data">  
             File:
-            <input type="file" name="file" id="file" /> <br/>
-            <input type="submit" value="Upload" name="upload" id="upload" />
+            <input type="file" name="file" /> <br/>
+            <input type="submit" value="Upload File" />
         </form>
    
 

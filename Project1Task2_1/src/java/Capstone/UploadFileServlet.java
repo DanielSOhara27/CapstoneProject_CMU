@@ -94,10 +94,10 @@ public class UploadFileServlet extends HttpServlet {
                         System.out.println("name "+name);
                         nextView = "index.jsp";
 
-                     //   item.write(
+                       item.write(
                                 
 
-                //          new File("C:\\Users\\Ellie\\Documents\\UploadTests" + File.separator + name));
+                     new File("C:\\Users\\Ellie\\Documents\\UploadTests" + File.separator + name));
                         
                     }
                    }

@@ -23,86 +23,51 @@ import java.util.zip.*;
  */
 public class UploadFileApplication {
     
-    final int BUFFER = 2048;
+    final int BUFFER_SIZE = 4096;
     static final int TOOBIG = 0x6400000; // Max size of unzipped data, 100MB
     static final int TOOMANY = 1024;     // Max number of files
 // ...
- 
-private String validateFilename(String filename, String intendedDir)
-      throws java.io.IOException 
-{
-            File f = new File(filename);
-            String canonicalPath = f.getCanonicalPath();
- 
-            File iD = new File(intendedDir);
-            String canonicalID = iD.getCanonicalPath();
-   
-            if (canonicalPath.startsWith(canonicalID)) {
-                    return canonicalPath;
-            } else {
-                    throw new IllegalStateException("File is outside extraction target directory.");
-            }
-} 
 
-    
     
    public void unpackFileFolder(String fileName) throws IOException
-   {
+    {
                 System.out.println("Gets here");
-                FileInputStream fis = new FileInputStream(fileName);
+                System.out.println(fileName);
                 System.out.println("here");
-                ZipInputStream zis = new ZipInputStream(new BufferedInputStream(fis));
-                ZipEntry entry;
-                int entries = 0;
-                long total = 0;
-                try {
-                  while ((entry = zis.getNextEntry()) != null) {
+                ZipInputStream zis = new ZipInputStream(new FileInputStream(fileName));
+                ZipEntry entry = zis.getNextEntry();
+                System.out.println(entry);
+                while (entry != null) {
                     System.out.println("Extracting: " + entry);
-                    int count;
-                    byte data[] = new byte[BUFFER];
-                    // Write the files to the disk, but ensure that the filename is valid,
-                    // and that the file is not insanely big
-                    String name = validateFilename(entry.getName(), ".");
-                    if (entry.isDirectory()) {
-                      System.out.println("Creating directory " + name);
-                      new File(name).mkdir();
-                      continue;
+                    String filePath = "C:\\Users\\Ellie\\Documents\\UploadTests\\" + entry.getName();                 
+                    if (!entry.isDirectory()) {
+                      extractFile(zis, filePath);
+                      System.out.println("here within not a directory");
                     }
-                    FileOutputStream fos = new FileOutputStream(name);
-                    BufferedOutputStream dest = new BufferedOutputStream(fos, BUFFER);
-                    while (total + BUFFER <= TOOBIG && (count = zis.read(data, 0, BUFFER)) != -1) {
-                      dest.write(data, 0, count);
-                      total += count;
-                    }
-                    dest.flush();
-                    dest.close();
+                    else
+                    {
+                        File dir = new File(filePath);
+                        dir.mkdir();
+                    }   
                     zis.closeEntry();
-                    entries++;
-                    if (entries > TOOMANY) {
-                      throw new IllegalStateException("Too many files to unzip.");
-                    }
-                    if (total > TOOBIG) {
-                      throw new IllegalStateException("File being unzipped is too big.");
-                    }
-                  }
-                } finally {
+                    entry = zis.getNextEntry();
+                    } 
                   zis.close();
-                }
-    }    
-
-
-
-
-    
-    private String getFileName(final Part part) {
-        final String partHeader = part.getHeader("content-disposition");
-      //  LOGGER.log(Level.INFO, "Part Header = {0}", partHeader);
-        for (String content : part.getHeader("content-disposition").split(";")) {
-            if (content.trim().startsWith("filename")) {
-                return content.substring(
-                        content.indexOf('=') + 1).trim().replace("\"", "");
-            }
-        }
-        return null;
     }
+
+
+
+
+
+        private void extractFile(ZipInputStream zis, String filePath) throws IOException
+        {
+            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(filePath));
+            byte[] bytesIn = new byte[BUFFER_SIZE];
+            int read = 0;
+            while((read = zis.read(bytesIn))!= -1)
+            {
+                bos.write(bytesIn, 0, read);
+            }
+            bos.close();
+        }
 }

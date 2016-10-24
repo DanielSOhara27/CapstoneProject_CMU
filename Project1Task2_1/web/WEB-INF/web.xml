@@ -13,4 +13,16 @@
             30
         </session-timeout>
     </session-config>
+
+
+
+<servlet>
+    <servlet-name>UploadFileServlet</servlet-name>
+    <servlet-class>Capstone.UploadFileServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>UploadFileServlet</servlet-name>
+    <url-pattern>/uploadFile</url-pattern>
+</servlet-mapping>
+
 </web-app>
