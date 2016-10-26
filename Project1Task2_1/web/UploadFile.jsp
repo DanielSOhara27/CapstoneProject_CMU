@@ -19,6 +19,10 @@
         <form action ="uploadFile" method ="POST" enctype="multipart/form-data">  
             File:
             <input type="file" name="file" /> <br/>
+            <label for="letter">Enter the number of files in the folder:</label>
+            <input type="text" name="numFiles" value="" /><br>        
+            <label for="letter">Enter the site and file format:</label>
+            <input type="text" name="format" value="" /><br>                 
             <input type="submit" value="Upload File" />
         </form>
    

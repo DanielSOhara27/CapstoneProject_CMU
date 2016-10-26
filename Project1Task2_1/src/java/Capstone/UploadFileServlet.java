@@ -14,15 +14,12 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Paths;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -71,9 +68,9 @@ public class UploadFileServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        ufa = new UploadFileApplication();
+
         String nextView = null;
+        
 
         //process only if its multipart content
 
@@ -82,23 +79,23 @@ public class UploadFileServlet extends HttpServlet {
             try {
                 System.out.println("gets to try");
                 List<FileItem> multiparts = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
-
+     
                    for(FileItem item : multiparts){
 
                     if(!item.isFormField()){
 
                         String name = new File(item.getName()).getName();
-                        
-                       // ufa.unpackFileFolder(name);
-
                         System.out.println("name "+name);
+                        item.write(new File("C:\\Users\\Ellie\\Documents\\UploadTests" + File.separator + name));
                         nextView = "index.jsp";
-
-                       item.write(
-                                
-
-                     new File("C:\\Users\\Ellie\\Documents\\UploadTests" + File.separator + name));
-                        
+            
+                    }
+                    if(item.isFormField())
+                    {
+                     String name = item.getFieldName();
+                     System.out.println("field name: " + name);
+                     String value = item.getString();
+                     System.out.println("value entered by user: " + value);
                     }
                    }
                   
