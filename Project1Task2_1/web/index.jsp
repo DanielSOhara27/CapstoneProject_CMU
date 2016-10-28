@@ -12,10 +12,10 @@
         <title>Falk School Data Portal</title>
     </head>
     <body>
-        <h1>Chatham University Falk School of Sustainability & Environment</h1>
+        <h1 style="color:purple;"><b>Chatham University Falk School of Sustainability & Environment</b></h1>
         <form action ="UploadDownloadServlet" method ="GET">   
-        <h1>Data Portal</h1>            
-        <label for="letter">Please select operation:</label>
+        <h1 style="color:purple;">Data Portal</h1>     
+        <label for="letter">Please select operation:</label> <br>
         <select name ="operation">
                 <option value="DownloadData">Download Data</option>            
                 <option value="UploadFiles">Upload Files</option>
@@ -24,6 +24,9 @@
         </select>
         <input type="submit" value="Go" />
         <br><br><br>
+        <center>
+        <img src = "ehc.png">
+        </center>
     </form>
 
     </body>
