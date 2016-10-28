@@ -14,8 +14,12 @@
         <title>Falk School Data Portal</title>
     </head>
     <body>
+        <h1 style="color:purple;">Chatham University Falk School of Sustainability & Environment</h1>
+        <h2 style="color:purple;">Data Portal</h2>
+        
         <h1> This is the upload form</h1><br>
         <h2>Please submit your zipped file here: </h2>
+        
         <form action ="uploadFile" method ="POST" enctype="multipart/form-data">  
             File:
             <input type="file" name="file" /> <br/>
