@@ -10,11 +10,14 @@ import java.util.logging.Logger;
 /**
  *
  * @author Anshu Agrawal
+ * 
  */
+//DBConnection manager
 public class DBConnectionManager {
     private static DBConnectionManager manager = null;
     
     private Connection conn;
+    
     
     private DBConnectionManager(){
     String JDBC_DRIVER = "com.mysql.jdbc.Driver";
