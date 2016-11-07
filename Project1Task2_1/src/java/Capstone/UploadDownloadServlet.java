@@ -56,7 +56,7 @@ public class UploadDownloadServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
            
-            String selection = request.getParameter("selection");
+        
                     
                 // determine what type of device our user is
                 String ua = request.getHeader("User-Agent");
@@ -88,34 +88,6 @@ public class UploadDownloadServlet extends HttpServlet {
              
              if(request.getParameter("operation").equals("HumanObservation"))
              {
-                try{
-                        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");  // load the driver
-                        // line below needs to be modified to include the database name, user, and password (if any)
-                        Connection con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=testingDatabase;user=TestingUser;password=12345;");
-
-                        System.out.println("Connected to database !");
-
-                        String returnList = null;
-                        Statement st = con.createStatement();
-                        ResultSet rs = st.executeQuery("Select * from dummyForTest");
-                        List ll = new LinkedList();
-                        while(rs.next())
-                        {
-                         String obsType = rs.getString("uploadType");
-                         String tableName = rs.getString("correspondingTable");
-                         ll.add(obsType);
-                         System.out.println(obsType + " " + tableName);
-                        }
-            
-                    request.setAttribute("observationType", ll);
-                }
-                catch(SQLException sqle) {
-                    System.out.println("Sql Exception :"+sqle.getMessage());
-                    Logger.getLogger(SelectFormType.class.getName()).log(Level.SEVERE, null, sqle);
-                }
-                catch(ClassNotFoundException e) {
-                 System.out.println("Class Not Found Exception :" + e.getMessage());
-                }   
                                   
                  nextView = "HumanObs.jsp";
              }
