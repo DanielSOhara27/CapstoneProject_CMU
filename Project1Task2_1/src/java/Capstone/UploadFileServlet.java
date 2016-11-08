@@ -10,11 +10,18 @@ package Capstone;
 // Natt OK
 //Sophie finally working.
 
+import java.io.BufferedOutputStream;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -43,13 +50,10 @@ public class UploadFileServlet extends HttpServlet {
         private static final long serialVersionUID = 1L;
      
     // location to store file uploaded
-    private static final String UPLOAD_DIRECTORY = "C:\\Users\\LP\\Documents\\UploadTests";
- 
-    // upload settings
-    private static final int MEMORY_THRESHOLD   = 1024 * 1024 * 3;  // 3MB
-    private static final int MAX_FILE_SIZE      = 1024 * 1024 * 40; // 40MB
-    private static final int MAX_REQUEST_SIZE   = 1024 * 1024 * 50; // 50MB
- 
+        private static final String UPLOAD_DIRECTORY = "C:\\Users\\Ellie\\Documents\\UploadTests";
+
+        // upload settings
+      private static final int  BUFFER_SIZE = 4096;
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -68,37 +72,69 @@ public class UploadFileServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        Map<String, String> formFields = new HashMap<>();
         String nextView = null;
-        
+      ufa = new UploadFileApplication();  
 
         //process only if its multipart content
 
       if(ServletFileUpload.isMultipartContent(request)){
 
             try {
-                System.out.println("gets to try");
                 List<FileItem> multiparts = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
      
                    for(FileItem item : multiparts){
 
                     if(!item.isFormField()){
 
-                        String name = new File(item.getName()).getName();
-                        System.out.println("name "+name);
-                        item.write(new File("C:\\Users\\LP\\Documents\\UploadedTests" + File.separator + name));
+                       String n = new File(item.getName()).getName();
+ 
+                          System.out.println("name "+n);
+                        File uploadedFile = new File("C:\\Users\\Ellie\\Documents\\UploadTests" + File.separator + n);
                         nextView = "index.jsp";
+                        
+                        try
+                        {
+                          ZipInputStream zin = new ZipInputStream(new FileInputStream(uploadedFile));
+                          ZipEntry entry;
+                          String name, dir;
+                          while ((entry = zin.getNextEntry()) != null)
+                          {
+                            name = entry.getName();
+                            if( entry.isDirectory() )
+                            {
+                              mkdirs(UPLOAD_DIRECTORY,name);
+                              continue;
+                            }
+                            /* this part is necessary because file entry can come before
+                             * directory entry where is file located
+                             * i.e.:
+                             *   /foo/foo.txt
+                             *   /foo/
+                             */
+                            dir = dirpart(name);
+                            if( dir != null )
+                              mkdirs(UPLOAD_DIRECTORY,dir);
+
+                            extractFile(zin, UPLOAD_DIRECTORY, name);
+                          }
+                          zin.close();
+                        } 
+                        catch (IOException e)
+                        {
+                          e.printStackTrace();
+                        }
             
                     }
                     if(item.isFormField())
                     {
-                     String name = item.getFieldName();
-                     System.out.println("field name: " + name);
-                     String value = item.getString();
-                     System.out.println("value entered by user: " + value);
+                     // accepts the entry from the user in key/value pairs with the field name being the key and user's entry being the value 
+                     formFields.put(item.getFieldName(), item.getString());
+
                     }
                    }
                   
+                   System.out.println(formFields.entrySet());
 
                 
         
@@ -134,19 +170,32 @@ public class UploadFileServlet extends HttpServlet {
 
     }
 
-    
+
+        private static void mkdirs(String outdir,String path)
+        {
+          File d = new File(outdir, path);
+          if( !d.exists() )
+            d.mkdirs();
+        }
 
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>.
-    
+          private static void extractFile(ZipInputStream in, String outdir, String name) throws IOException
+        {
+          byte[] buffer = new byte[BUFFER_SIZE];
+          BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(new File(outdir,name)));
+          int count = -1;
+          while ((count = in.read(buffer)) != -1)
+            out.write(buffer, 0, count);
+          out.close();
+        }
+  
 
-
+        private static String dirpart(String name)
+        {
+          int s = name.lastIndexOf( File.separatorChar );
+          return s == -1 ? null : name.substring( 0, s );
+        }
+        
+        
+        
 }

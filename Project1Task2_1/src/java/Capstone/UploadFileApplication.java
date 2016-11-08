@@ -29,45 +29,27 @@ public class UploadFileApplication {
 // ...
 
     
-   public void unpackFileFolder(String fileName) throws IOException
-    {
-                System.out.println("Gets here");
-                System.out.println(fileName);
-                System.out.println("here");
-                ZipInputStream zis = new ZipInputStream(new FileInputStream(fileName));
-                ZipEntry entry = zis.getNextEntry();
-                System.out.println(entry);
-                while (entry != null) {
-                    System.out.println("Extracting: " + entry);
-                    String filePath = "C:\\Users\\LP\\Documents\\UploadTests\\" + entry.getName();                 
-                    if (!entry.isDirectory()) {
-                      extractFile(zis, filePath);
-                      System.out.println("here within not a directory");
-                    }
-                    else
-                    {
-                        File dir = new File(filePath);
-                        dir.mkdir();
-                    }   
-                    zis.closeEntry();
-                    entry = zis.getNextEntry();
-                    } 
-                  zis.close();
-    }
-
-
-
-
-
-        private void extractFile(ZipInputStream zis, String filePath) throws IOException
-        {
-            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(filePath));
-            byte[] bytesIn = new byte[BUFFER_SIZE];
-            int read = 0;
-            while((read = zis.read(bytesIn))!= -1)
+  
+   public UploadFileApplication()
+   {}
+   
+   
+   public void Test(File f)
+   {
+       System.out.println("here");
+       
+       try
+       {
+           ZipInputStream zis = new ZipInputStream(new FileInputStream(f));
+           System.out.println("here after zis");
+            
+           
+           
+       }
+           catch (IOException e)
             {
-                bos.write(bytesIn, 0, read);
+              e.printStackTrace();
             }
-            bos.close();
-        }
+       
+   }
 }

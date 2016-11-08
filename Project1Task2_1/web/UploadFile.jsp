@@ -56,10 +56,14 @@
         <form style="margin-left: 0.5cm;" action ="uploadFile" method ="POST" enctype="multipart/form-data">  
             
             <input type="file" name="file" /> <br/><br>
-            <label for="letter">Enter the number of files in the folder:</label>
-            <input type="text" name="numFiles" value="" /><br><br>        
-            <label for="letter">Enter the site and file format:</label>
-            <input type="text" name="format" value="" /><br><br><br>                 
+            <label for="letter">Enter the site name:</label>
+            <input type="text" name="siteName" value="" /><br><br>        
+            <label for="letter">Enter the sensor name:</label>
+            <input type="text" name="sensorName" value="" /><br><br><br> 
+            <label for="letter">Enter the model:</label>
+            <input type="text" name="model" value="" /><br><br><br> 
+            <label for="letter">Enter the folder name:</label>            
+            <input type="text" name="folderName" value="" /><br><br>            
             <input style = "margin-bottom: 1cm; width: 3cm;" 
                    type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Upload File" />
         </form>                

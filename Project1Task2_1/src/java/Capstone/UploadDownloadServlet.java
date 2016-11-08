@@ -9,6 +9,15 @@ package Capstone;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -79,7 +88,35 @@ public class UploadDownloadServlet extends HttpServlet {
              
              if(request.getParameter("operation").equals("HumanObservation"))
              {
-                 // user directed to upload page
+                try{
+                        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");  // load the driver
+                        // line below needs to be modified to include the database name, user, and password (if any)
+                        Connection con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=testingDatabase;user=TestingUser;password=12345;");
+
+                        System.out.println("Connected to database !");
+
+                        String returnList = null;
+                        Statement st = con.createStatement();
+                        ResultSet rs = st.executeQuery("Select * from dummyForTest");
+                        List ll = new LinkedList();
+                        while(rs.next())
+                        {
+                         String obsType = rs.getString("uploadType");
+                         String tableName = rs.getString("correspondingTable");
+                         ll.add(obsType);
+                         System.out.println(obsType + " " + tableName);
+                        }
+            
+                    request.setAttribute("observationType", ll);
+                }
+                catch(SQLException sqle) {
+                    System.out.println("Sql Exception :"+sqle.getMessage());
+                    Logger.getLogger(SelectFormType.class.getName()).log(Level.SEVERE, null, sqle);
+                }
+                catch(ClassNotFoundException e) {
+                 System.out.println("Class Not Found Exception :" + e.getMessage());
+                }   
+                                  
                  nextView = "HumanObs.jsp";
              }
              
