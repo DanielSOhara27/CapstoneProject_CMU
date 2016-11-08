@@ -2,27 +2,55 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>CreateTableForm</servlet-name>
-        <servlet-class>Capstone.CreateTableForm</servlet-class>
+        <servlet-class>capstone.CreateTableForm</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MappingTableServlet</servlet-name>
+        <servlet-class>capstone.MappingTableServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MappingColoumn</servlet-name>
+        <servlet-class>capstone.MappingColoumn</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MappingETLServlet</servlet-name>
+        <servlet-class>capstone.MappingETLServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserTableServlet</servlet-name>
+        <servlet-class>capstone.UserTableServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>CreateTableForm</servlet-name>
         <url-pattern>/CreateTableForm</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MappingTableServlet</servlet-name>
+        <url-pattern>/MappingTableServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MappingColoumn</servlet-name>
+        <url-pattern>/MappingColoumn</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MappingETLServlet</servlet-name>
+        <url-pattern>/MappingETLServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserTableServlet</servlet-name>
+        <url-pattern>/UserTableServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
-
-
-
-<servlet>
-    <servlet-name>UploadFileServlet</servlet-name>
-    <servlet-class>Capstone.UploadFileServlet</servlet-class>
-</servlet>
-<servlet-mapping>
-    <servlet-name>UploadFileServlet</servlet-name>
-    <url-pattern>/uploadFile</url-pattern>
-</servlet-mapping>
-
+    <servlet>
+        <servlet-name>UploadFileServlet</servlet-name>
+        <servlet-class>capstone.UploadFileServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UploadFileServlet</servlet-name>
+        <url-pattern>/uploadFile</url-pattern>
+    </servlet-mapping>
 </web-app>
