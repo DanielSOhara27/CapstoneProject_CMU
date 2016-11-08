@@ -65,9 +65,9 @@ CREATE TABLE `MappingTable` (
   `ModelID` varchar(10000) NOT NULL,
   `SensorID` varchar(10000) NOT NULL,
   `Username` varchar(45) NOT NULL,
-  `SiteName` varchar(10000) NOT NULL DEFAULT 'No Default Sitename provided',
+  `SiteName` varchar(1000) NOT NULL DEFAULT 'No Default Sitename provided',
   `SensorType` varchar(10000) NOT NULL,
-  `Location` varchar(10000) DEFAULT NULL,
+  `Location` varchar(1000) DEFAULT NULL,
   `NumColumn` int(11) NOT NULL,
   `Delimiter` varchar(50) NOT NULL,
   `RangeBetweenReadings` varchar(50) NOT NULL,
@@ -75,6 +75,9 @@ CREATE TABLE `MappingTable` (
   `TypeSensor_BaseTable` varchar(10) NOT NULL,
   `Site_BaseTable` varchar(10) NOT NULL,
   `Public` varchar(10) NOT NULL,
+  `TableName` varchar(10000) NOT NULL,
+  `ColumnNames` varchar(10000) NOT NULL,
+  `Row_To_Skip` int(11) NOT NULL,
   PRIMARY KEY (`MappingTable_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -126,4 +129,4 @@ CREATE TABLE `User` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-08 16:28:20
+-- Dump completed on 2016-11-08 17:26:52

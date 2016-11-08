@@ -2,23 +2,23 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>CreateTableForm</servlet-name>
-        <servlet-class>capstone.CreateTableForm</servlet-class>
+        <servlet-class>Capstone.CreateTableForm</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>MappingTableServlet</servlet-name>
-        <servlet-class>capstone.MappingTableServlet</servlet-class>
+        <servlet-class>Capstone.MappingTableServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>MappingColoumn</servlet-name>
-        <servlet-class>capstone.MappingColoumn</servlet-class>
+        <servlet-class>Capstone.MappingColoumn</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>MappingETLServlet</servlet-name>
-        <servlet-class>capstone.MappingETLServlet</servlet-class>
+        <servlet-class>Capstone.MappingETLServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UserTableServlet</servlet-name>
-        <servlet-class>capstone.UserTableServlet</servlet-class>
+        <servlet-class>Capstone.UserTableServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>CreateTableForm</servlet-name>
