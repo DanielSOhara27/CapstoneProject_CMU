@@ -43,7 +43,7 @@ public class UploadFileServlet extends HttpServlet {
         private static final long serialVersionUID = 1L;
      
     // location to store file uploaded
-    private static final String UPLOAD_DIRECTORY = "C:\\Users\\Ellie\\Documents\\UploadTests";
+    private static final String UPLOAD_DIRECTORY = "C:\\Users\\LP\\Documents\\UploadTests";
  
     // upload settings
     private static final int MEMORY_THRESHOLD   = 1024 * 1024 * 3;  // 3MB
@@ -86,7 +86,7 @@ public class UploadFileServlet extends HttpServlet {
 
                         String name = new File(item.getName()).getName();
                         System.out.println("name "+name);
-                        item.write(new File("C:\\Users\\Ellie\\Documents\\UploadTests" + File.separator + name));
+                        item.write(new File("C:\\Users\\LP\\Documents\\UploadedTests" + File.separator + name));
                         nextView = "index.jsp";
             
                     }
