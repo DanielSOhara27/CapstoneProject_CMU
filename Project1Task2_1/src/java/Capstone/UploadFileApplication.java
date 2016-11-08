@@ -39,7 +39,7 @@ public class UploadFileApplication {
                 System.out.println(entry);
                 while (entry != null) {
                     System.out.println("Extracting: " + entry);
-                    String filePath = "C:\\Users\\Ellie\\Documents\\UploadTests\\" + entry.getName();                 
+                    String filePath = "C:\\Users\\LP\\Documents\\UploadTests\\" + entry.getName();                 
                     if (!entry.isDirectory()) {
                       extractFile(zis, filePath);
                       System.out.println("here within not a directory");
