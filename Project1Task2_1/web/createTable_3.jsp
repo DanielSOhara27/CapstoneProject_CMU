@@ -58,7 +58,7 @@
         
         <form action="Palindrome" method="GET" style = "margin-left: 0.25cm">    
             <div class="w3-row-padding">
-
+                        
                 <label for="letter"> Column 1: </label>
                 &nbsp;<input type="checkbox" name="missing" value="missingCheck"> Remove Missing Value | 
 

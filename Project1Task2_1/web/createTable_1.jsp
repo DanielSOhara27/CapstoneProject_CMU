@@ -55,11 +55,13 @@
             <div class="w3-row-padding">
 
                 <div class="w3-half">
-                    <label for="letter"> Number of Columns: &nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    <label for="letter"> Number of Columns: &nbsp; &nbsp; &nbsp;</label>
                     <input type="text" name="numColumn" value="" /><br><br>
-                    <label for="letter"> Type of Delimeter: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    <label for="letter"> Type of Delimeter: &nbsp; &nbsp; &nbsp; &nbsp; </label>
                     <input type="text" name="typeDelimeter" value="" /><br><br>
-                    <label for="letter"> Comment Line Signifier: </label>
+                    <label for="letter"> Comment Line Signifier: &nbsp;</label>
+                    <input type="text" name="lineSignifier" value="" /><br><br>
+                    <label for="letter"> Number of header's line: </label>
                     <input type="text" name="lineSignifier" value="" /><br><br>
                 </div>
                 <div class="w3-half">
@@ -79,7 +81,6 @@
                    type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Next" />
             </div>
         </form>
-
         
         <div class="w3-container w3-bottom" style="margin-top: 0.5cm; height: 1.3cm; line-height: 1.3cm; background-color: #533678;color: white; ">
             <center><span>Woodland Road | Pittsburgh, PA 15232 | Main: 412-365-1100 | Admission: 800-837-1290</span></center>
@@ -87,3 +88,4 @@
 
     </body>
 </html>
+
