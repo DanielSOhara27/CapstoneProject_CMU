@@ -1,6 +1,6 @@
 package Capstone;
 
-import capstone.DBConnectionManager;
+import Capstone.DBConnectionManager;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;

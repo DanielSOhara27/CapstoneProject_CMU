@@ -1,4 +1,4 @@
-package capstone;
+package Capstone;
 
 /**
  *
