@@ -12,12 +12,16 @@
    int ColNum=4;
    List<String> list = new ArrayList<String>();
    for(int i=1; i<=4; i++){
-       for(int j=1;j<=4;j++){
+       for(int j=1;j<=8;j++){
            switch (j){
-               case 1: list.add("Col"+i+"_ColName");break;
-               case 2: list.add("Col"+i+"_DataType");break;
-               case 3: list.add("Col"+i+"_MaxLength");break;
-               case 4: list.add("Col"+i+"_Relevant");break;
+               case 1: list.add("col"+i+"_missing");break;
+               case 2: list.add("col"+i+"_range");break;
+               case 3: list.add("col"+i+"_lowerThan");break;
+               case 4: list.add("col"+i+"_andOr");break;
+               case 5: list.add("col"+i+"_greaterThan");break;
+               case 6: list.add("col"+i+"_variance");break;
+               case 7: list.add("col"+i+"_sign");break;
+               case 8: list.add("col"+i+"_value");break;
            }
        }
    }
@@ -33,6 +37,10 @@
     </head>
     
     <style> 
+        mark {
+            background-color: red;
+            color: black;
+        }
         span {
             display: inline-block;
             vertical-align: middle;
@@ -67,33 +75,45 @@
         </div>
 
         <div class="w3-container">
-          <p>Your new table contains 4 columns. Please input the information for each column.</p>
+           <p>Your new table contains 4 columns. Please input the data validation rules for <mark><b>RED</b></mark> flag (optional).</p>
         </div>
                
         <form action="Palindrome" method="GET" style = "margin-left: 0.25cm">    
             <div class="w3-row-padding">
                     
+                
+                
                 <%
                     int count=1;
                   for(int i=1; i<=list.size();i++){
-                    if((i % 4)==1)
-                    {out.print("Column "+ count +": <input name=\"" + list.get(i-1) + "\"onfocus=\"if (this.value=='"+ list.get(i-1) +"') this.value='';\" type=\"text\" value=\""+list.get(i-1)+"\"style=\"color: grey\"/> " );
+                    if((i % 8)==1)
+                    {out.print("Column "+ count +": <input name=\"" + list.get(i-1) +"\" type=\"checkbox\" value=\"missingCheck\" style=\"color: grey\"/> Remove Missing Value | " );
                     count=count+1;}
-                    if((i % 4)==2)
+                    if((i % 8)==2)
+                    {out.print(" <input name=\"" + list.get(i-1) +"\" type=\"checkbox\" value=\"missingCheck\" style=\"color: grey\"/> Range :" );}
+                    if((i % 8)==3)
+                    {out.print("<input name=\"" + list.get(i-1) + "\"onfocus=\"if (this.value=='"+ list.get(i-1) +"') this.value='';\" type=\"text\" value=\""+list.get(i-1)+"\"style=\"color: grey; width: 2.8cm;\"/> " );}
+                    if((i % 8)==4)
                     //{out.print("<input name=\"" + list.get(i-1) + "\" type=\"text\" value=\""+ "DataType"+list.get(i-1)+"\"/>" );}
                     {out.print("<select name=\"" + list.get(i-1)+"\"class=\"form-control\" style=\"color: grey; height: 0.75cm;\"> "
-                            + "<option disabled selected>Select Data Type</option>"
-                            + "<option value='char'>Character</option>"
-                            + "<option value='number'>Number</option>"
-                            + "<option value='integer'>Integer</option>"
-                            + "<option value='date_time'>Date and Time</option>"
-                            + "<option value='boolean'>Boolean</option></select> ");}
-
-                    if((i % 4)==3)
-                    {out.print("<input name=\"" + list.get(i-1) + "\"onfocus=\"if (this.value=='"+ list.get(i-1) +"') this.value='';\" type=\"text\" value=\""+list.get(i-1)+"\"style=\"color: grey\"/> " );}
-                    if((i % 4)==0)
+                            + "<option disabled selected>AND/OR</option>"
+                            + "<option value='and'>AND</option>"
+                            + "<option value='or'>OR</option></select> ");}
+                    if((i % 8)==5)
+                    {out.print("<input name=\"" + list.get(i-1) + "\"onfocus=\"if (this.value=='"+ list.get(i-1) +"') this.value='';\" type=\"text\" value=\""+list.get(i-1)+"\"style=\"color: grey; width: 2.8cm;\"/> |" );}
+                    if((i % 8)==6)
                     //{out.print("<input name=\"" + list.get(i-1) + "\" type=\"text\" value=\""+ "Relevant"+list.get(i-1)+"\"/><br>" );}                  
-                    {out.print("<input type=\"checkbox\" name=\"" + list.get(i-1) + "\" value=\"entryYes\"> Relevant Data?<br>");}  
+                    {out.print(" <input type=\"checkbox\" name=\"" + list.get(i-1) + "\" value=\"entryYes\"> Variance :");}  
+                    if((i % 8)==7)
+                    //{out.print("<input name=\"" + list.get(i-1) + "\" type=\"text\" value=\""+ "DataType"+list.get(i-1)+"\"/>" );}
+                    {out.print("<select name=\"" + list.get(i-1)+"\"class=\"form-control\" style=\"color: grey; height: 0.75cm;\"> "
+                            + "<option disabled selected>sign</option>"
+                            + "<option value='p'>+</option>"
+                            + "<option value='n'>-</option>"
+                            + "<option value='p_or_n'>+/-</option></select> ");}
+                    if((i % 8)==0)
+                    {out.print(" <input name=\"" + list.get(i-1) + "\"onfocus=\"if (this.value=='"+ list.get(i-1) +"') this.value='';\" type=\"text\" value=\""+list.get(i-1)+"\"style=\"color: grey;width: 2.8cm;\"/><br>" );}
+                                        
                   }
                 %>
 
@@ -107,9 +127,9 @@
         </form>
 
 
+        
         <div class="w3-container w3-bottom" style="margin-top: 0.5cm; height: 1.3cm; line-height: 1.3cm; background-color: #533678;color: white; ">
             <center><span>Woodland Road | Pittsburgh, PA 15232 | Main: 412-365-1100 | Admission: 800-837-1290</span></center>
         </div>
-
     </body>
 </html>
