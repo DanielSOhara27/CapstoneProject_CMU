@@ -14,10 +14,10 @@
    for(int i=1; i<=4; i++){
        for(int j=1;j<=4;j++){
            switch (j){
-               case 1: list.add("Col"+i+"_ColName");break;
-               case 2: list.add("Col"+i+"_DataType");break;
-               case 3: list.add("Col"+i+"_MaxLength");break;
-               case 4: list.add("Col"+i+"_Relevant");break;
+               case 1: list.add("col"+i+"_colName");break;
+               case 2: list.add("col"+i+"_dataType");break;
+               case 3: list.add("col"+i+"_maxLength");break;
+               case 4: list.add("col"+i+"_relevant");break;
            }
        }
    }
