@@ -1,11 +1,10 @@
-package capstone;
+package Capstone;
 
 /**
  *
  * @author Anshu Agrawal
  */
 
-import capstone.DBConnectionManager;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -21,7 +20,7 @@ public class GenerateFile {
             
     public static void main(String[] args) {
         
-        String file = "capstonetest12.csv";
+        String file = "capstonetest122.csv";
         
         //String workingDirectory = System.getProperty("user.dir");
         
