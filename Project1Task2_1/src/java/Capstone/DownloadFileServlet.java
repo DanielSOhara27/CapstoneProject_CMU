@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
  
 @WebServlet(name = "DownloadFileServlet",
-        urlPatterns = {"/downloadFile"})
+        urlPatterns = {"/downloadFileServlet"})
 public class DownloadFileServlet extends HttpServlet {
  
     protected void doGet(HttpServletRequest request,
