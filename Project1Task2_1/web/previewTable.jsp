@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.*" %>
 <%@ page import="java.sql.*" %>
-<% Class.forName("sun.jdbc.odbc.JdbcOdbcDriver"); %>
+
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 
 <%@ page  import="Capstone.DBConnectionManager" %>
@@ -20,8 +20,8 @@
 
     Statement statement = connection.createStatement() ;
     //ref: http://stackoverflow.com/questions/5003142/show-jdbc-resultset-in-html-in-jsp-page-using-mvc-and-dao-pattern
-ResultSet resultset = (ResultSet)request.getAttribute("queryResult");
-//ResultSet resultset = statement.executeQuery("SELECT a, b, c FROM TABLE2");
+//ResultSet resultset = (ResultSet)request.getAttribute("queryResult");
+ResultSet resultset = statement.executeQuery("SELECT `BV (Volts)`, `T (deg C)` FROM `Ryan_BRCR01_Phizer_7392-960779_DataTable`");
 ResultSetMetaData rsmd = resultset.getMetaData();
 int columnCount = rsmd.getColumnCount();
 
@@ -86,10 +86,14 @@ int columnCount = rsmd.getColumnCount();
                 } 
                 %>
             </TR>
-            <% while(resultset.next()){ %>
+            <%  int previewLimit=0;
+                while(resultset.next()){ %>
             <TR>
-                <% for(int i=1; i<=columnCount; i++){
+                <%  if(previewLimit==20)
+                        break;
+                    for(int i=1; i<=columnCount; i++){
                     out.println("<td>"+  resultset.getString(i) + "</td>");
+                    previewLimit++;
                 } 
                 %>
             </TR>
