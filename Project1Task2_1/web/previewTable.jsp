@@ -10,11 +10,18 @@
 <% Class.forName("sun.jdbc.odbc.JdbcOdbcDriver"); %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 
+<%@ page  import="Capstone.DBConnectionManager" %>
 
 
 <%
+    
+    DBConnectionManager DBManager = DBConnectionManager.getInstance();
+    Connection connection = DBManager.getConnection();
+
+    Statement statement = connection.createStatement() ;
+    //ref: http://stackoverflow.com/questions/5003142/show-jdbc-resultset-in-html-in-jsp-page-using-mvc-and-dao-pattern
 ResultSet resultset = (ResultSet)request.getAttribute("queryResult");
-//ResultSet resultset = stmt.executeQuery("SELECT a, b, c FROM TABLE2");
+//ResultSet resultset = statement.executeQuery("SELECT a, b, c FROM TABLE2");
 ResultSetMetaData rsmd = resultset.getMetaData();
 int columnCount = rsmd.getColumnCount();
 
