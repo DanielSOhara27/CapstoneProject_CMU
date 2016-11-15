@@ -4,25 +4,29 @@
         <servlet-name>CreateTableForm</servlet-name>
         <servlet-class>Capstone.CreateTableForm</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DownloadFileServlet</servlet-name>
+        <servlet-class>Capstone.DownloadFileServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CreateTableForm</servlet-name>
         <url-pattern>/CreateTableForm</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DownloadFileServlet</servlet-name>
+        <url-pattern>/DownloadFileServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
-
-
-
-<servlet>
-    <servlet-name>UploadFileServlet</servlet-name>
-    <servlet-class>Capstone.UploadFileServlet</servlet-class>
-</servlet>
-<servlet-mapping>
-    <servlet-name>UploadFileServlet</servlet-name>
-    <url-pattern>/uploadFile</url-pattern>
-</servlet-mapping>
-
+    <servlet>
+        <servlet-name>UploadFileServlet</servlet-name>
+        <servlet-class>Capstone.UploadFileServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UploadFileServlet</servlet-name>
+        <url-pattern>/uploadFile</url-pattern>
+    </servlet-mapping>
 </web-app>
