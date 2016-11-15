@@ -9,7 +9,6 @@ import java.util.logging.Logger;
 /**
  *
  * @author Anshu Agrawal
- *
  */
 //DBConnection manager
 public class DBConnectionManager {
