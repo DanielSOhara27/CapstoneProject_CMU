@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Capstone;
 //Daniel Comment through netbeans
 // Ellie comment netbeans 
@@ -31,12 +27,6 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-
-
-
-
-
-
 /**
  *
  * @author Ellie
@@ -45,7 +35,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 @MultipartConfig
 public class UploadFileServlet extends HttpServlet {
 
-        ProcessFiles pf = null;
+        ProcessFiles processFiles = null;
         private static final long serialVersionUID = 1L;
      
     // location to store file uploaded
@@ -73,7 +63,9 @@ public class UploadFileServlet extends HttpServlet {
             throws ServletException, IOException {
         Map<String, String> formFields = new HashMap<>();
         String nextView = null;
-  
+        
+        processFiles = new ProcessFiles();
+        
         //1/process only if its multipart content
 
       if(ServletFileUpload.isMultipartContent(request)){
@@ -134,7 +126,7 @@ public class UploadFileServlet extends HttpServlet {
                    }
                   
                    System.out.println(formFields.entrySet());
-
+                   
                 
         
  
