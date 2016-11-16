@@ -19,7 +19,7 @@ public class DownloadFileServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
         // reads input file from an absolute path
-        String filePath = "C:/capstone/refer.txt";
+        String filePath = "C:/TestDownload/Ryan_BRCR01_Phizer_7392-960779_DataTable_Out.csv";
         File downloadFile = new File(filePath);
         FileInputStream inStream = new FileInputStream(downloadFile);
          

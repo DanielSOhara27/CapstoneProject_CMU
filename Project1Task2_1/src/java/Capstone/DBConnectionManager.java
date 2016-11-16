@@ -1,4 +1,4 @@
-package capstone;
+package Capstone;
 
 
 import java.sql.Connection;
@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Anshu Agrawalfggdfgd
+ * @author Anshu Agrawal
  * 
  */
 //DBConnection manager

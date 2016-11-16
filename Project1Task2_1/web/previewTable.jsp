@@ -21,7 +21,7 @@
     Statement statement = connection.createStatement() ;
     //ref: http://stackoverflow.com/questions/5003142/show-jdbc-resultset-in-html-in-jsp-page-using-mvc-and-dao-pattern
 //ResultSet resultset = (ResultSet)request.getAttribute("queryResult");
-ResultSet resultset = statement.executeQuery("SELECT `BV (Volts)`, `T (deg C)` FROM `Ryan_BRCR01_Phizer_7392-960779_DataTable`");
+ResultSet resultset = statement.executeQuery("SELECT TimeLX, `BV (Volts)`, `T (deg C)`,`DO (mg/l)`,`Q ()`,minute,hour,mday,mon,year,yday,`SourceFile` FROM `Ryan_BRCR01_Phizer_7392-960779_DataTable`");
 ResultSetMetaData rsmd = resultset.getMetaData();
 int columnCount = rsmd.getColumnCount();
 
@@ -75,11 +75,11 @@ int columnCount = rsmd.getColumnCount();
         </div>
 
         <div class="w3-container">
-          <p>There are 3 sensor types associated with "Site 1". Please select <b>a pair</b> of sensors that you want to query.</p>
+          <p>Table Preview.</p>
         </div>
                
         <!-- http://www.java2s.com/Tutorial/Java/0360__JSP/OutputResultSet.htm -->
-        <TABLE BORDER="1">
+        <TABLE BORDER="1" style = "margin-left: 0.5cm">
             <TR>
                 <% for(int i=1; i<=columnCount; i++){
                     out.println("<th>"+  rsmd.getColumnName(i) + "</th>");
@@ -92,7 +92,7 @@ int columnCount = rsmd.getColumnCount();
                 <%  if(previewLimit==20)
                         break;
                     for(int i=1; i<=columnCount; i++){
-                    out.println("<td>"+  resultset.getString(i) + "</td>");
+                        out.println("<td>"+  resultset.getString(i) + "</td>");
                     previewLimit++;
                 } 
                 %>
