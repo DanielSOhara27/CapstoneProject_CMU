@@ -45,12 +45,11 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 @MultipartConfig
 public class UploadFileServlet extends HttpServlet {
 
-    UploadFileApplication ufa = null;
-    
+        ProcessFiles pf = null;
         private static final long serialVersionUID = 1L;
      
     // location to store file uploaded
-        private static final String UPLOAD_DIRECTORY = "C:\\Users\\Ellie\\Documents\\UploadTests";
+        private static final String BASE_RECEIVE_DIRECTORY = "C:/TestLoad/";
 
         // upload settings
       private static final int  BUFFER_SIZE = 4096;
@@ -74,9 +73,8 @@ public class UploadFileServlet extends HttpServlet {
             throws ServletException, IOException {
         Map<String, String> formFields = new HashMap<>();
         String nextView = null;
-      ufa = new UploadFileApplication();  
-
-        //process only if its multipart content
+  
+        //1/process only if its multipart content
 
       if(ServletFileUpload.isMultipartContent(request)){
 
@@ -103,7 +101,7 @@ public class UploadFileServlet extends HttpServlet {
                             name = entry.getName();
                             if( entry.isDirectory() )
                             {
-                              mkdirs(UPLOAD_DIRECTORY,name);
+                              mkdirs(BASE_RECEIVE_DIRECTORY,name);
                               continue;
                             }
                             /* this part is necessary because file entry can come before
@@ -114,9 +112,10 @@ public class UploadFileServlet extends HttpServlet {
                              */
                             dir = dirpart(name);
                             if( dir != null )
-                              mkdirs(UPLOAD_DIRECTORY,dir);
+                              mkdirs(BASE_RECEIVE_DIRECTORY,dir);
 
-                            extractFile(zin, UPLOAD_DIRECTORY, name);
+                            extractFile(zin, BASE_RECEIVE_DIRECTORY, name);
+                            
                           }
                           zin.close();
                         } 
