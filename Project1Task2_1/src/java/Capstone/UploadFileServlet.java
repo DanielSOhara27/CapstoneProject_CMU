@@ -35,7 +35,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 @MultipartConfig
 public class UploadFileServlet extends HttpServlet {
 
-        ProcessFiles processFiles = null;
+        ProcessFiles processFiles;
         private static final long serialVersionUID = 1L;
      
     // location to store file uploaded
@@ -64,7 +64,15 @@ public class UploadFileServlet extends HttpServlet {
         Map<String, String> formFields = new HashMap<>();
         String nextView = null;
         
-        processFiles = new ProcessFiles();
+        boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+        
+        if (!isMultipart) {
+            return;
+        }
+
+        
+       // processFiles = new ProcessFiles();
+        System.out.println("here - after processFIles");
         
         //1/process only if its multipart content
 
@@ -77,15 +85,19 @@ public class UploadFileServlet extends HttpServlet {
 
                     if(!item.isFormField()){
 
-                       String n = new File(item.getName()).getName();
+                        String fileName = new File(item.getName()).getName();
  
-                          System.out.println("name "+n);
-                        File uploadedFile = new File("C:\\Users\\Ellie\\Documents\\UploadTests" + File.separator + n);
-                        nextView = "index.jsp";
+                        System.out.println("name "+ fileName);
+                        
+                        item.write( new File(BASE_RECEIVE_DIRECTORY + File.separator + fileName));
+
+
                         
                         try
                         {
-                          ZipInputStream zin = new ZipInputStream(new FileInputStream(uploadedFile));
+                          //System.out.println(uploadedFile);
+                          FileInputStream fin = new FileInputStream(BASE_RECEIVE_DIRECTORY + File.separator + fileName);
+                          ZipInputStream zin = new ZipInputStream(fin);
                           ZipEntry entry;
                           String name, dir;
                           while ((entry = zin.getNextEntry()) != null)
@@ -126,9 +138,14 @@ public class UploadFileServlet extends HttpServlet {
                    }
                   
                    System.out.println(formFields.entrySet());
+                   //String sensorName = "sensorName";
+                   System.out.println(formFields.get("sensorName"));
+                   System.out.println(formFields.get("siteName"));
+                   System.out.println(formFields.get("model"));
+                   System.out.println(formFields.get("folderName"));
                    
                 
-        
+//                   processFiles.startETL(formFields.get("siteName"), formFields.get("model"), formFields.get("sensorName"), formFields.get("folderName"));
  
 
                //File uploaded successfully
