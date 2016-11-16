@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package capstone;
+package Capstone;
 
 import javax.servlet.http.Part;
 import java.io.*;
