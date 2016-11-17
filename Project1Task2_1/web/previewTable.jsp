@@ -79,27 +79,28 @@ int columnCount = rsmd.getColumnCount();
         </div>
                
         <!-- http://www.java2s.com/Tutorial/Java/0360__JSP/OutputResultSet.htm -->
-        <TABLE BORDER="1" style = "margin-left: 0.5cm">
-            <TR>
-                <% for(int i=1; i<=columnCount; i++){
-                    out.println("<th>"+  rsmd.getColumnName(i) + "</th>");
-                } 
-                %>
-            </TR>
-            <%  int previewLimit=0;
-                while(resultset.next()){ %>
-            <TR>
-                <%  if(previewLimit==20)
-                        break;
-                    for(int i=1; i<=columnCount; i++){
+        <div class="w3-responsive" style = "margin-left: 0.5cm">
+            <TABLE class="w3-table w3-striped w3-bordered w3-border" BORDER="1">
+                <TR>
+                    <% for(int i=1; i<=columnCount; i++){
+                        out.println("<th>"+  rsmd.getColumnName(i) + "</th>");
+                    } 
+                    %>
+                </TR>
+                <%  int previewLimit=0;
+                    while(resultset.next()){ %>
+                <TR>
+                    <%  if(previewLimit==20)
+                            break;
+                        for(int i=1; i<=columnCount; i++){
                         out.println("<td>"+  resultset.getString(i) + "</td>");
-                    previewLimit++;
-                } 
-                %>
-            </TR>
-            <% } %>
-        </TABLE>
-        
+                        previewLimit++;
+                    } 
+                    %>
+                </TR>
+                <% } %>
+            </TABLE>
+        </div>
         
         
         <form action="Palindrome" method="GET" style = "margin-left: 0.25cm">    
