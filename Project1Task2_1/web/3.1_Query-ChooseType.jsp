@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Query/Download</title>
+        <title>Query</title>
         <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
     </head>
     
@@ -61,9 +61,6 @@
         
         <input style = "margin-bottom: 1cm; width: 3cm;" 
                type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Next" />
-        
-        <input style = "margin-bottom: 1cm; width: 3cm;" 
-               type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Before" />
         
         
         <div class="w3-container w3-bottom" style="margin-top: 0.5cm; height: 1.3cm; line-height: 1.3cm; background-color: #533678;color: white; ">

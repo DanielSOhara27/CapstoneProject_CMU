@@ -1,8 +1,3 @@
-<%-- 
-    Document   : createTable_2
-    Created on : Nov 4, 2016, 12:46:52 AM
-    Author     : NaTT
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.*" %>
@@ -21,7 +16,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Create Table 2</title>
+        <title>Query</title>
         <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
     </head>
     
