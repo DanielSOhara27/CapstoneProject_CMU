@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Main Page</title>
+        <title>Main</title>
         <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
     </head>
     
