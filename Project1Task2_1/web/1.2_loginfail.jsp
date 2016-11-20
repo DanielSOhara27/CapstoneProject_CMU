@@ -53,10 +53,8 @@
             <input type="text" name="user_id" value="" /><br><br>        
             <label for="letter">Enter password here:</label>
             <input type="text" name="password" value="" /><br><br><br>           
-            <input style = "margin-left: 0cm; margin-bottom: 1cm; width: 2.5cm;" 
-                   type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Previous" />
             <input style = "margin-left: 0.25cm; margin-bottom: 1cm; width: 2.5cm;" 
-                   type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Next" />
+                   type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Submit" />
         </form>                
         
         <div class="w3-container w3-bottom" style="margin-top: 0.5cm; height: 1.3cm; line-height: 1.3cm; background-color: #533678;color: white; ">

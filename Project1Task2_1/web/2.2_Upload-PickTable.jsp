@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Log-In</title>
+        <title>Upload</title>
         <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
     </head>
     
@@ -37,24 +37,26 @@
             <span>About</span>
         </div>
         <!-- End of header -->
-       
+        
         <div class="w3-container w3-white" >
-            <h1 style="color: #533678;"> Log-In</h1>
+            <h1 style="color: #533678;"> Choose a Table</h1>
         </div>
 
         <div class="w3-container">
-          <p>Log-In using your user id and password: </p>
+            <p>Please choose 1 existing table you wish to upload to.<BR> </p>
+        </div>
+
+        <div class="w3-container">
+            <BR>
+            DATA TABLE HERE!!
+            <BR><BR><BR>
         </div>
         
-        <form style="margin-left: 0.5cm;" action ="uploadFile" method ="POST" enctype="multipart/form-data">  
-            
-            <label for="letter">Enter id here:</label>
-            <input type="text" name="user_id" value="" /><br><br>        
-            <label for="letter">Enter password here:</label>
-            <input type="text" name="password" value="" /><br><br><br>           
-            <input style = "margin-left: 0.25cm; margin-bottom: 1cm; width: 2.5cm;" 
-                   type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Submit" />
-        </form>                
+        <input style = "margin-bottom: 1cm; width: 3cm;" 
+               type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Before" />
+        <input style = "margin-bottom: 1cm; width: 3cm;" 
+               type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Next" />
+        
         
         <div class="w3-container w3-bottom" style="margin-top: 0.5cm; height: 1.3cm; line-height: 1.3cm; background-color: #533678;color: white; ">
             <center><span>Woodland Road | Pittsburgh, PA 15232 | Main: 412-365-1100 | Admission: 800-837-1290</span></center>
@@ -62,3 +64,4 @@
 
     </body>
 </html>
+
