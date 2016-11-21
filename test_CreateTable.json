@@ -1,0 +1,29 @@
+{
+  "metaData": {
+  "SiteID": "BRCR01",
+  "ModelID": "Phizer",
+  "SensorID": "7392-960779",
+  "Username": "Ryan1",
+  "SiteName": "WeatherForest-TESTNAME",
+  "SensorType": "DO",
+  "Location": "Lat:11234123, Lng:102352",
+  "NumColumn": 5,
+  "ColumnNames": "Original_Timestamp:seconds,BV(Volts):String,T (Deg C):String,DO (mg/L):String,Q():String",
+  "Row_To_Skip": 5,
+  "Delimiter": ";",
+  "Comment_Delimiter": "#",
+  "RangeBetweenReadings": "15 min",
+  "AcceptableRange": "20 min",
+  "TypeSensor_BaseTable": "FALSE",
+  "Site_BaseTable": "FALSE",
+  "Public": "TRUE"
+  
+  },
+  "userTable" :[
+    {"nameColumn": "Original_Timestamp", "dataType": "Date", "Format":"seconds"},
+    {"nameColumn": "BV(Volts)", "dataType": "String", "Format":""},
+    {"nameColumn": "T (Deg C)", "dataType": "String", "Format":""},
+    {"nameColumn": "DO (mg/L)", "dataType": "String", "Format":""},
+    {"nameColumn": "Q()", "dataType": "String", "Format":""}
+  ]
+}
