@@ -1,8 +1,10 @@
 <%-- 
-    Document   : createTable_1.1
-    Created on : Nov 4, 2016, 12:46:52 AM
-    Author     : NaTT
+    Document   : index
+    Created on : Oct 25, 2016, 10:11:11 PM
+    Author     : Sophie 
 --%>
+
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -42,22 +44,25 @@
             <span>About</span>
         </div>
         <!-- End of header -->
-        
+       
         <div class="w3-container w3-white" >
-            <h1 style="color: #533678;"> Create Table</h1>
+            <h1 style="color: #533678;"> Upload Form</h1>
         </div>
 
         <div class="w3-container">
-          <p>Please upload the example data file for validation: </p>
+          <p>Please select operation: </p>
         </div>
         
+        <center>
+            <div class="w3-container" style="width:300px;height:100px;background-color:lightgrey">
+                <br>    
+            <button class="w3-container" type="button" style="background-color:Purple;width:1000;height:500;color:white">Download</button><br>
+            <button class="w3-container" type="button" style="background-color:Purple;width:1000;height:500;color:white">Upload</button><br>
+            </div>
+            <br><br><br>
+            <img src = "ehc.png">
+        </center>
 
-        <form style="margin-left: 0.5cm;" action="CreateTableServlet" method="post" enctype="multipart/form-data">
-        <input type="file" name="file" size="50" />
-        <br /><br><br>
-        <input style = "margin-bottom: 1cm; width: 3cm;" 
-                   type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Upload File" />
-        </form>
         
         <div class="w3-container w3-bottom" style="margin-top: 0.5cm; height: 1.3cm; line-height: 1.3cm; background-color: #533678;color: white; ">
             <center><span>Woodland Road | Pittsburgh, PA 15232 | Main: 412-365-1100 | Admission: 800-837-1290</span></center>
@@ -66,3 +71,29 @@
     </body>
 </html>
 
+
+
+
+<!--
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Falk School Data Portal</title>
+    </head>
+    <body>
+        <h1 style="color:purple;">Chatham University Falk School of Sustainability & Environment</h1>
+        <h2 style="color:purple;">Data Portal</h2>    
+    <center>
+        <div style="width:300px;height:100px;background-color:lightgrey">
+        <label for="letter" style = "color:lightcoral">Please select operation:</label><br><br>
+        <button type="button" style="background-color:Purple;width:1000;height:500;color:white">Download</button><br>
+        <button type="button" style="background-color:Purple;width:1000;height:500;color:white">Upload</button><br>
+        </div>
+        <br><br><br>
+        <img src = "ehc.png">
+    </center>
+
+    </body>
+</html>
+-->

@@ -1,17 +1,10 @@
-    <%-- 
-    Document   : result
-    Created on : Feb 1, 2016, 8:18:26 PM
-    Author     : Ellie
---%>
-
-
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Create Table 1</title>
+        <title>Upload</title>
         <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
     </head>
     
@@ -44,25 +37,26 @@
             <span>About</span>
         </div>
         <!-- End of header -->
-       
+        
         <div class="w3-container w3-white" >
-            <h1 style="color: #533678;"> Upload Form</h1>
+            <h1 style="color: #533678;"> Choose a Table</h1>
         </div>
 
         <div class="w3-container">
-          <p>Please submit your zipped file here: </p>
+            <p>Please choose 1 existing table you wish to upload to.<BR> </p>
+        </div>
+
+        <div class="w3-container">
+            <BR>
+            DATA TABLE HERE!!
+            <BR><BR><BR>
         </div>
         
-        <form style="margin-left: 0.5cm;" action ="uploadFile" method ="POST" enctype="multipart/form-data">  
-            
-            <input type="file" name="file" /> <br/><br>
-            <label for="letter">Enter the number of files in the folder:</label>
-            <input type="text" name="numFiles" value="" /><br><br>        
-            <label for="letter">Enter the site and file format:</label>
-            <input type="text" name="format" value="" /><br><br><br>                 
-            <input style = "margin-bottom: 1cm; width: 3cm;" 
-                   type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Upload File" />
-        </form>                
+        <input style = "margin-bottom: 1cm; width: 3cm;" 
+               type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Before" />
+        <input style = "margin-bottom: 1cm; width: 3cm;" 
+               type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Next" />
+        
         
         <div class="w3-container w3-bottom" style="margin-top: 0.5cm; height: 1.3cm; line-height: 1.3cm; background-color: #533678;color: white; ">
             <center><span>Woodland Road | Pittsburgh, PA 15232 | Main: 412-365-1100 | Admission: 800-837-1290</span></center>
@@ -71,27 +65,3 @@
     </body>
 </html>
 
-
-
-<!--
-<!DOCTYPE html>
-
-
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Falk School Data Portal</title>
-    </head>
-    <body>
-        <h1 style="color:purple;">Chatham University Falk School of Sustainability & Environment</h1>
-        <h2 style="color:purple;">Data Portal</h2>
-        
-        <h1> This is the upload form</h1><br>
-        <h2>Please submit your zipped file here: </h2>
-        
-
-   
-
-    </body>
-</html>
--->

@@ -1,15 +1,10 @@
-<%-- 
-    Document   : index
-    Created on : Jan 31, 2016, 10:11:11 PM
-    Author     : Ellie
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Create Table 1</title>
+        <title>Upload</title>
         <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
     </head>
     
@@ -42,47 +37,31 @@
             <span>About</span>
         </div>
         <!-- End of header -->
-       
- 
-        <center>
-        <img src = "sf_chatham_01.jpg" alt="Chatham" width="100%">
-        </center>
-        </form>
         
+        <div class="w3-container w3-white" >
+            <h1 style="color: #533678;"> Choose a Table</h1>
+        </div>
 
+        <div class="w3-container">
+            <p>Please choose 1 existing table you wish to upload to.<BR> </p>
+        </div>
+
+        <div class="w3-container">
+            <BR>
+            DATA TABLE HERE!!
+            <BR><BR><BR>
+        </div>
         
-        <div class="w3-container w3-bottom" style="height: 1.3cm; line-height: 1.3cm; background-color: #533678;color: white; ">
+        <input style = "margin-bottom: 1cm; width: 3cm;" 
+               type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Before" />
+        <input style = "margin-bottom: 1cm; width: 3cm;" 
+               type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Next" />
+        
+        
+        <div class="w3-container w3-bottom" style="margin-top: 0.5cm; height: 1.3cm; line-height: 1.3cm; background-color: #533678;color: white; ">
             <center><span>Woodland Road | Pittsburgh, PA 15232 | Main: 412-365-1100 | Admission: 800-837-1290</span></center>
         </div>
 
     </body>
 </html>
 
-<!--
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Falk School Data Portal</title>
-    </head>
-    <body>
-        <h1 style="color:purple;"><b>Chatham University Falk School of Sustainability & Environment</b></h1>
-        <form action ="UploadDownloadServlet" method ="GET">   
-        <h1 style="color:purple;">Data Portal</h1>     
-        <label for="letter">Please select operation:</label> <br>
-        <select name ="operation">
-                <option value="DownloadData">Download Data</option>            
-                <option value="UploadFiles">Upload Files</option>
-                <option value="HumanObservation">Human Observation Submittal</option>
-                <option value="CreateTableJSP">Create Table</option>
-        </select>
-        <input type="submit" value="Go" />
-        <br><br><br>
-        <center>
-        <img src = "ehc.png">
-        </center>
-    </form>
-
-    </body>
-</html>
--->

@@ -107,7 +107,7 @@ public class MappingTable{
        String query;
        JSONObject myJSONobject;
 
-        
+       
        
         try{
           myJSONobject = new JSONObject(createUserTableParameterSet);
@@ -243,13 +243,23 @@ public class MappingTable{
        ResultSet res;
        String result;
        
+       System.out.println("Inside getUserTableName");
+       
        try{
            stmt = manager.getConnection().createStatement();
+           System.out.println("After stmt connection");
+           
            query = "SELECT TableName FROM MappingTable WHERE"
                    + " SiteID ='" + mySiteID +"'"
-                   + " AND ModelID='" + myModelID +"'"
-                   + " AND SensorID='" + mySensorID +"'";
+                   + " AND ModelID ='" + myModelID +"'"
+                   + " AND SensorID ='" + mySensorID +"'";
+           
+           System.out.println("Before executeQuery");
+           System.out.println(query);
+           
            res = stmt.executeQuery(query);
+           
+           System.out.println("After execute Query");
            
            result = res.getString("TableName");
            

@@ -97,7 +97,12 @@ public class CreateTableFormServlet extends HttpServlet {
                 out.println(mappingTableService.PrintCreateTable(sqlResult));
                 
                 out.println("<br />");
-                String tableName = sqlResult.getString("TableName");
+                System.out.println("Before GetUserTableName");
+                String mySiteID = sqlResult.getString("SiteID");
+                String myModelID = sqlResult.getString("ModelID");
+                String mySensorID = sqlResult.getString("SensorID");
+                String tableName = mappingTableService.getUserTableName(mySiteID, myModelID, mySensorID);
+                System.out.println("Before Creating UserTable");
                 sqlResult = mappingTableService.CreateUserTable(urlParameter_Test2, tableName);
             }//if
             System.out.println("After the mappingtable if");

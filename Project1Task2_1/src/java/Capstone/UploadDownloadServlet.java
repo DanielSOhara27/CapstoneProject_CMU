@@ -9,6 +9,15 @@ package Capstone;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -47,7 +56,7 @@ public class UploadDownloadServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
            
-            String selection = request.getParameter("selection");
+        
                     
                 // determine what type of device our user is
                 String ua = request.getHeader("User-Agent");
@@ -79,7 +88,7 @@ public class UploadDownloadServlet extends HttpServlet {
              
              if(request.getParameter("operation").equals("HumanObservation"))
              {
-                 // user directed to upload page
+                                  
                  nextView = "HumanObs.jsp";
              }
              
