@@ -34,7 +34,7 @@
         <div class="w3-container w3-white" style="height: 0.07cm;">
         </div>
         <div class="w3-container" style="height: 1cm; line-height: 0.9cm; background-color: #46434A; color: whitesmoke;">
-            <span>Log-in</span> &nbsp;| &nbsp;
+            <span><a href='1.1_login.jsp'>Log-in</a></span> &nbsp;| &nbsp;
             <span>Upload</span> &nbsp;| &nbsp;
             <span>Query/Download</span> &nbsp;| &nbsp;
             <span>Create Table</span> &nbsp;| &nbsp;

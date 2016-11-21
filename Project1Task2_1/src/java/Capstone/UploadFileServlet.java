@@ -157,7 +157,7 @@ public class UploadFileServlet extends HttpServlet {
                request.setAttribute("message", "File Upload Failed due to " + ex);
                System.out.println(ex);
                System.out.println("I am here in exception");
-               nextView = "index.jsp";   
+               nextView = "1.0_Main.jsp";   
 
             }
 
@@ -166,7 +166,7 @@ public class UploadFileServlet extends HttpServlet {
         }else{
           System.out.println("I am here in else statement");
 
-            nextView = "index.jsp";     
+            nextView = "1.0_Main.jsp";     
      }
 
  
