@@ -16,6 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import Capstone.MappingTable;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -45,6 +48,13 @@ public class CreateTableFormServlet extends HttpServlet {
     
     String urlParameter_Test =" {\"SiteID\": \"BRCR01\",\"ModelID\": \"Phizer\",\"SensorID\": \"7392-960779\",\"Username\": \"Ryan1\",\"SiteName\": \"WeatherForest-TESTNAME\",\"SensorType\": \"DO\",\"Location\": \"Lat:11234123, Lng:102352\",\"NumColumn\": 5,\"ColumnNames\": \"Original_Timestamp:seconds,BV(Volts):String,T (Deg C):String,DO (mg/L):String,Q():String\",\"Row_To_Skip\": 5,\"Delimiter\": \";\",\"RangeBetweenReadings\": \"15 min\",\"AcceptableRange\": \"20 min\",\"TypeSensor_BaseTable\": \"false\",\"Site_BaseTable\": \"false\",\"Public\": \"true\"}";
     System.out.println(urlParameter_Test);
+    String urlParameter_Test2 ="{\"userTable\": ["
+            + "{\"nameColumn\": \"Original_Timestamp\",\"dataType\": \"Date\", \"Format\":\"seconds\"},"
+            + "{\"nameColumn\": \"BV(Volts)\", \"dataType\": \"String\", \"Format\":\"\"},"
+            + "{\"nameColumn\": \"T (Deg C)\", \"dataType\": \"String\", \"Format\":\"\"},"
+            + "{\"nameColumn\": \"DO (mg/L)\", \"dataType\": \"String\", \"Format\":\"\"},"
+            + "{\"nameColumn\": \"Q()\", \"dataType\": \"String\", \"Format\":\"\"}"
+            + "]}";
     
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
@@ -67,60 +77,43 @@ public class CreateTableFormServlet extends HttpServlet {
             sqlResult = null;
             sqlResult = mappingTableService.DescribeTables("MappingTable");
             if(sqlResult != null){
-                String myTable = "<h3>Mapping Table</h3>"
-                        + "<table border=\"1\">"
-                        + "<tr>"
-                        + "<th>Field</th>"
-                        + "<th>Type</th>"
-                        + "<th>Null</th>"
-                        + "<th>Key</th>"
-                        + "<th>Default</th>"
-                        + "<th>Extra</th>"
-                        + "</tr>";
-                while(sqlResult.next()){
-                    myTable = myTable + "<tr>";
-                    myTable = myTable + "<td>" + sqlResult.getString("Field") + "</td>";
-                    myTable = myTable + "<td>" + sqlResult.getString("Type") + "</td>";
-                    myTable = myTable + "<td>" + sqlResult.getString("Null") + "</td>";
-                    myTable = myTable + "<td>" + sqlResult.getString("Key") + "</td>";
-                    myTable = myTable + "<td>" + sqlResult.getString("Default") + "</td>";
-                    myTable = myTable + "<td>" + sqlResult.getString("Extra") + "</td>";
-                    myTable = myTable + "</tr>";
-                }
-                myTable = myTable + "</table><br /><br />";
-                out.println(myTable);
+                out.println(printDescribeTable(sqlResult));
             }
             sqlResult = null;
             sqlResult = mappingTableService.DescribeTables("MappingColumn");
             if(sqlResult != null){
-                String myTable = "<h3>How the Mapping Column</h3>"
-                        + "<table border=\"1\">"
-                        + "<tr>"
-                        + "<th>Field</th>"
-                        + "<th>Type</th>"
-                        + "<th>Null</th>"
-                        + "<th>Key</th>"
-                        + "<th>Default</th>"
-                        + "<th>Extra</th>"
-                        + "</tr>";
-                while(sqlResult.next()){
-                    myTable = myTable + "<tr>";
-                    myTable = myTable + "<td>" + sqlResult.getString("Field") + "</td>";
-                    myTable = myTable + "<td>" + sqlResult.getString("Type") + "</td>";
-                    myTable = myTable + "<td>" + sqlResult.getString("Null") + "</td>";
-                    myTable = myTable + "<td>" + sqlResult.getString("Key") + "</td>";
-                    myTable = myTable + "<td>" + sqlResult.getString("Default") + "</td>";
-                    myTable = myTable + "<td>" + sqlResult.getString("Extra") + "</td>";
-                    myTable = myTable + "</tr>";
-                }
-                myTable = myTable + "</table><br /><br />";
-                out.println(myTable);
+                out.println(printDescribeTable(sqlResult));
             }
             
             sqlResult = null;
             sqlResult = mappingTableService.DescribeTables("Mapping_ETL_Rules");
             if(sqlResult != null){
-                String myTable = "<h3>How the Mapping ETL Rules</h3>"
+                out.println(printDescribeTable(sqlResult));
+            }
+            
+            sqlResult = mappingTableService.InsertMetaData_MappingTable2(urlParameter_Test);
+            if(sqlResult != null){
+               
+                out.println(mappingTableService.PrintCreateTable(sqlResult));
+                
+                out.println("<br />");
+                String tableName = sqlResult.getString("TableName");
+                sqlResult = mappingTableService.CreateUserTable(urlParameter_Test2, tableName);
+            }//if
+            System.out.println("After the mappingtable if");
+            out.println("</body>");
+            out.println("</html>");
+            
+            stmt = null;
+        
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CreateTableFormServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }//try print
+    }//end of method
+    
+    public String printDescribeTable(ResultSet sqlResult){
+        String myTable = "<h3>Mapping Table</h3>"
                         + "<table border=\"1\">"
                         + "<tr>"
                         + "<th>Field</th>"
@@ -130,82 +123,25 @@ public class CreateTableFormServlet extends HttpServlet {
                         + "<th>Default</th>"
                         + "<th>Extra</th>"
                         + "</tr>";
-                while(sqlResult.next()){
-                    myTable = myTable + "<tr>";
-                    myTable = myTable + "<td>" + sqlResult.getString("Field") + "</td>";
-                    myTable = myTable + "<td>" + sqlResult.getString("Type") + "</td>";
-                    myTable = myTable + "<td>" + sqlResult.getString("Null") + "</td>";
-                    myTable = myTable + "<td>" + sqlResult.getString("Key") + "</td>";
-                    myTable = myTable + "<td>" + sqlResult.getString("Default") + "</td>";
-                    myTable = myTable + "<td>" + sqlResult.getString("Extra") + "</td>";
-                    myTable = myTable + "</tr>";
-                }
-                myTable = myTable + "</table><br /><br />";
-                out.println(myTable);
+        try {
+            while(sqlResult.next()){
+                myTable = myTable + "<tr>";
+                myTable = myTable + "<td>" + sqlResult.getString("Field") + "</td>";
+                myTable = myTable + "<td>" + sqlResult.getString("Type") + "</td>";
+                myTable = myTable + "<td>" + sqlResult.getString("Null") + "</td>";
+                myTable = myTable + "<td>" + sqlResult.getString("Key") + "</td>";
+                myTable = myTable + "<td>" + sqlResult.getString("Default") + "</td>";
+                myTable = myTable + "<td>" + sqlResult.getString("Extra") + "</td>";
+                myTable = myTable + "</tr>";
             }
-            
-            sqlResult = mappingTableService.InsertMetaData_MappingTable2(urlParameter_Test);
-            if(sqlResult != null){
-                String myTable = "<h3>How the MappingTable After creation</h3>"
-                        + "<table border=\"1\">"
-                        + "<tr>"
-                        + "<th>MappingTable_ID</th>"
-                        + "<th>SiteID</th>"
-                        + "<th>ModelID</th>"
-                        + "<th>SensorID</th>"
-                        + "<th>Username</th>"
-                        + "<th>SiteName</th>"
-                        + "<th>SensorType</th>"
-                        + "<th>Location</th>"
-                        + "<th>NumColumn</th>"
-                        + "<th>Delimiter</th>"
-                        + "<th>RangeBetweenReadings</th>"
-                        + "<th>AcceptableRange</th>"
-                        + "<th>TypeSensor_BaseTable</th>"
-                        + "<th>Site_BaseTable</th>"
-                        + "<th>Public</th>"
-                        + "<th>TableName</th>"
-                        + "<th>ColumnNames</th>"
-                        + "<th>Row_To_Skip</th>"
-                        + "</tr>";
-                //System.out.println(myTable);
-                while(sqlResult.next()){
-                    myTable = myTable + "<tr>";
-                    myTable = myTable + "<td>" + sqlResult.getInt("MappingTable_ID") + "</td>";
-                    myTable = myTable + "<td>" + sqlResult.getString("SiteID") + "</td>";
-                    myTable = myTable + "<td>" + sqlResult.getString("ModelID") + "</td>";
-                    myTable = myTable + "<td>" + sqlResult.getString("SensorID") + "</td>";
-                    myTable = myTable + "<td>" + sqlResult.getString("Username") + "</td>";
-                    myTable = myTable + "<td>" + sqlResult.getString("SiteName") + "</td>";
-                    myTable = myTable + "<td>" + sqlResult.getString("SensorType") + "</td>";
-                    myTable = myTable + "<td>" + sqlResult.getString("Location") + "</td>";
-                    myTable = myTable + "<td>" + sqlResult.getInt("NumColumn") + "</td>";
-                    myTable = myTable + "<td>" + sqlResult.getString("Delimiter") + "</td>";
-                    myTable = myTable + "<td>" + sqlResult.getString("RangeBetweenReadings") + "</td>";
-                    myTable = myTable + "<td>" + sqlResult.getString("AcceptableRange") + "</td>";
-                    myTable = myTable + "<td>" + sqlResult.getString("TypeSensor_BaseTable") + "</td>";
-                    myTable = myTable + "<td>" + sqlResult.getString("Site_BaseTable") + "</td>";
-                    myTable = myTable + "<td>" + sqlResult.getString("Public") + "</td>";
-                    myTable = myTable + "<td>" + sqlResult.getString("TableName") + "</td>";
-                    myTable = myTable + "<td>" + sqlResult.getString("ColumnNames") + "</td>";
-                    myTable = myTable + "<td>" + sqlResult.getInt("Row_To_Skip") + "</td>";
-                    myTable = myTable + "</tr>";
-                }
-                myTable = myTable + "</table><br /><br />";
-                out.println(myTable);
-            }else{
-                out.println("<p> SOMETHING WENT WRONG </p>");
-            }
-            
-            
-            System.out.println("After the mappingtable if");
-            out.println("</body>");
-            out.println("</html>");
-        }catch(Exception e) {
-            e.printStackTrace();
-            stmt = null;
+        } catch (SQLException ex) {
+            Logger.getLogger(CreateTableFormServlet.class.getName()).log(Level.SEVERE, null, ex);
+            myTable = "<p>There was an error printing the describe table</p></table>";
         }
-        
+                myTable = myTable + "</table><br /><br />";
+                
+                return myTable;
+    
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
