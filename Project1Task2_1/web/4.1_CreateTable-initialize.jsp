@@ -62,7 +62,7 @@
                     <label for="letter"> Comment Line Signifier: &nbsp;</label>
                     <input type="text" name="lineSignifier" value="" /><br><br>
                     <label for="letter"> Number of header's line: </label>
-                    <input type="text" name="lineSignifier" value="" /><br><br>
+                    <input type="text" name="numHeader" value="" /><br><br>
                 </div>
                 <div class="w3-half">
                     <label for="letter"> Type of Sensor: &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</label>
