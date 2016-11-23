@@ -83,11 +83,13 @@
                     //{out.print("<input name=\"" + list.get(i-1) + "\" type=\"text\" value=\""+ "DataType"+list.get(i-1)+"\"/>" );}
                     {out.print("<select name=\"" + list.get(i-1)+"\"class=\"form-control\" style=\"color: grey; height: 0.75cm;\"> "
                             + "<option disabled selected>Select Data Type</option>"
-                            + "<option value='char'>Character</option>"
-                            + "<option value='number'>Number</option>"
-                            + "<option value='integer'>Integer</option>"
-                            + "<option value='date_time'>Date and Time</option>"
-                            + "<option value='boolean'>Boolean</option></select> ");}
+                            + "<option value='string'>String/alphanumeric(abc123)</option>"
+                            + "<option value='numsym'>Numeric with Symbol(+3.00,-3.97)</option>"
+                            + "<option value='numNOsym'>Numeric without Symbol(3.00,3.97)</option>"
+                            + "<option value='Date'>Date(Date US MM:DD:YY)</option>"
+                            + "<option value='Time'>Time(Time HH:MM:SS)</option>"
+                            + "<option value='TimeDate'>Date and Time(MM:DD:YY HH:MM:SS)</option>"
+                            + "</select> ");}
 
                     if((i % 4)==3)
                     {out.print("<input name=\"" + list.get(i-1) + "\"onfocus=\"if (this.value=='"+ list.get(i-1) +"') this.value='';\" type=\"text\" value=\""+list.get(i-1)+"\"style=\"color: grey\"/> " );}
