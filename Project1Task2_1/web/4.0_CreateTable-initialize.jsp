@@ -60,7 +60,7 @@
                     <label for="letter"> Type of Delimeter: &nbsp; &nbsp; &nbsp; &nbsp; </label>
                     <input type="text" name="typeDelimeter" value="" /><br><br>
                     <label for="letter"> Comment Line Signifier: &nbsp;</label>
-                    <input type="text" name="lineSignifier" value="" /><br><br>
+                    <input type="text" name="commentSignifier" value="" /><br><br>
                     <label for="letter"> Number of header's line: </label>
                     <input type="text" name="numHeader" value="" /><br><br>
                     <label for="letter"> Base table exists? (Same type of data exists): </label>

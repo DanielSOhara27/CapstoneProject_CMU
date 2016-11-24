@@ -9,9 +9,9 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 <%  
    // create a list for testing
-   int ColNum=4;
+   int colNum=4;
    List<String> list = new ArrayList<String>();
-   for(int i=1; i<=4; i++){
+   for(int i=1; i<=colNum; i++){
        for(int j=1;j<=4;j++){
            switch (j){
                case 1: list.add("col"+i+"_colName");break;
@@ -21,7 +21,7 @@
            }
        }
    }
-
+   session.setAttribute("colNum",colNum);
    pageContext.setAttribute("list", list);
 %>
 <!DOCTYPE html>
