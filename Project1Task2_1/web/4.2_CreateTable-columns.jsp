@@ -21,6 +21,8 @@
            }
        }
    }
+   int option = 2;
+   session.setAttribute("option",option);
    session.setAttribute("colNum",colNum);
    pageContext.setAttribute("list", list);
 %>
