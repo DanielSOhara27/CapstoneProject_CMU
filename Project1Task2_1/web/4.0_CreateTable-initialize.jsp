@@ -62,10 +62,7 @@
                     <label for="letter"> Comment Line Signifier: &nbsp;</label>
                     <input type="text" name="lineSignifier" value="" /><br><br>
                     <label for="letter"> Number of header's line: </label>
-                    <input type="text" name="numHeader" value="" /><br><br>
-                    <label for="letter"> Base table exists? (Same type of data exists): </label>
-                    Yes <input type="checkbox" id="baseTable" value="yes">
-                    No <input type="checkbox" id="baseTable" value="no"><BR><BR><BR><BR>
+                    <input type="text" name="numHeader" value="" /><BR><BR>
                 </div>
                 <div class="w3-half">
                     <label for="letter"> Type of Sensor: &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</label>
