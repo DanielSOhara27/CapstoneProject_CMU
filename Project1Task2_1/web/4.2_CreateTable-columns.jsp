@@ -86,12 +86,12 @@
                             + "<option value='String'>String/Alphanumeric [ Abc123 ]</option>"
                             + "<option value='String'>Numeric with Symbol [ +3.00 ]</option>"
                             + "<option value='Double'>Numeric without Symbol [ 3.00 ]</option>"
-                            + "<option value='[ DateTime-US_MM:DD:YYYY HH:MM:SS ]'>Datetime [ DateTime-US_MM:DD:YYYY HH:MM:SS ]</option>"
-                            + "<option value='[ Date-US_MM:DD:YY ]'>Datetime [ Date-US_MM:DD:YY ]</option>"
+                            + "<option value='[ DateTime-US MM:DD:YYYY_HH:MM:SS ]'>Datetime [ DateTime-US_MM:DD:YYYY HH:MM:SS ]</option>"
+                            + "<option value='[ Date-US MM:DD:YY ]'>Datetime [ Date-US_MM:DD:YY ]</option>"
                             + "<option value='[ Unix/Epoch_seconds ]'>Datetime [ Unix/Epoch_seconds ]</option>"                           
-                            + "<option value='[ Timestamp_YYYY:MM:DD HH:MM:SS ]'>Datetime [ Timestamp_YYYY:MM:DD HH:MM:SS ]</option>"
-                            + "<option value='[ Date-Int_DD:MM:YYYY ]'>Datetime [ Date-Int_DD:MM:YYYY ]</option>"
-                            + "<option value='[ Time_HH:MM:SS ]'>Datetime [ Time_HH:MM:SS ]</option>"
+                            + "<option value='[ Timestamp YYYY:MM:DD_HH:MM:SS ]'>Datetime [ Timestamp_YYYY:MM:DD HH:MM:SS ]</option>"
+                            + "<option value='[ Date-Int DD:MM:YYYY ]'>Datetime [ Date-Int_DD:MM:YYYY ]</option>"
+                            + "<option value='[ Time HH:MM:SS ]'>Datetime [ Time_HH:MM:SS ]</option>"
                             + "</select><br> ");}
 
                     //if((i % 4)==3)
