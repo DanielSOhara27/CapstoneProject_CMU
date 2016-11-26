@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Upload</title>
+        <title>Query</title>
         <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
     </head>
     
@@ -39,22 +39,22 @@
         <!-- End of header -->
         
         <div class="w3-container w3-white" >
-            <h1 style="color: #533678;"> Choose Upload type</h1>
+            <h1 style="color: #533678;"> Show data and download </h1>
         </div>
 
         <div class="w3-container">
-            <p>Please choose type of upload.<BR> </p>
+            <p>Please take a look at the queried data and if you wish to download, click "Download" button. <BR> </p>
         </div>
-
+        
         <div class="w3-container">
-            <BR>
-            <input TYPE="radio" NAME="uploadType" VALUE="existing" CHECKED>
-            Upload to an existing table. (using .csv zipped files).
-            <BR><BR><BR>
-            <input TYPE="radio" NAME="uploadType" VALUE="observation">
-            Upload observations.
-            <BR><BR><BR>
+        <BR>
+        <p>SHOW DATA HERE!!</p><BR>
+        <input style = "margin-bottom: 1cm; width: 3cm;" 
+               type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Download" />
         </div>
+        <BR><BR>
+        <input style = "margin-bottom: 1cm; width: 3cm;" 
+               type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Previous" />
         
         <input style = "margin-bottom: 1cm; width: 3cm;" 
                type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Next" />

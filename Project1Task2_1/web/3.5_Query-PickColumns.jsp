@@ -1,10 +1,33 @@
-
+<%@page import="java.util.*" %>
+<%@page import="java.sql.*" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+<%@page  import="Capstone.DBConnectionManager" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%
+    
+    DBConnectionManager DBManager = DBConnectionManager.getInstance();
+    Connection connection = DBManager.getConnection();
+
+    Statement statement = connection.createStatement() ;
+    //ref: http://stackoverflow.com/questions/5003142/show-jdbc-resultset-in-html-in-jsp-page-using-mvc-and-dao-pattern
+//ResultSet resultset = (ResultSet)request.getAttribute("queryResult");
+ResultSet resultset = statement.executeQuery("SELECT TimeLX, `BV (Volts)`, `T (deg C)`,`DO (mg/l)`,`Q ()`,minute,hour,mday,mon,year,yday,`SourceFile` FROM `Ryan_BRCR01_Phizer_7392-960779_DataTable`");
+ResultSetMetaData rsmd = resultset.getMetaData();
+int columnCount = rsmd.getColumnCount();
+
+// The column count starts from 1
+//for (int i = 1; i <= columnCount; i++ ) {
+  //String name = rsmd.getColumnName(i);
+//}
+%>
+
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Upload</title>
+        <title>Query</title>
         <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
     </head>
     
@@ -39,26 +62,22 @@
         <!-- End of header -->
         
         <div class="w3-container w3-white" >
-            <h1 style="color: #533678;"> Choose Upload type</h1>
+            <h1 style="color: #533678;"> Pick only columns you want.</h1>
         </div>
 
         <div class="w3-container">
-            <p>Please choose type of upload.<BR> </p>
-        </div>
-
-        <div class="w3-container">
-            <BR>
-            <input TYPE="radio" NAME="uploadType" VALUE="existing" CHECKED>
-            Upload to an existing table. (using .csv zipped files).
-            <BR><BR><BR>
-            <input TYPE="radio" NAME="uploadType" VALUE="observation">
-            Upload observations.
-            <BR><BR><BR>
+            <p>Please choose all columns that apply. <BR> </p>
         </div>
         
-        <input style = "margin-bottom: 1cm; width: 3cm;" 
+
+        
+        <div>
+        <input style = "margin-left: 18cm; margin-bottom: 2cm; width: 3cm;" 
+               type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Previous" />
+        
+        <input style = " margin-bottom: 2cm; width: 3cm;" 
                type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Next" />
-        
+        </div>
         
         <div class="w3-container w3-bottom" style="margin-top: 0.5cm; height: 1.3cm; line-height: 1.3cm; background-color: #533678;color: white; ">
             <center><span>Woodland Road | Pittsburgh, PA 15232 | Main: 412-365-1100 | Admission: 800-837-1290</span></center>

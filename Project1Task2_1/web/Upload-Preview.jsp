@@ -39,21 +39,15 @@
         <!-- End of header -->
         
         <div class="w3-container w3-white" >
-            <h1 style="color: #533678;"> Choose Upload type</h1>
+            <h1 style="color: #533678;"> Upload Preview</h1>
         </div>
 
         <div class="w3-container">
-            <p>Please choose type of upload.<BR> </p>
+            <p>Please take a look at the table content to see if it's the right table you wish to upload.<BR> </p>
         </div>
 
         <div class="w3-container">
-            <BR>
-            <input TYPE="radio" NAME="uploadType" VALUE="existing" CHECKED>
-            Upload to an existing table. (using .csv zipped files).
-            <BR><BR><BR>
-            <input TYPE="radio" NAME="uploadType" VALUE="observation">
-            Upload observations.
-            <BR><BR><BR>
+            <p>Show file here.<BR> </p>
         </div>
         
         <input style = "margin-bottom: 1cm; width: 3cm;" 

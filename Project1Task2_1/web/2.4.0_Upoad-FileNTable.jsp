@@ -1,10 +1,17 @@
+    <%-- 
+    Document   : result
+    Created on : Feb 1, 2016, 8:18:26 PM
+    Author     : Ellie
+--%>
+
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Upload</title>
+        <title>Create Table 1</title>
         <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
     </head>
     
@@ -29,36 +36,37 @@
         <div class="w3-container w3-white" style="height: 0.07cm;">
         </div>
         <div class="w3-container" style="height: 1cm; line-height: 0.9cm; background-color: #46434A; color: whitesmoke;">
-            <span><a href='1.1_login.jsp'>Log-in</a></span> &nbsp;| &nbsp;
-            <span><a href='2.1_Upload-ChooseType.jsp'>Upload</a></span> &nbsp;| &nbsp;
-            <span><a href='3.1_Query-ChooseType.jsp'>Query/Download</a></span> &nbsp;| &nbsp;
-            <span><a href='4.0_CreateTable-Upload.jsp'>Create Table</a></span> &nbsp;| &nbsp;
-            <span><a href='5.0_Admin-Choose.jsp.jsp'>Admin</span> &nbsp;| &nbsp;
-            <span><a href='6.0_About.jsp'>About</a></span>
+            <span>Log-in</span> &nbsp;| &nbsp;
+            <span>Upload</span> &nbsp;| &nbsp;
+            <span>Query/Download</span> &nbsp;| &nbsp;
+            <span>Create Table</span> &nbsp;| &nbsp;
+            <span>Admin</span> &nbsp;| &nbsp;
+            <span>About</span>
         </div>
         <!-- End of header -->
-        
+       
         <div class="w3-container w3-white" >
-            <h1 style="color: #533678;"> Choose Upload type</h1>
+            <h1 style="color: #533678;"> Upload Form</h1>
         </div>
 
         <div class="w3-container">
-            <p>Please choose type of upload.<BR> </p>
-        </div>
-
-        <div class="w3-container">
-            <BR>
-            <input TYPE="radio" NAME="uploadType" VALUE="existing" CHECKED>
-            Upload to an existing table. (using .csv zipped files).
-            <BR><BR><BR>
-            <input TYPE="radio" NAME="uploadType" VALUE="observation">
-            Upload observations.
-            <BR><BR><BR>
+          <p>Please submit your zipped file here: </p>
         </div>
         
-        <input style = "margin-bottom: 1cm; width: 3cm;" 
-               type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Next" />
-        
+        <form style="margin-left: 0.5cm;" action ="uploadFile" method ="POST" enctype="multipart/form-data">  
+            
+            <input type="file" name="file" /> <br/><br>
+            <label for="letter">Enter the site name:</label>
+            <input type="text" name="siteName" value="" /><br><br>        
+            <label for="letter">Enter the sensor name:</label>
+            <input type="text" name="sensorName" value="" /><br><br><br> 
+            <label for="letter">Enter the model:</label>
+            <input type="text" name="model" value="" /><br><br><br> 
+            <label for="letter">Enter the folder name:</label>            
+            <input type="text" name="folderName" value="" /><br><br>            
+            <input style = "margin-bottom: 1cm; width: 3cm;" 
+                   type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Upload File" />
+        </form>                
         
         <div class="w3-container w3-bottom" style="margin-top: 0.5cm; height: 1.3cm; line-height: 1.3cm; background-color: #533678;color: white; ">
             <center><span>Woodland Road | Pittsburgh, PA 15232 | Main: 412-365-1100 | Admission: 800-837-1290</span></center>

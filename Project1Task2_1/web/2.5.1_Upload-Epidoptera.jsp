@@ -48,76 +48,62 @@
         
         
         <div>
+            Genus: <input type ="text" name ="Genus"><BR>
             Species: <input type ="text" name ="Species"><BR>
+            Common Name: <input type ="text" name ="CommonName"><BR>
           
-            <label for="letter">Common Name:</label>
+            <label for="letter">Family:</label>
             <select name = "Family">
-                <option value="Aceraceae">Aceraceae</option> 
-                <option value="Amaryllidaceae">Amaryllidaceae</option> 
-                <option value="Anacardiaceae">Anacardiaceae</option> 
-                <option value="Apocynaceae">Aceraceae</option> 
-                <option value="Araceae">Araceae</option>
-                <option value="Balsamaceae">Balsamaceae</option> 
-                <option value="Berberidaceae">Berberidaceae</option> 
-                <option value="Betulaceae">Betulaceae</option> 
-                <option value="Brassicaceae">Brassicaceae</option> 
-                <option value="Caryophyllaceae">Caryophyllaceae</option> 
-                <option value="Commelinaceae">Commelinaceae</option> 
-                <option value="Ericaceae">Ericaceae</option>
-                <option value="Fabaceae">Fabaceae</option> 
-                <option value="Fagaceae">Fagaceae</option> 
-                <option value="Geraniaceae">Geraniaceae</option> 
-                <option value="Ginkoaceae">Ginkoaceae</option> 
-                <option value="Juglandaceae">Juglandaceae</option> 
-                <option value="Lauraceae">Lauraceae</option> 
-                <option value="Magnoliaceae">Magnoliaceae</option> 
-                <option value="Pinaceae">Pinaceae</option> 
-                <option value="Polygonaceae">Polygonaceae</option> 
-                <option value="Rosaceae">Rosaceae</option> 
-                <option value="Sapindaceae">Sapindaceae</option> 
-                <option value="Simaroubaceae">Simaroubaceae</option> 
+                <option value="Aceraceae">Arctiidae</option> 
+                <option value="Crambidae">Crambidae</option>
+                <option value="Depressariidae">Depressariidae</option>
+                <option value="Erebidae">Erebidae</option>
+                <option value="Geometridae">Geometridae</option>
+                <option value="Lasiocampidae">Lasiocampidae</option>
+                <option value="Limacodidae">Limacodidae</option>
+                <option value="Noctuidae">Noctuidae</option>
+                <option value="Notodontidae">Notodontidae</option>
+                <option value="Oecophoridae">Oecophoridae</option>
+                <option value="Pyralidae">Pyralidae</option>
+                <option value="Saturniidae">Saturniidae</option>
+                <option value="Sphingidae">Sphingidae</option>
+                <option value="Tortricidae">Tortricidae</option>
+                <option value="Yponomeutidae">Yponomeutidae</option>
             </select>
 
             </br>
 
-            <label for="letter">Vegetation Type:</label>
-            <select name = "VegetationType">
-                <option value ="herb"> Herb</option>
-                <option value ="shrub"> Shrub</option>
-                <option value="tree"> Tree</option>
-                <option value="vine"> Vine</option>
+            <label for="letter">Sex:</label>
+            <select name = "Sex">
+                <option value="Unknown">Unknown</option>
+                <option value="Female">Female</option> 
+                <option value="Male">Male</option>
             </select>
-
-            </br>
-
-            <label for ="letter">Habitat:</label>
-            <select name ="Habitat">
-                <option value="forest"> Forest</option>
-                <option value="meadow"> Meadow</option>
-                <option value="edge"> Edge</option>
-                <option value="disturbed"> Disturbed</option>
+            
+            <label for="letter">Time of Sampling:</label>
+            <select name = "SampleTime">
+                <option value="Morning">Morning</option>
+                <option value="Evening">Evening</option> 
             </select>
+            
+            <BR>
+            <p>Date of Reference Image:</p>
+            <input style = "margin-bottom: 1cm; width: 5cm;" 
+                   type="date" class="w3-btn w3-grey w3-center" name="refDate" value="refDate" /><BR>
 
-            </br>
-            <label for="letter">Origin:</label>
-            <select name="Origin">
-                <option value="wild"> Wild</option>
-                <option value="planted"> Planted</option>
-            </select>
-
-            </br>
+            Identified by: <input type ="text" name ="identifiedBy"><BR>
             <label for="letter">Native Status:</label>
-            <select name="NativeStatus">
-                <option value="native"> Native</option>
-                <option value="nonnative">Non-Native</option>
-                <option value="invasiv">Invasive</option>
+            <select name = "Native">
+                <option value="Unknown">Unknown</option>
+                <option value="Native">Native</option> 
+                <option value="NonNatvie">Non-Native</option>
+            </select><BR>
+            
+            <label for="letter">Collected and Pinned:</label>
+            <select name = "Collected">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option> 
             </select>
-
-            </br>
-            Date: <input type ="text" name ="Date">
-            </br>
-            Personnel Name: <input type ="text" name ="PersonnelName">
-            </br> 
             <BR>
             <input type="submit" value="Submit" />   
             </BR>

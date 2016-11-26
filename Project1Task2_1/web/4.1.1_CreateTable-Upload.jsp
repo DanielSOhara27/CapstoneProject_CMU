@@ -1,3 +1,8 @@
+<%-- 
+    Document   : createTable_1.1
+    Created on : Nov 4, 2016, 12:46:52 AM
+    Author     : NaTT
+--%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -18,6 +23,8 @@
     
     <body>
         
+        <% int colNum = (int)session.getAttribute("colNum");
+            session.setAttribute("colNum",colNum); %>
         <!-- Start header -->
         <div class="w3-container" style="height: 3.1cm; background-color: #533678;align-content: center; ">
             <br>
@@ -39,26 +46,20 @@
         <!-- End of header -->
         
         <div class="w3-container w3-white" >
-            <h1 style="color: #533678;"> Choose Upload type</h1>
+            <h1 style="color: #533678;"> Create Table</h1>
         </div>
 
         <div class="w3-container">
-            <p>Please choose type of upload.<BR> </p>
-        </div>
-
-        <div class="w3-container">
-            <BR>
-            <input TYPE="radio" NAME="uploadType" VALUE="existing" CHECKED>
-            Upload to an existing table. (using .csv zipped files).
-            <BR><BR><BR>
-            <input TYPE="radio" NAME="uploadType" VALUE="observation">
-            Upload observations.
-            <BR><BR><BR>
+          <p>Please upload the example data file for validation: </p>
         </div>
         
+
+        <form style="margin-left: 0.5cm;" action="CreateTableServlet" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" size="50" />
+        <br /><br><br>
         <input style = "margin-bottom: 1cm; width: 3cm;" 
-               type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Next" />
-        
+                   type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Upload File" />
+        </form>
         
         <div class="w3-container w3-bottom" style="margin-top: 0.5cm; height: 1.3cm; line-height: 1.3cm; background-color: #533678;color: white; ">
             <center><span>Woodland Road | Pittsburgh, PA 15232 | Main: 412-365-1100 | Admission: 800-837-1290</span></center>
