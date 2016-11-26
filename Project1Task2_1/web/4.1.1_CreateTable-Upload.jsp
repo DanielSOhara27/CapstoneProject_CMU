@@ -23,6 +23,8 @@
     
     <body>
         
+        <% int colNum = (int)session.getAttribute("colNum");
+            session.setAttribute("colNum",colNum); %>
         <!-- Start header -->
         <div class="w3-container" style="height: 3.1cm; background-color: #533678;align-content: center; ">
             <br>

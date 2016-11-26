@@ -12,12 +12,12 @@
    int colNum=4;
    List<String> list = new ArrayList<String>();
    for(int i=1; i<=colNum; i++){
-       for(int j=1;j<=2;j++){
+       for(int j=1;j<=4;j++){
            switch (j){
                case 1: list.add("col"+i+"_colName");break;
                case 2: list.add("col"+i+"_dataType");break;
-               //case 3: list.add("col"+i+"_maxLength");break;
-               //case 4: list.add("col"+i+"_relevant");break;
+               case 3: list.add("col"+i+"_maxLength");break;
+               case 4: list.add("col"+i+"_relevant");break;
            }
        }
    }
@@ -76,28 +76,24 @@
                 <%
                     int count=1;
                   for(int i=1; i<=list.size();i++){
-                    if((i % 2)==1)
+                    if((i % 4)==1)
                     {out.print("Column "+ count +": <input name=\"" + list.get(i-1) + "\"onfocus=\"if (this.value=='"+ list.get(i-1) +"') this.value='';\" type=\"text\" value=\""+list.get(i-1)+"\"style=\"color: grey\"/> " );
                     count=count+1;}
-                    if((i % 2)==0)
+                    if((i % 4)==2)
                     //{out.print("<input name=\"" + list.get(i-1) + "\" type=\"text\" value=\""+ "DataType"+list.get(i-1)+"\"/>" );}
                     {out.print("<select name=\"" + list.get(i-1)+"\"class=\"form-control\" style=\"color: grey; height: 0.75cm;\"> "
                             + "<option disabled selected>Select Data Type</option>"
-                            + "<option value='String'>String/Alphanumeric [ Abc123 ]</option>"
-                            + "<option value='String'>Numeric with Symbol [ +3.00 ]</option>"
-                            + "<option value='Double'>Numeric without Symbol [ 3.00 ]</option>"
-                            + "<option value='[ DateTime-US_MM:DD:YYYY HH:MM:SS ]'>Datetime [ DateTime-US_MM:DD:YYYY HH:MM:SS ]</option>"
-                            + "<option value='[ Date-US_MM:DD:YY ]'>Datetime [ Date-US_MM:DD:YY ]</option>"
-                            + "<option value='[ Unix/Epoch_seconds ]'>Datetime [ Unix/Epoch_seconds ]</option>"                           
-                            + "<option value='[ Timestamp_YYYY:MM:DD HH:MM:SS ]'>Datetime [ Timestamp_YYYY:MM:DD HH:MM:SS ]</option>"
-                            + "<option value='[ Date-Int_DD:MM:YYYY ]'>Datetime [ Date-Int_DD:MM:YYYY ]</option>"
-                            + "<option value='[ Time_HH:MM:SS ]'>Datetime [ Time_HH:MM:SS ]</option>"
-                            + "</select><br> ");}
+                            + "<option value='char'>Character</option>"
+                            + "<option value='number'>Number</option>"
+                            + "<option value='integer'>Integer</option>"
+                            + "<option value='date_time'>Date and Time</option>"
+                            + "<option value='boolean'>Boolean</option></select> ");}
 
-                    //if((i % 4)==3)
-                    //{out.print("<input name=\"" + list.get(i-1) + "\"onfocus=\"if (this.value=='"+ list.get(i-1) +"') this.value='';\" type=\"text\" value=\""+list.get(i-1)+"\"style=\"color: grey\"/> " );}
-                    //if((i % 4)==0)                 
-                    //{out.print("<input type=\"checkbox\" name=\"" + list.get(i-1) + "\" value=\"entryYes\"> Relevant Data?<br>");}  
+                    if((i % 4)==3)
+                    {out.print("<input name=\"" + list.get(i-1) + "\"onfocus=\"if (this.value=='"+ list.get(i-1) +"') this.value='';\" type=\"text\" value=\""+list.get(i-1)+"\"style=\"color: grey\"/> " );}
+                    if((i % 4)==0)
+                    //{out.print("<input name=\"" + list.get(i-1) + "\" type=\"text\" value=\""+ "Relevant"+list.get(i-1)+"\"/><br>" );}                  
+                    {out.print("<input type=\"checkbox\" name=\"" + list.get(i-1) + "\" value=\"entryYes\"> Relevant Data?<br>");}  
                   }
                 %>
 
