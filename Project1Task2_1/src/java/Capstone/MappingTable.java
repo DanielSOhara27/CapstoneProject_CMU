@@ -63,9 +63,9 @@ public class MappingTable{
                         "SELECT TableName FROM MappingTable WHERE TableName='" + userTableName + "'" +
                         " ) LIMIT 1";
                     
-            System.out.println(query);        
+            //System.out.println(query);        
             stmt.executeUpdate(query);
-            System.out.println("after the executeUpdate");
+            //System.out.println("after the executeUpdate");
             ResultSet res = stmt.executeQuery("SELECT * FROM MappingTable");
             return res;
        }catch(SQLException e){
@@ -102,7 +102,7 @@ public class MappingTable{
        }
     }
 
-    public ResultSet CreateUserTable(String createUserTableParameterSet, String tableName){
+    public ResultSet CreateUserTable(String createUserTableParameterSet, String tableName, int numColumn){
        Statement stmt;
        String query;
        JSONObject myJSONobject;
@@ -110,41 +110,46 @@ public class MappingTable{
        
        
         try{
+            System.out.println("Inside CreateUserTable");
           myJSONobject = new JSONObject(createUserTableParameterSet);
-          JSONArray myJSONArray = myJSONobject.getJSONArray("User_Columns");
+          System.out.println("After creating JSONObject in CreateUserTable");
+          JSONArray myJSONArray = myJSONobject.getJSONArray("UserTable");
           JSONObject aux;
           
-          int numColumns2 = myJSONobject.getInt("numColumn");
+          int numColumns2 = numColumn;
           
-          query = "CREATE TABLE " + tableName + " ";
+          query = "CREATE TABLE `" + tableName + "` ";
           query = query + "( ";
-          query = query + " userTable_ID INT(11) NOT NULL AUTO_INCREMENT,";
-          query = query + " isItFlagged VARCHAR(10) NOT NULL,";
-          query = query + " Converted_Timetamp VARCHAR(20),";
-          query = query + " TimeFormat VARCHAR(50) NOT NULL,";
-          query = query + " Original_Timestamp VARCHAR(50) NOT NULL,";
-          query = query + " Year INT(2),";
-          query = query + " Yday INT(2),";
-          query = query + " Ymonth INT(1), ";
-          query = query + " Mday INT(1), ";
-          query = query + " SourceFile_Name VARCHAR(100) NOT NULL,";
+          query = query + " `userTable_ID` INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,";
+          query = query + " `isItFlagged` VARCHAR(10) NOT NULL,";
+          query = query + " `Converted_Timetamp` VARCHAR(20),";
+          query = query + " `TimeFormat` VARCHAR(50) NOT NULL,";
+          query = query + " `Year` INT(2),";
+          query = query + " `Yday` INT(2),";
+          query = query + " `Ymonth` INT(1), ";
+          query = query + " `Mday` INT(1), ";
+          query = query + " `SourceFile_Name` VARCHAR(100) NOT NULL,";
           
           for(int x = 0; x < myJSONArray.length(); x++){
                aux = myJSONArray.getJSONObject(x);
-               query = query + " " + aux.getString("nameColumn") + " " + parseDataType(aux.getString("dataType"));
+               query = query + " `" + aux.getString("nameColumn") + "` " + parseDataType(aux.getString("dataType"));
                
                if(x != ( myJSONArray.length() -1) ) query = query + ",";
           }
-
+          
+          query = query + ")";
+          
+          System.out.println("The CreateUserTable query is: " + query);
           stmt = manager.getConnection().createStatement();
           
           stmt.executeUpdate(query);
           
-          query = "DESCRIBE " + tableName;
+          query = "DESCRIBE `" + tableName + "`";
           ResultSet res = stmt.executeQuery(query);
           return res;
 
        }catch(SQLException e){
+           
             e.printStackTrace();
             stmt = null;
             return null;
@@ -261,6 +266,7 @@ public class MappingTable{
            
            System.out.println("After execute Query");
            
+           res.next();
            result = res.getString("TableName");
            
        }catch(SQLException e){
@@ -289,4 +295,29 @@ public class MappingTable{
            return null;
        }
     }
+
+    public ResultSet test_ResultSet(){
+       Statement stmt;
+       String query;
+       try{
+          System.out.println("Inside test_ResultSet");
+          stmt = manager.getConnection().createStatement();
+          
+          System.out.println("Preparing Query");
+          query = "SELECT * FROM MappingTable";
+          
+          System.out.println("Before executeQuery");
+          ResultSet res = stmt.executeQuery(query);
+          
+          System.out.println("Before return res");
+          
+          return res;
+
+       }catch(SQLException e){
+            e.printStackTrace();
+            stmt = null;
+            return null;
+       }
+    }
+    
 }//class

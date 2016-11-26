@@ -48,7 +48,7 @@ public class CreateTableFormServlet extends HttpServlet {
     
     String urlParameter_Test =" {\"SiteID\": \"BRCR01\",\"ModelID\": \"Phizer\",\"SensorID\": \"7392-960779\",\"Username\": \"Ryan1\",\"SiteName\": \"WeatherForest-TESTNAME\",\"SensorType\": \"DO\",\"Location\": \"Lat:11234123, Lng:102352\",\"NumColumn\": 5,\"ColumnNames\": \"Original_Timestamp:seconds,BV(Volts):String,T (Deg C):String,DO (mg/L):String,Q():String\",\"Row_To_Skip\": 5,\"Delimiter\": \";\",\"RangeBetweenReadings\": \"15 min\",\"AcceptableRange\": \"20 min\",\"TypeSensor_BaseTable\": \"false\",\"Site_BaseTable\": \"false\",\"Public\": \"true\"}";
     System.out.println(urlParameter_Test);
-    String urlParameter_Test2 ="{\"userTable\": ["
+    String urlParameter_Test2 ="{\"UserTable\": ["
             + "{\"nameColumn\": \"Original_Timestamp\",\"dataType\": \"Date\", \"Format\":\"seconds\"},"
             + "{\"nameColumn\": \"BV(Volts)\", \"dataType\": \"String\", \"Format\":\"\"},"
             + "{\"nameColumn\": \"T (Deg C)\", \"dataType\": \"String\", \"Format\":\"\"},"
@@ -79,31 +79,46 @@ public class CreateTableFormServlet extends HttpServlet {
             if(sqlResult != null){
                 out.println(printDescribeTable(sqlResult));
             }
+            //sqlResult.close();
             sqlResult = null;
             sqlResult = mappingTableService.DescribeTables("MappingColumn");
             if(sqlResult != null){
                 out.println(printDescribeTable(sqlResult));
             }
             
+            //sqlResult.close();
             sqlResult = null;
             sqlResult = mappingTableService.DescribeTables("Mapping_ETL_Rules");
             if(sqlResult != null){
                 out.println(printDescribeTable(sqlResult));
             }
             
+            //sqlResult.close();
+            sqlResult = null;
             sqlResult = mappingTableService.InsertMetaData_MappingTable2(urlParameter_Test);
             if(sqlResult != null){
                
                 out.println(mappingTableService.PrintCreateTable(sqlResult));
                 
                 out.println("<br />");
+                
                 System.out.println("Before GetUserTableName");
+                sqlResult.first();
                 String mySiteID = sqlResult.getString("SiteID");
                 String myModelID = sqlResult.getString("ModelID");
                 String mySensorID = sqlResult.getString("SensorID");
+                int myNumColumn = sqlResult.getInt("NumColumn");
                 String tableName = mappingTableService.getUserTableName(mySiteID, myModelID, mySensorID);
+                System.out.println("Tablename is " + tableName);
                 System.out.println("Before Creating UserTable");
-                sqlResult = mappingTableService.CreateUserTable(urlParameter_Test2, tableName);
+                sqlResult = mappingTableService.CreateUserTable(urlParameter_Test2, tableName, myNumColumn);
+                
+                if(sqlResult != null){
+                    out.println(printDescribeTable(sqlResult));
+                }
+                
+                //sqlResult.close();
+                //sqlResult = null;
             }//if
             System.out.println("After the mappingtable if");
             out.println("</body>");

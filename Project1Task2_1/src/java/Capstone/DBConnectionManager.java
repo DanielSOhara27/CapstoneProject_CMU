@@ -23,7 +23,7 @@ public class DBConnectionManager {
     String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     String DB_NAME = "test";
     String URL = "jdbc:mysql://localhost/" + DB_NAME;
-    String DB_USER = "root2";
+    String DB_USER = "root";
     String DB_PWD = "anshu";
     try {
             Class.forName(JDBC_DRIVER);
