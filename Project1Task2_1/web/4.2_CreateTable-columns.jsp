@@ -105,9 +105,9 @@
 
                     <br><br><br>
                 <input style = "margin-left: 0cm; margin-bottom: 1cm; width: 2.5cm;" 
-                       type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Previous"/> 
+                    type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Previous"/> 
                 <input style = "margin-left: 0.25cm; margin-bottom: 1cm; width: 2.5cm;" 
-                   type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Next" />
+                    type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Next" />
             </div>
             <br><br>
         </form>
