@@ -6,6 +6,10 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.*" %>
+<%@page import="java.io.*" %>
+<%@page import="javax.xml.parsers.*"%>
+<%@page import="org.w3c.dom.*"%>
+<%@page import="org.xml.sax.*"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 <%  
    // create a list for testing
@@ -22,9 +26,30 @@
        }
    }
    int option = 2;
-   session.setAttribute("option",option);
+   session.setAttribute("option",3);
    session.setAttribute("colNum",colNum);
    pageContext.setAttribute("list", list);
+   
+
+    String xmlInput = "";
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        // use the factory to create a documentbuilder
+        Document apixml = null;
+        try {
+            // parse xml
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            apixml = (Document) builder.parse(new ByteArrayInputStream(xmlInput.getBytes()));
+            Element columns = apixml.getDocumentElement();
+            //title = recipe1.getElementsByTagName("title").item(0).getTextContent();
+            //ingredients = recipe1.getElementsByTagName("ingredients").item(0).getTextContent();
+            //error = recipe1.getElementsByTagName("error").item(0).getTextContent().trim();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 %>
 <!DOCTYPE html>
 <html>

@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<% session.setAttribute("option",1);%>
 <!DOCTYPE html>
 <html>
     <head>

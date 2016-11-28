@@ -25,6 +25,7 @@
            }
        }
    }
+   session.setAttribute("option",5);
    session.setAttribute("colNum",colNum);
    pageContext.setAttribute("list", list);
 %>

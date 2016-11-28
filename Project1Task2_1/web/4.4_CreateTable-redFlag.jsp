@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.*" %>
+
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 <%  
    // create a list for testing
@@ -25,6 +26,7 @@
            }
        }
    }
+   session.setAttribute("option",4);
    session.setAttribute("colNum",colNum);
    pageContext.setAttribute("list", list);
 %>
