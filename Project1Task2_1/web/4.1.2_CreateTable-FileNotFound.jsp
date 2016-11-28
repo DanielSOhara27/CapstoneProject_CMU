@@ -54,7 +54,7 @@
         </div>
         
 
-        <form style="margin-left: 0.5cm;" action="CreateTableServlet" method="post" enctype="multipart/form-data">
+        <form style="margin-left: 0.5cm;" action="CreateTableForm" method="POST" enctype="multipart/form-data">
         <input type="file" name="file" size="50" />
         <br /><br><br>
         <input style = "margin-bottom: 1cm; width: 3cm;" 

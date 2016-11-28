@@ -89,7 +89,7 @@
           <p>Map your columns </p>
         </div>
                
-        <form action="Palindrome" method="GET" style = "margin-left: 0.25cm">    
+        <form action="CreateTableForm" method="POST" style = "margin-left: 0.25cm">    
             <div class="w3-row-padding">
                 <div class="w3-half">
 
