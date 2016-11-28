@@ -30,7 +30,7 @@
         try {
             // parse xml
             DocumentBuilder builder = factory.newDocumentBuilder();
-            apixml = (Document) builder.parse(new ByteArrayInputStream(xmlReceived.getBytes()));
+            apixml = (Document) builder.parse(new ByteArrayInputStream(xmlInput.getBytes()));
             Element columns = apixml.getDocumentElement();
             //title = recipe1.getElementsByTagName("title").item(0).getTextContent();
             //ingredients = recipe1.getElementsByTagName("ingredients").item(0).getTextContent();
