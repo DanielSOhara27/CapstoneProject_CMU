@@ -5,6 +5,7 @@
 <%@page import="javax.xml.parsers.*"%>
 <%@page import="org.w3c.dom.*"%>
 <%@page import="org.xml.sax.*"%>
+
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 <%  
    // create a list for testing
