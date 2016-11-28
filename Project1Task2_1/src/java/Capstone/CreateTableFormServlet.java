@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import Capstone.MappingTable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -39,6 +40,72 @@ public class CreateTableFormServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        response.setContentType("text/html;charset=UTF-8");
+        String option = request.getParameter("option");
+        switch(option){
+            case "0":
+                System.out.println("Case 0 -> option: " + option);
+                break;
+            case "1":
+                System.out.println("Case 1 -> option: " + option);
+                break;
+            case "2":
+                System.out.println("Case 2 -> option: " + option);
+                break;
+            case "3":
+                System.out.println("Case 3 -> option: " + option);
+                break;
+            case "4":
+                System.out.println("Case 4 -> option: " + option);
+                break;
+            case "5":
+                System.out.println("Case 5 -> option: " + option);
+                break;
+            case "6":
+                System.out.println("Case 6 -> option: " + option);
+                break;
+            default:
+                System.out.println("Default -> option: " + option);
+                break;
+        }
+        
+    
+    }//end of method
+    
+    public String printDescribeTable(ResultSet sqlResult){
+        String myTable = "<h3>Mapping Table</h3>"
+                        + "<table border=\"1\">"
+                        + "<tr>"
+                        + "<th>Field</th>"
+                        + "<th>Type</th>"
+                        + "<th>Null</th>"
+                        + "<th>Key</th>"
+                        + "<th>Default</th>"
+                        + "<th>Extra</th>"
+                        + "</tr>";
+        try {
+            while(sqlResult.next()){
+                myTable = myTable + "<tr>";
+                myTable = myTable + "<td>" + sqlResult.getString("Field") + "</td>";
+                myTable = myTable + "<td>" + sqlResult.getString("Type") + "</td>";
+                myTable = myTable + "<td>" + sqlResult.getString("Null") + "</td>";
+                myTable = myTable + "<td>" + sqlResult.getString("Key") + "</td>";
+                myTable = myTable + "<td>" + sqlResult.getString("Default") + "</td>";
+                myTable = myTable + "<td>" + sqlResult.getString("Extra") + "</td>";
+                myTable = myTable + "</tr>";
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CreateTableFormServlet.class.getName()).log(Level.SEVERE, null, ex);
+            myTable = "<p>There was an error printing the describe table</p></table>";
+        }
+                myTable = myTable + "</table><br /><br />";
+                
+                return myTable;
+    
+    }
+
+    public void TestingServlet(HttpServletRequest request, HttpServletResponse response){
     System.out.println("Inside CreateTableForm Servlet");
     
     MappingTable mappingTableService = new MappingTable();
@@ -56,7 +123,7 @@ public class CreateTableFormServlet extends HttpServlet {
             + "{\"nameColumn\": \"Q()\", \"dataType\": \"String\", \"Format\":\"\"}"
             + "]}";
     
-        response.setContentType("text/html;charset=UTF-8");
+        
         try (PrintWriter out = response.getWriter()) {
             
             /* TODO output your page here. You may use following sample code. */
@@ -129,41 +196,43 @@ public class CreateTableFormServlet extends HttpServlet {
 
         } catch (SQLException ex) {
             Logger.getLogger(CreateTableFormServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }//try print
-    }//end of method
-    
-    public String printDescribeTable(ResultSet sqlResult){
-        String myTable = "<h3>Mapping Table</h3>"
-                        + "<table border=\"1\">"
-                        + "<tr>"
-                        + "<th>Field</th>"
-                        + "<th>Type</th>"
-                        + "<th>Null</th>"
-                        + "<th>Key</th>"
-                        + "<th>Default</th>"
-                        + "<th>Extra</th>"
-                        + "</tr>";
-        try {
-            while(sqlResult.next()){
-                myTable = myTable + "<tr>";
-                myTable = myTable + "<td>" + sqlResult.getString("Field") + "</td>";
-                myTable = myTable + "<td>" + sqlResult.getString("Type") + "</td>";
-                myTable = myTable + "<td>" + sqlResult.getString("Null") + "</td>";
-                myTable = myTable + "<td>" + sqlResult.getString("Key") + "</td>";
-                myTable = myTable + "<td>" + sqlResult.getString("Default") + "</td>";
-                myTable = myTable + "<td>" + sqlResult.getString("Extra") + "</td>";
-                myTable = myTable + "</tr>";
-            }
-        } catch (SQLException ex) {
+        } catch (IOException ex) {
+            stmt = null;
+            //sqlResult.close();
+            sqlResult = null;
             Logger.getLogger(CreateTableFormServlet.class.getName()).log(Level.SEVERE, null, ex);
-            myTable = "<p>There was an error printing the describe table</p></table>";
-        }
-                myTable = myTable + "</table><br /><br />";
-                
-                return myTable;
+        }//try print
+    }
+    
+    public void testParameters(HttpServletRequest request, HttpServletResponse response){
+        try (PrintWriter out = response.getWriter()){
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet MappingTableForm</title>");            
+            out.println("</head>");
+            out.println("<body vertical-align=\"middle\" >");
+            out.println("<h1>Servlet Connecting Frontend with Backend at " + request.getContextPath() + "</h1>");
+            Enumeration<String> myparameters =  request.getParameterNames();
+            String auxName;
+            
+            out.println("<ol>");
+            
+            while(myparameters.hasMoreElements()){
+            auxName = myparameters.nextElement();
+            out.println("<li> " + auxName + ": " + request.getParameter(auxName) +" </li>");
+            }//while
+            
+            out.println("</ol>");
+            
+            out.println("</body></html>");
+       }//try
+       catch(IOException e){
+        e.printStackTrace();
+       }
     
     }
-
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
