@@ -20,7 +20,6 @@
            }
        }
    }
-   session.setAttribute("option",6);
    session.setAttribute("colNum",colNum);
    pageContext.setAttribute("list", list);
    
@@ -32,7 +31,7 @@
             // parse xml
             DocumentBuilder builder = factory.newDocumentBuilder();
             apixml = (Document) builder.parse(new ByteArrayInputStream(xmlInput.getBytes()));
-            Element basetable = apixml.getDocumentElement();
+            Element columns = apixml.getDocumentElement();
             //title = recipe1.getElementsByTagName("title").item(0).getTextContent();
             //ingredients = recipe1.getElementsByTagName("ingredients").item(0).getTextContent();
             //error = recipe1.getElementsByTagName("error").item(0).getTextContent().trim();
@@ -43,12 +42,14 @@
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
 %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Create Table</title>
+        <title>Query</title>
         <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
     </head>
     
@@ -83,42 +84,27 @@
         <!-- End of header-->
         
         <div class="w3-container w3-white" >
-            <h1 style="color: #533678;"> Create Table</h1>
+            <h1 style="color: #533678;"> Pick Columns</h1>
         </div>
 
         <div class="w3-container">
-          <p>Map your columns </p>
+          <p>Pick all the columns you wish to have in your final file. </p>
         </div>
                
         <form action="Palindrome" method="GET" style = "margin-left: 0.25cm">    
-            <div class="w3-row-padding">
-                <div class="w3-half">
-
-                    <%
-                        int count = 1;
-                        for (int i = 1; i <= list.size(); i++) {
-                            if ((i % 4) == 1) {
-                                out.print("Column " + count + ": <input name=\"" + list.get(i - 1) + "\"onfocus=\"if (this.value=='" + list.get(i - 1) + "') this.value='';\" type=\"text\" value=\"" + list.get(i - 1) + "\"style=\"color: grey\"/><br> ");
-                                count = count + 1;
-                            }
+            <div class="w3-row-padding" >   
+                <%
+                    int count2 = 1;
+                    for (int i = 1; i <= list.size(); i++) {
+                        if ((i % 4) == 1) {
+                            out.print("Column " + count2 + ": <input name=\"" + list.get(i - 1) + "\"onfocus=\"if (this.value=='" + list.get(i - 1) + "') this.value='';\" type=\"text\" value=\"" + list.get(i - 1) + "\"style=\"color: grey\"disabled/> ");
+                            count2 = count2 + 1;
                         }
-                    %>
-                </div>
-                <div class="w3-half">
-                    <%
-                        int count2 = 1;
-                        for (int i = 1; i <= list.size(); i++) {
-                            if ((i % 4) == 1) {
-                                out.print("Column " + count2 + ": <input name=\"" + list.get(i - 1) + "\"onfocus=\"if (this.value=='" + list.get(i - 1) + "') this.value='';\" type=\"text\" value=\"" + list.get(i - 1) + "\"style=\"color: grey\"/> ");
-                                count2 = count2 + 1;
-                            }
-                            if ((i % 4) == 0){
-                                out.print("<input  name=\"" + list.get(i - 1) + "\"><br>");
-                            }
+                        if ((i % 4) == 0) {
+                             out.print("<input type=\"checkbox\" name=\"" + list.get(i-1) + "\" value=\"entryYes\"><BR> ");  
                         }
-                    %>
-                </div>
-            
+                    }
+                %>
             </div>
                     <BR><BR>
                     <div>

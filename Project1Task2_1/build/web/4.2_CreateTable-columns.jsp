@@ -1,3 +1,8 @@
+<%-- 
+    Document   : createTable_2
+    Created on : Nov 4, 2016, 12:46:52 AM
+    Author     : NaTT
+--%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.*" %>
@@ -11,19 +16,21 @@
    int colNum=4;
    List<String> list = new ArrayList<String>();
    for(int i=1; i<=colNum; i++){
-       for(int j=1;j<=4;j++){
+       for(int j=1;j<=2;j++){
            switch (j){
                case 1: list.add("col"+i+"_colName");break;
                case 2: list.add("col"+i+"_dataType");break;
-               case 3: list.add("col"+i+"_maxLength");break;
-               case 4: list.add("col"+i+"_relevant");break;
+               //case 3: list.add("col"+i+"_maxLength");break;
+               //case 4: list.add("col"+i+"_relevant");break;
            }
        }
    }
-   session.setAttribute("option",6);
+   int option = 2;
+   session.setAttribute("option",3);
    session.setAttribute("colNum",colNum);
    pageContext.setAttribute("list", list);
    
+
     String xmlInput = "";
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         // use the factory to create a documentbuilder
@@ -32,7 +39,7 @@
             // parse xml
             DocumentBuilder builder = factory.newDocumentBuilder();
             apixml = (Document) builder.parse(new ByteArrayInputStream(xmlInput.getBytes()));
-            Element basetable = apixml.getDocumentElement();
+            Element columns = apixml.getDocumentElement();
             //title = recipe1.getElementsByTagName("title").item(0).getTextContent();
             //ingredients = recipe1.getElementsByTagName("ingredients").item(0).getTextContent();
             //error = recipe1.getElementsByTagName("error").item(0).getTextContent().trim();
@@ -48,7 +55,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Create Table</title>
+        <title>Upload</title>
         <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
     </head>
     
@@ -87,46 +94,46 @@
         </div>
 
         <div class="w3-container">
-          <p>Map your columns </p>
+          <p>Your new table contains 4 columns. Please input the information for each column.</p>
         </div>
                
         <form action="Palindrome" method="GET" style = "margin-left: 0.25cm">    
             <div class="w3-row-padding">
-                <div class="w3-half">
+                    
+                <%
+                    int count=1;
+                  for(int i=1; i<=list.size();i++){
+                    if((i % 2)==1)
+                    {out.print("Column "+ count +": <input name=\"" + list.get(i-1) + "\"onfocus=\"if (this.value=='"+ list.get(i-1) +"') this.value='';\" type=\"text\" value=\""+list.get(i-1)+"\"style=\"color: grey\"/> " );
+                    count=count+1;}
+                    if((i % 2)==0)
+                    //{out.print("<input name=\"" + list.get(i-1) + "\" type=\"text\" value=\""+ "DataType"+list.get(i-1)+"\"/>" );}
+                    {out.print("<select name=\"" + list.get(i-1)+"\"class=\"form-control\" style=\"color: grey; height: 0.75cm;\"> "
+                            + "<option disabled selected>Select Data Type</option>"
+                            + "<option value='String'>String/Alphanumeric [ Abc123 ]</option>"
+                            + "<option value='String'>Numeric with Symbol [ +3.00 ]</option>"
+                            + "<option value='Double'>Numeric without Symbol [ 3.00 ]</option>"
+                            + "<option value='[ DateTime-US MM:DD:YYYY_HH:MM:SS ]'>Datetime [ DateTime-US_MM:DD:YYYY HH:MM:SS ]</option>"
+                            + "<option value='[ Date-US MM:DD:YY ]'>Datetime [ Date-US_MM:DD:YY ]</option>"
+                            + "<option value='[ Unix/Epoch_seconds ]'>Datetime [ Unix/Epoch_seconds ]</option>"                           
+                            + "<option value='[ Timestamp YYYY:MM:DD_HH:MM:SS ]'>Datetime [ Timestamp_YYYY:MM:DD HH:MM:SS ]</option>"
+                            + "<option value='[ Date-Int DD:MM:YYYY ]'>Datetime [ Date-Int_DD:MM:YYYY ]</option>"
+                            + "<option value='[ Time HH:MM:SS ]'>Datetime [ Time_HH:MM:SS ]</option>"
+                            + "</select><br> ");}
 
-                    <%
-                        int count = 1;
-                        for (int i = 1; i <= list.size(); i++) {
-                            if ((i % 4) == 1) {
-                                out.print("Column " + count + ": <input name=\"" + list.get(i - 1) + "\"onfocus=\"if (this.value=='" + list.get(i - 1) + "') this.value='';\" type=\"text\" value=\"" + list.get(i - 1) + "\"style=\"color: grey\"/><br> ");
-                                count = count + 1;
-                            }
-                        }
-                    %>
-                </div>
-                <div class="w3-half">
-                    <%
-                        int count2 = 1;
-                        for (int i = 1; i <= list.size(); i++) {
-                            if ((i % 4) == 1) {
-                                out.print("Column " + count2 + ": <input name=\"" + list.get(i - 1) + "\"onfocus=\"if (this.value=='" + list.get(i - 1) + "') this.value='';\" type=\"text\" value=\"" + list.get(i - 1) + "\"style=\"color: grey\"/> ");
-                                count2 = count2 + 1;
-                            }
-                            if ((i % 4) == 0){
-                                out.print("<input  name=\"" + list.get(i - 1) + "\"><br>");
-                            }
-                        }
-                    %>
-                </div>
-            
+                    //if((i % 4)==3)
+                    //{out.print("<input name=\"" + list.get(i-1) + "\"onfocus=\"if (this.value=='"+ list.get(i-1) +"') this.value='';\" type=\"text\" value=\""+list.get(i-1)+"\"style=\"color: grey\"/> " );}
+                    //if((i % 4)==0)                 
+                    //{out.print("<input type=\"checkbox\" name=\"" + list.get(i-1) + "\" value=\"entryYes\"> Relevant Data?<br>");}  
+                  }
+                %>
+
+                    <br><br><br>
+                <input style = "margin-left: 0cm; margin-bottom: 1cm; width: 2.5cm;" 
+                    type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Previous"/> 
+                <input style = "margin-left: 0.25cm; margin-bottom: 1cm; width: 2.5cm;" 
+                    type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Next" />
             </div>
-                    <BR><BR>
-                    <div>
-                        <input style = "margin-left: 0cm; margin-bottom: 1cm; width: 2.5cm;" 
-                               type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Previous"/> 
-                        <input style = "margin-left: 0.25cm; margin-bottom: 1cm; width: 2.5cm;" 
-                               type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Next" />
-                    </div>
             <br><br>
         </form>
 
