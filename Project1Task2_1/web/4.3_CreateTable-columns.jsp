@@ -31,7 +31,17 @@
    pageContext.setAttribute("list", list);
    
 
-    String xmlInput = "";
+    String xmlInput =  "<xmlInput>" +
+            "<foo> 'x-y' </foo>"+
+            "<NumCol> 5 </NumCol>"+
+	    "<ColumnsNames>"+
+		"<Column> Column1 </Column>"+
+		"<Column> Column2 </Column>"+
+		"<Column> Column3 </Column>"+
+		"<Column> Column4 </Column>"+
+		"<Column> Column5 </Column>"+
+	    "</ColumnsNames>"+
+        "</xmlInput>";
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         // use the factory to create a documentbuilder
         Document apixml = null;
@@ -39,10 +49,19 @@
             // parse xml
             DocumentBuilder builder = factory.newDocumentBuilder();
             apixml = (Document) builder.parse(new ByteArrayInputStream(xmlInput.getBytes()));
-            Element columns = apixml.getDocumentElement();
-            //title = recipe1.getElementsByTagName("title").item(0).getTextContent();
-            //ingredients = recipe1.getElementsByTagName("ingredients").item(0).getTextContent();
-            //error = recipe1.getElementsByTagName("error").item(0).getTextContent().trim();
+            String numColstr = apixml.getElementsByTagName("NumCol").item(0).getTextContent();
+            int numColumns = Integer.parseInt(numColstr.trim());
+            //session.setAttribute("colNum", numColumns);
+            NodeList columnNames = apixml.getElementsByTagName("Column");
+            List<String> columnList = new ArrayList<String>();
+            for(int i = 0; i < numColumns; i++){
+                Node data = columnNames.item(i);
+                if (data.getNodeType() == Node.TEXT_NODE) {
+                      columnList.add(data.getNodeValue());
+                }
+            }
+            //pageContext.setAttribute("columnlist", columnList);
+            
         } catch (SAXException e) {
             e.printStackTrace();
         } catch (ParserConfigurationException e) {
