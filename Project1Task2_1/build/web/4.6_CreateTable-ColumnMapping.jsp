@@ -75,7 +75,7 @@
             <span><a href='1.1_login.jsp'>Log-in</a></span> &nbsp;| &nbsp;
             <span><a href='2.1_Upload-ChooseType.jsp'>Upload</a></span> &nbsp;| &nbsp;
             <span><a href='3.1_Query-ChooseType.jsp'>Query/Download</a></span> &nbsp;| &nbsp;
-            <span><a href='4.0_CreateTable-Upload.jsp'>Create Table</a></span> &nbsp;| &nbsp;
+            <span><a href='4.0_CreateTable-initialize.jsp'>Create Table</a></span> &nbsp;| &nbsp;
             <span><a href='5.0_Admin-Choose.jsp.jsp'>Admin</span> &nbsp;| &nbsp;
             <span><a href='6.0_About.jsp'>About</a></span>
         </div>
@@ -97,7 +97,7 @@
                         int count = 1;
                         for (int i = 1; i <= list.size(); i++) {
                             if ((i % 4) == 1) {
-                                out.print("Column " + count + ": <input name=\"" + list.get(i - 1) + "\"onfocus=\"if (this.value=='" + list.get(i - 1) + "') this.value='';\" type=\"text\" value=\"" + list.get(i - 1) + "\"style=\"color: grey\"/><br> ");
+                                out.print("Column " + count + ": <input name=\"" + list.get(i - 1) + "\"onfocus=\"if (this.value=='" + list.get(i - 1) + "') this.value='';\" type=\"text\" value=\"" + list.get(i - 1) + "\"style=\"color: grey\"/disabled><br> ");
                                 count = count + 1;
                             }
                         }
@@ -108,7 +108,7 @@
                         int count2 = 1;
                         for (int i = 1; i <= list.size(); i++) {
                             if ((i % 4) == 1) {
-                                out.print("Column " + count2 + ": <input name=\"" + list.get(i - 1) + "\"onfocus=\"if (this.value=='" + list.get(i - 1) + "') this.value='';\" type=\"text\" value=\"" + list.get(i - 1) + "\"style=\"color: grey\"/> ");
+                                out.print("Column " + count2 + ": <input name=\"" + list.get(i - 1) + "\"onfocus=\"if (this.value=='" + list.get(i - 1) + "') this.value='';\" type=\"text\" value=\"" + list.get(i - 1) + "\"style=\"color: grey\"/disabled> ");
                                 count2 = count2 + 1;
                             }
                             if ((i % 4) == 0){
