@@ -43,7 +43,7 @@
         </div>
 
         <div class="w3-container">
-            <p>Fill in appropriate observation form.</p>
+            <p>Fill in appropriate observation form for Vascular Plant Observation.</p>
         </div>
         
         
