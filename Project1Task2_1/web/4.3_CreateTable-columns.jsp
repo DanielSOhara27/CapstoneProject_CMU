@@ -12,55 +12,41 @@
 <%@page import="org.xml.sax.*"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 <%  
-   // create a list for testing
-   int colNum=4;
-   List<String> list = new ArrayList<String>();
-   for(int i=1; i<=colNum; i++){
-       for(int j=1;j<=2;j++){
-           switch (j){
-               case 1: list.add("col"+i+"_colName");break;
-               case 2: list.add("col"+i+"_dataType");break;
-               //case 3: list.add("col"+i+"_maxLength");break;
-               //case 4: list.add("col"+i+"_relevant");break;
-           }
-       }
-   }
-   int option = 2;
-   session.setAttribute("option",3);
-   session.setAttribute("colNum",colNum);
-   pageContext.setAttribute("list", list);
+
    
 
     String xmlInput =  "<xmlInput>" +
             "<foo> 'x-y' </foo>"+
             "<NumCol> 5 </NumCol>"+
-	    "<ColumnsNames>"+
-		"<Column> Column1 </Column>"+
-		"<Column> Column2 </Column>"+
-		"<Column> Column3 </Column>"+
-		"<Column> Column4 </Column>"+
-		"<Column> Column5 </Column>"+
-	    "</ColumnsNames>"+
+            "<Column1> Column1 a </Column1>"+
+            "<Column2> Column2 b </Column2>"+
+            "<Column3> Column3 c </Column3>"+
+            "<Column4> Column4 d </Column4>"+
+            "<Column5> Column5 e </Column5>"+
         "</xmlInput>";
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         // use the factory to create a documentbuilder
         Document apixml = null;
+        List<String> columnList = new ArrayList<String>();
+        int numColumns=0;
         try {
             // parse xml
             DocumentBuilder builder = factory.newDocumentBuilder();
             apixml = (Document) builder.parse(new ByteArrayInputStream(xmlInput.getBytes()));
-            String numColstr = apixml.getElementsByTagName("NumCol").item(0).getTextContent();
-            int numColumns = Integer.parseInt(numColstr.trim());
-            //session.setAttribute("colNum", numColumns);
-            NodeList columnNames = apixml.getElementsByTagName("Column");
-            List<String> columnList = new ArrayList<String>();
+            // parse xml
+            NodeList parsedinput = apixml.getElementsByTagName("xmlInput");
+            Element input = (Element) parsedinput.item(0);
+            String numColstr = input.getElementsByTagName("NumCol").item(0).getTextContent();
+            numColumns = Integer.parseInt(numColstr.trim());
+            //System.out.println("NumCol is " + numColumns);
+
             for(int i = 0; i < numColumns; i++){
-                Node data = columnNames.item(i);
-                if (data.getNodeType() == Node.TEXT_NODE) {
-                      columnList.add(data.getNodeValue());
-                }
+                String y = Integer.toString(i + 1);
+                String columnNames = input.getElementsByTagName("Column"+ y).item(0).getTextContent();
+                columnList.add(columnNames);
+                //System.out.println("columnName"+ i + ": " + columnNames);
             }
-            //pageContext.setAttribute("columnlist", columnList);
+
             
         } catch (SAXException e) {
             e.printStackTrace();
@@ -69,6 +55,23 @@
         } catch (IOException e) {
             e.printStackTrace();
         }
+        
+           //int numColumns=4;
+            List<String> list = new ArrayList<String>();
+            for(int i=1; i<=numColumns; i++){
+                for(int j=1;j<=2;j++){
+                    switch (j){
+                        case 1: list.add("col"+i+"_colName");break;
+                        case 2: list.add("col"+i+"_dataType");break;
+                        //case 3: list.add("col"+i+"_maxLength");break;
+                        //case 4: list.add("col"+i+"_relevant");break;
+                    }
+                }
+            }
+            int option = 3;
+            session.setAttribute("option",3);
+            session.setAttribute("colNum",numColumns);
+            pageContext.setAttribute("list", list);
 %>
 <!DOCTYPE html>
 <html>
@@ -113,7 +116,7 @@
         </div>
 
         <div class="w3-container">
-          <p>Your new table contains 4 columns. Please input the information for each column.</p>
+          <p>Your new table contains above columns. Please input the information for each column.</p>
         </div>
                
         <form action="CreateTableForm" method="POST" style = "margin-left: 0.25cm">    
@@ -121,10 +124,12 @@
                     
                 <%
                     int count=1;
-                  for(int i=1; i<=list.size();i++){
+                  for(int i=1; i<= list.size();i++){
                     if((i % 2)==1)
-                    {out.print("Column "+ count +": <input name=\"" + list.get(i-1) + "\"onfocus=\"if (this.value=='"+ list.get(i-1) +"') this.value='';\" type=\"text\" value=\""+list.get(i-1)+"\"style=\"color: grey\"/> " );
+                    {out.print("Column "+ count +": <input name=\"" + list.get(i-1) + "\"onfocus=\"if (this.value=='"+ columnList.get((i%2)*count-1) +"') this.value='';\" type=\"text\" value=\""+columnList.get((i%2)*count-1)+"\"style=\"color: grey\"/disabled> " );
                     count=count+1;}
+//                    {out.print("Column "+ count +": <input name=\"" + list.get(i-1) + "\"onfocus=\"if (this.value=='"+ list.get(i-1) +"') this.value='';\" type=\"text\" value=\""+list.get(i-1)+"\"style=\"color: grey\"/> " );
+//                    count=count+1;}
                     if((i % 2)==0)
                     //{out.print("<input name=\"" + list.get(i-1) + "\" type=\"text\" value=\""+ "DataType"+list.get(i-1)+"\"/>" );}
                     {out.print("<select name=\"" + list.get(i-1)+"\"class=\"form-control\" style=\"color: grey; height: 0.75cm;\"> "

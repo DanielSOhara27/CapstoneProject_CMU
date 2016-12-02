@@ -6,35 +6,58 @@
 <%@page import="org.xml.sax.*"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 <%  
-   // create a list for testing
-   int colNum=4;
-   List<String> list = new ArrayList<String>();
-   for(int i=1; i<=colNum; i++){
-       for(int j=1;j<=4;j++){
-           switch (j){
-               case 1: list.add("col"+i+"_colName");break;
-               case 2: list.add("col"+i+"_dataType");break;
-               case 3: list.add("col"+i+"_maxLength");break;
-               case 4: list.add("col"+i+"_relevant");break;
-           }
-       }
-   }
-   session.setAttribute("option",6);
-   session.setAttribute("colNum",colNum);
-   pageContext.setAttribute("list", list);
-   
-    String xmlInput = "";
+        String xmlInput =  "<xmlInput>"
+	+"<foo> 'x-y' </foo>"
+	+ "<bNumCol> 4 </bNumCol>"
+	+ "<bColumn1> bColumn1 </bColumn1>"
+	+ "<bColumn2> bColumn2 </bColumn2>"
+	+ "<bColumn3> bColumn3 </bColumn3>"
+	+ "<bColumn4> bColumn4 </bColumn4>"
+	+ "<nNumCol> 5 </nNumCol>"
+	+ "<nColumn1> nColumn1 </nColumn1>"
+	+ "<nColumn2> nColumn2 </nColumn2>"
+	+ "<nColumn3> nColumn3 </nColumn3>"
+	+ "<nColumn4> nColumn4 </nColumn4>"
+	+ "<nColumn5> nColumn5 </nColumn5>"
+        + "</xmlInput>";
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         // use the factory to create a documentbuilder
         Document apixml = null;
+        List<String> BASEcolumnList = new ArrayList<String>();
+        List<String> NEWcolumnList = new ArrayList<String>();
+        int BASEnumColumns=0;
+        int NEWnumColumns=0;
         try {
             // parse xml
             DocumentBuilder builder = factory.newDocumentBuilder();
             apixml = (Document) builder.parse(new ByteArrayInputStream(xmlInput.getBytes()));
-            Element basetable = apixml.getDocumentElement();
-            //title = recipe1.getElementsByTagName("title").item(0).getTextContent();
-            //ingredients = recipe1.getElementsByTagName("ingredients").item(0).getTextContent();
-            //error = recipe1.getElementsByTagName("error").item(0).getTextContent().trim();
+            // parse xml
+            NodeList parsedinput = apixml.getElementsByTagName("xmlInput");
+            Element input = (Element) parsedinput.item(0);
+            
+            String bnumColstr = input.getElementsByTagName("bNumCol").item(0).getTextContent();
+            BASEnumColumns = Integer.parseInt(bnumColstr.trim());
+            //System.out.println("NumCol is " + numColumns);
+
+            for(int i = 0; i < BASEnumColumns; i++){
+                String y = Integer.toString(i + 1);
+                String columnNames = input.getElementsByTagName("bColumn"+ y).item(0).getTextContent();
+                BASEcolumnList.add(columnNames);
+                System.out.println("BASEcolumnName"+ i + ": " + columnNames);
+            }
+            
+            String nnumColstr = input.getElementsByTagName("nNumCol").item(0).getTextContent();
+            NEWnumColumns = Integer.parseInt(nnumColstr.trim());
+            //System.out.println("NumCol is " + numColumns);
+
+            for(int i = 0; i < NEWnumColumns; i++){
+                String y = Integer.toString(i + 1);
+                String columnNames = input.getElementsByTagName("nColumn"+ y).item(0).getTextContent();
+                NEWcolumnList.add(columnNames);
+                System.out.println("NEWcolumnName"+ i + ": " + columnNames);
+            }
+
+            
         } catch (SAXException e) {
             e.printStackTrace();
         } catch (ParserConfigurationException e) {
@@ -42,6 +65,30 @@
         } catch (IOException e) {
             e.printStackTrace();
         }
+    
+    
+   // create a list for testing
+   //int colNum=4;
+   List<String> BASElist = new ArrayList<String>();
+   List<String> NEWlist = new ArrayList<String>();
+   for(int i=1; i<=BASEnumColumns; i++){
+        BASElist.add("col"+i+"_basecolName");
+   }
+   
+   for(int i=1; i<=NEWnumColumns; i++){
+        for(int j=1;j<=2;j++){
+           switch (j){
+               case 1: NEWlist.add("col"+i+"_newcolName");break;
+               case 2: NEWlist.add("col"+i+"_mapNumber");break;
+           }
+       }
+   }
+   session.setAttribute("option",6);
+   session.setAttribute("colNum",BASEnumColumns);
+   session.setAttribute("colNum",NEWnumColumns);
+   pageContext.setAttribute("list", BASElist);
+   pageContext.setAttribute("list", NEWlist);
+   
 %>
 <!DOCTYPE html>
 <html>
@@ -95,24 +142,22 @@
 
                     <%
                         int count = 1;
-                        for (int i = 1; i <= list.size(); i++) {
-                            if ((i % 4) == 1) {
-                                out.print("Column " + count + ": <input name=\"" + list.get(i - 1) + "\"onfocus=\"if (this.value=='" + list.get(i - 1) + "') this.value='';\" type=\"text\" value=\"" + list.get(i - 1) + "\"style=\"color: grey\"/disabled><br> ");
+                        for (int i = 1; i <= BASElist.size(); i++) {
+                                out.print("Column " + count + ": <input name=\"" + BASElist.get(i - 1) + "\"onfocus=\"if (this.value=='" + BASEcolumnList.get(i-1) + "') this.value='';\" type=\"text\" value=\"" + BASEcolumnList.get(i-1) + "\"style=\"color: grey\"/disabled><br> ");
                                 count = count + 1;
-                            }
                         }
                     %>
                 </div>
                 <div class="w3-half">
                     <%
                         int count2 = 1;
-                        for (int i = 1; i <= list.size(); i++) {
-                            if ((i % 4) == 1) {
-                                out.print("Column " + count2 + ": <input name=\"" + list.get(i - 1) + "\"onfocus=\"if (this.value=='" + list.get(i - 1) + "') this.value='';\" type=\"text\" value=\"" + list.get(i - 1) + "\"style=\"color: grey\"/disabled> ");
+                        for (int i = 1; i <= NEWlist.size(); i++) {
+                            if ((i % 2) == 1) {
+                                out.print("Column " + count2 + ": <input name=\"" + NEWlist.get(i - 1) + "\"onfocus=\"if (this.value=='" + NEWcolumnList.get((i%2)*count2-1) + "') this.value='';\" type=\"text\" value=\"" + NEWcolumnList.get((i%2)*count2-1) + "\"style=\"color: grey\"/disabled> ");
                                 count2 = count2 + 1;
                             }
-                            if ((i % 4) == 0){
-                                out.print("<input  name=\"" + list.get(i - 1) + "\"><br>");
+                            if ((i % 2) == 0){
+                                out.print("<input  name=\"" + NEWlist.get(i - 1) + "\"><br>");
                             }
                         }
                     %>

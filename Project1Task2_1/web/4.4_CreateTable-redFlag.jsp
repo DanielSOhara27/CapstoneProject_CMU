@@ -6,13 +6,61 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.*" %>
-
+<%@page import="java.io.*" %>
+<%@page import="javax.xml.parsers.*"%>
+<%@page import="org.w3c.dom.*"%>
+<%@page import="org.xml.sax.*"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 <%  
+        String xmlInput =  "<xmlInput>" +
+            "<foo> 'x-y' </foo>"+
+            "<NumCol> 5 </NumCol>"+
+            "<Column1> Column1 a </Column1>"+
+            "<Column2> Column2 b </Column2>"+
+            "<Column3> Column3 c </Column3>"+
+            "<Column4> Column4 d </Column4>"+
+            "<Column5> Column5 e </Column5>"+
+        "</xmlInput>";
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        // use the factory to create a documentbuilder
+        Document apixml = null;
+        List<String> columnList = new ArrayList<String>();
+        int numColumns=0;
+        try {
+            // parse xml
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            apixml = (Document) builder.parse(new ByteArrayInputStream(xmlInput.getBytes()));
+            // parse xml
+            NodeList parsedinput = apixml.getElementsByTagName("xmlInput");
+            Element input = (Element) parsedinput.item(0);
+            String numColstr = input.getElementsByTagName("NumCol").item(0).getTextContent();
+            numColumns = Integer.parseInt(numColstr.trim());
+            //System.out.println("NumCol is " + numColumns);
+
+            for(int i = 0; i < numColumns; i++){
+                String y = Integer.toString(i + 1);
+                String columnNames = input.getElementsByTagName("Column"+ y).item(0).getTextContent();
+                columnList.add(columnNames);
+                //System.out.println("columnName"+ i + ": " + columnNames);
+            }
+
+            
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    
+    
+    
+    
+    
    // create a list for testing
-   int colNum=4;
+   //int colNum=4;
    List<String> list = new ArrayList<String>();
-   for(int i=1; i<=colNum; i++){
+   for(int i=1; i<=numColumns; i++){
        for(int j=1;j<=8;j++){
            switch (j){
                case 1: list.add("col"+i+"_missing");break;
@@ -27,7 +75,7 @@
        }
    }
    session.setAttribute("option",4);
-   session.setAttribute("colNum",colNum);
+   session.setAttribute("colNum",numColumns);
    pageContext.setAttribute("list", list);
 %>
 <!DOCTYPE html>
@@ -88,8 +136,10 @@
                 <%
                     int count=1;
                   for(int i=1; i<=list.size();i++){
+                      
                     if((i % 8)==1)
-                    {out.print("Column "+ count +": <input name=\"" + list.get(i-1) +"\" type=\"checkbox\" value=\"missingCheck\" style=\"color: grey\"/> Remove Missing Value | " );
+                    {out.print("Column "+ count +": <input name=\"" + list.get(i-1) + "\"onfocus=\"if (this.value=='"+ columnList.get((i%8)*count-1) +"') this.value='';\" type=\"text\" value=\""+columnList.get((i%8)*count-1)+"\"style=\"color: grey\"/disabled>"
+                            + " &nbsp <input name=\"" + list.get(i-1) +"\" type=\"checkbox\" value=\"missingCheck\" style=\"color: grey\"/> Remove Missing Value | " );
                     count=count+1;}
                     if((i % 8)==2)
                     {out.print(" <input name=\"" + list.get(i-1) +"\" type=\"checkbox\" value=\"missingCheck\" style=\"color: grey\"/> Range :" );}
