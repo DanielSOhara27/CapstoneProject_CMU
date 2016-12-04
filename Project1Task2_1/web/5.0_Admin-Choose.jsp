@@ -44,7 +44,7 @@
 
         <div class="w3-container">
             <p>Choose a type of administrative operation you wish to make</p>
-            <p>Please choose one of the following options. <BR> </p>
+            <p>Please choose one of the following options. </p><BR>
         </div>
         
         <div class="w3-container">
@@ -52,7 +52,7 @@
             Create user id & password
             <BR><BR>
             <input TYPE="radio" NAME="queryType" VALUE="password">
-            Change password
+            Delete user
             <BR><BR>
             <input TYPE="radio" NAME="queryType" VALUE="createAccess">
             Create access

@@ -13,8 +13,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 <%  
 
-   
-
     String xmlInput =  "<xmlInput>" +
             "<foo> 'x-y' </foo>"+
             "<NumCol> 5 </NumCol>"+
@@ -59,12 +57,12 @@
            //int numColumns=4;
             List<String> list = new ArrayList<String>();
             for(int i=1; i<=numColumns; i++){
-                for(int j=1;j<=2;j++){
+                for(int j=1;j<=4;j++){
                     switch (j){
                         case 1: list.add("col"+i+"_colName");break;
-                        case 2: list.add("col"+i+"_dataType");break;
-                        //case 3: list.add("col"+i+"_maxLength");break;
-                        //case 4: list.add("col"+i+"_relevant");break;
+                        case 2: list.add("col"+i+"_alias");break;
+                        case 3: list.add("col"+i+"aliasCheck");break;
+                        case 4: list.add("col"+i+"_dataType");break;
                     }
                 }
             }
@@ -77,7 +75,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Upload</title>
+        <title>Create Table</title>
         <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
     </head>
     
@@ -106,7 +104,7 @@
             <span><a href='2.1_Upload-ChooseType.jsp'>Upload</a></span> &nbsp;| &nbsp;
             <span><a href='3.1_Query-ChooseType.jsp'>Query/Download</a></span> &nbsp;| &nbsp;
             <span><a href='4.0_CreateTable-initialize.jsp'>Create Table</a></span> &nbsp;| &nbsp;
-            <span><a href='5.0_Admin-Choose.jsp.jsp'>Admin</span> &nbsp;| &nbsp;
+            <span><a href='5.0_Admin-Choose.jsp.jsp'>Admin</a></span> &nbsp;| &nbsp;
             <span><a href='6.0_About.jsp'>About</a></span>
         </div>
         <!-- End of header-->
@@ -116,7 +114,8 @@
         </div>
 
         <div class="w3-container">
-          <p>Your new table contains above columns. Please input the information for each column.</p>
+          <p>Your new table contains below columns. Please input the information for each column.</p>
+          <p>If you would like to name your columns with a new name, re-name and check the box so that we know you would like to change the column name.</p>
         </div>
                
         <form action="CreateTableForm" method="POST" style = "margin-left: 0.25cm">    
@@ -124,17 +123,19 @@
                     
                 <%
                     int count=1;
-                  for(int i=1; i<= list.size();i++){
-                    if((i % 2)==1)
-                    {out.print("Column "+ count +": <input name=\"" + list.get(i-1) + "\"onfocus=\"if (this.value=='"+ columnList.get((i%2)*count-1) +"') this.value='';\" type=\"text\" value=\""+columnList.get((i%2)*count-1)+"\"style=\"color: grey\"/disabled> " );
-                    count=count+1;}
-//                    {out.print("Column "+ count +": <input name=\"" + list.get(i-1) + "\"onfocus=\"if (this.value=='"+ list.get(i-1) +"') this.value='';\" type=\"text\" value=\""+list.get(i-1)+"\"style=\"color: grey\"/> " );
-//                    count=count+1;}
-                    if((i % 2)==0)
-                    //{out.print("<input name=\"" + list.get(i-1) + "\" type=\"text\" value=\""+ "DataType"+list.get(i-1)+"\"/>" );}
-                    {out.print("<select name=\"" + list.get(i-1)+"\"class=\"form-control\" style=\"color: grey; height: 0.75cm;\"> "
+                out.print("<b>Column#: Column Names &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; New Column Names &nbsp &nbsp &nbsp Re-name?&nbsp;&nbsp;Data Type</b><BR>");
+                  for(int i=1; i<= list.size();i++){   
+                    if((i % 4)==1)
+                    {out.print("Column "+ count +": &nbsp<input name=\"" + list.get(i-1) + "\"onfocus=\"if (this.value=='"+ columnList.get((i%4)*count-1) +"') this.value='';\" type=\"text\" value=\""+columnList.get((i%4)*count-1)+"\"style=\"color: grey\"/disabled> |" );}
+                    if((i % 4)==2)
+                    {out.print("<input name=\"" + list.get(i-1) + "\"onfocus=\"if (this.value=='"+ columnList.get(((i%4)-1)*count-1) +"') this.value='';\" type=\"text\" value=\""+columnList.get(((i%4)-1)*count-1)+"\"style=\"color: grey\"/> |" );
+                    count++;}   
+                    if((i % 4)==3)
+                    {out.print("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type=\"checkbox\" name=\"" + list.get(i-1) + "\" value=\"true\"><input type=\"hidden\" name=\"" + list.get(i-1) + "\" value=\"false\"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|" );}
+                    if((i % 4)==0)
+                    {out.print("&nbsp<select name=\"" + list.get(i-1)+"\"class=\"form-control\" style=\"color: grey; height: 0.75cm;\"> "
                             + "<option disabled selected>Select Data Type</option>"
-                            + "<option value='String'>String/Alphanumeric [ Abc123 ]</option>"
+                            + "<option value='  String'>String/Alphanumeric [ Abc123 ]</option>"
                             + "<option value='String'>Numeric with Symbol [ +3.00 ]</option>"
                             + "<option value='Double'>Numeric without Symbol [ 3.00 ]</option>"
                             + "<option value='[ DateTime-US MM:DD:YYYY_HH:MM:SS ]'>Datetime [ DateTime-US_MM:DD:YYYY HH:MM:SS ]</option>"
@@ -144,11 +145,6 @@
                             + "<option value='[ Date-Int DD:MM:YYYY ]'>Datetime [ Date-Int_DD:MM:YYYY ]</option>"
                             + "<option value='[ Time HH:MM:SS ]'>Datetime [ Time_HH:MM:SS ]</option>"
                             + "</select><br> ");}
-
-                    //if((i % 4)==3)
-                    //{out.print("<input name=\"" + list.get(i-1) + "\"onfocus=\"if (this.value=='"+ list.get(i-1) +"') this.value='';\" type=\"text\" value=\""+list.get(i-1)+"\"style=\"color: grey\"/> " );}
-                    //if((i % 4)==0)                 
-                    //{out.print("<input type=\"checkbox\" name=\"" + list.get(i-1) + "\" value=\"entryYes\"> Relevant Data?<br>");}  
                   }
                 %>
 

@@ -123,7 +123,7 @@
             <span><a href='2.1_Upload-ChooseType.jsp'>Upload</a></span> &nbsp;| &nbsp;
             <span><a href='3.1_Query-ChooseType.jsp'>Query/Download</a></span> &nbsp;| &nbsp;
             <span><a href='4.0_CreateTable-initialize.jsp'>Create Table</a></span> &nbsp;| &nbsp;
-            <span><a href='5.0_Admin-Choose.jsp.jsp'>Admin</span> &nbsp;| &nbsp;
+            <span><a href='5.0_Admin-Choose.jsp.jsp'>Admin</a></span> &nbsp;| &nbsp;
             <span><a href='6.0_About.jsp'>About</a></span>
         </div>
         <!-- End of header-->
@@ -133,14 +133,17 @@
         </div>
 
         <div class="w3-container">
-          <p>Map your columns </p>
+          <p>Map your new columns to the the base table columns.</p>
+          <p>Put corresponding base table column numbers next to the new column names. </p>
         </div>
                
         <form action="CreateTableForm" method="POST" style = "margin-left: 0.25cm">    
+            
             <div class="w3-row-padding">
                 <div class="w3-half">
 
                     <%
+                        out.print("<b>Column#: Base table column names </b><BR>");
                         int count = 1;
                         for (int i = 1; i <= BASElist.size(); i++) {
                                 out.print("Column " + count + ": <input name=\"" + BASElist.get(i - 1) + "\"onfocus=\"if (this.value=='" + BASEcolumnList.get(i-1) + "') this.value='';\" type=\"text\" value=\"" + BASEcolumnList.get(i-1) + "\"style=\"color: grey\"/disabled><br> ");
@@ -150,6 +153,7 @@
                 </div>
                 <div class="w3-half">
                     <%
+                        out.print("<b>Column#: New Table column names and Number</b><BR>");
                         int count2 = 1;
                         for (int i = 1; i <= NEWlist.size(); i++) {
                             if ((i % 2) == 1) {
