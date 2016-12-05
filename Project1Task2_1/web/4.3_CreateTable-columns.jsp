@@ -57,12 +57,13 @@
            //int numColumns=4;
             List<String> list = new ArrayList<String>();
             for(int i=1; i<=numColumns; i++){
-                for(int j=1;j<=4;j++){
+                for(int j=1;j<=5;j++){
                     switch (j){
                         case 1: list.add("col"+i+"_colName");break;
                         case 2: list.add("col"+i+"_alias");break;
                         case 3: list.add("col"+i+"aliasCheck");break;
                         case 4: list.add("col"+i+"_dataType");break;
+                        case 5: list.add("col"+i+"datetime");break;
                     }
                 }
             }
@@ -116,6 +117,7 @@
         <div class="w3-container">
           <p>Your new table contains below columns. Please input the information for each column.</p>
           <p>If you would like to name your columns with a new name, re-name and check the box so that we know you would like to change the column name.</p>
+          <p>If your date formate is UNIX (looks like this "1448057460") then, choose "Datetime [UNIX]". If you choose "Datetime [Custom]" from the data type drop box, please fill the text box with appropriate date format. For example, YYYY:MM:DD or YY:MM:DD HH:MM:SS. You must use <b> Colon (:)</b> to represent your format.</p>
         </div>
                
         <form action="CreateTableForm" method="POST" style = "margin-left: 0.25cm">    
@@ -123,28 +125,26 @@
                     
                 <%
                     int count=1;
-                out.print("<b>Column#: Column Names &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; New Column Names &nbsp &nbsp &nbsp Re-name?&nbsp;&nbsp;Data Type</b><BR>");
+                out.print("<b>Column#: Column Names &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; New Column Names &nbsp &nbsp &nbsp Re-name?&nbsp;&nbsp;Data Type &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Custom Datetime Format</b><BR>");
                   for(int i=1; i<= list.size();i++){   
-                    if((i % 4)==1)
-                    {out.print("Column "+ count +": &nbsp<input name=\"" + list.get(i-1) + "\"onfocus=\"if (this.value=='"+ columnList.get((i%4)*count-1) +"') this.value='';\" type=\"text\" value=\""+columnList.get((i%4)*count-1)+"\"style=\"color: grey\"/disabled> |" );}
-                    if((i % 4)==2)
-                    {out.print("<input name=\"" + list.get(i-1) + "\"onfocus=\"if (this.value=='"+ columnList.get(((i%4)-1)*count-1) +"') this.value='';\" type=\"text\" value=\""+columnList.get(((i%4)-1)*count-1)+"\"style=\"color: grey\"/> |" );
+                    if((i % 5)==1)
+                    {out.print("Column "+ count +": &nbsp<input name=\"" + list.get(i-1) + "\"onfocus=\"if (this.value=='"+ columnList.get((i%5)*count-1) +"') this.value='';\" type=\"text\" value=\""+columnList.get((i%5)*count-1)+"\"style=\"color: grey\"/disabled> |" );}
+                    if((i % 5)==2)
+                    {out.print("<input name=\"" + list.get(i-1) + "\"onfocus=\"if (this.value=='"+ columnList.get(((i%5)-1)*count-1) +"') this.value='';\" type=\"text\" value=\""+columnList.get(((i%5)-1)*count-1)+"\"style=\"color: grey\"/> |" );
                     count++;}   
-                    if((i % 4)==3)
+                    if((i % 5)==3)
                     {out.print("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type=\"checkbox\" name=\"" + list.get(i-1) + "\" value=\"true\"><input type=\"hidden\" name=\"" + list.get(i-1) + "\" value=\"false\"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|" );}
-                    if((i % 4)==0)
+                    if((i % 5)==4)
                     {out.print("&nbsp<select name=\"" + list.get(i-1)+"\"class=\"form-control\" style=\"color: grey; height: 0.75cm;\"> "
                             + "<option disabled selected>Select Data Type</option>"
                             + "<option value='  String'>String/Alphanumeric [ Abc123 ]</option>"
                             + "<option value='String'>Numeric with Symbol [ +3.00 ]</option>"
                             + "<option value='Double'>Numeric without Symbol [ 3.00 ]</option>"
-                            + "<option value='[ DateTime-US MM:DD:YYYY_HH:MM:SS ]'>Datetime [ DateTime-US_MM:DD:YYYY HH:MM:SS ]</option>"
-                            + "<option value='[ Date-US MM:DD:YY ]'>Datetime [ Date-US_MM:DD:YY ]</option>"
-                            + "<option value='[ Unix/Epoch_seconds ]'>Datetime [ Unix/Epoch_seconds ]</option>"                           
-                            + "<option value='[ Timestamp YYYY:MM:DD_HH:MM:SS ]'>Datetime [ Timestamp_YYYY:MM:DD HH:MM:SS ]</option>"
-                            + "<option value='[ Date-Int DD:MM:YYYY ]'>Datetime [ Date-Int_DD:MM:YYYY ]</option>"
-                            + "<option value='[ Time HH:MM:SS ]'>Datetime [ Time_HH:MM:SS ]</option>"
-                            + "</select><br> ");}
+                            + "<option value='String'>Datetime [UNIX]</option>"
+                            + "<option value='String'>Datetime [Custom]</option>"
+                            + "</select>");}
+                    if((i%5)==0)
+                    {out.print("<input name=\"" + list.get(i-1) +"\" type=\"text\" style=\"color: grey\"/><BR>");}
                   }
                 %>
 

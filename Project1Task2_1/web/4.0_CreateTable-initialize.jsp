@@ -64,6 +64,8 @@
                     <input type="text" name="commentSignifier" value="" /><br><br>
                     <label for="letter"> Number of header's line: </label>
                     <input type="text" name="numHeader" value="" /><BR><BR>
+                    <label for="letter"> How often does the sensor read data: </label>
+                    <input type="text" name="rangeBTWreadings" value="" /><BR><BR>
                 </div>
                 <div class="w3-half">
                     <label for="letter"> Type of Sensor: &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</label>
