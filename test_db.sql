@@ -1,4 +1,5 @@
-CREATE DATABASE `test` /*!40100 DEFAULT CHARACTER SET latin1 */;
+CREATE DATABASE `test`;
+
 
 CREATE TABLE `MappingColumn` (
   `ColMap_ID` int(11) NOT NULL AUTO_INCREMENT,
@@ -10,7 +11,7 @@ CREATE TABLE `MappingColumn` (
   `Dest_ColumnName` varchar(10000) NOT NULL,
   `Dest_TableName` varchar(10000) NOT NULL,
   PRIMARY KEY (`ColMap_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB;
 
 CREATE TABLE `Mapping_ETL_Rules` (
   `ETL_ID` int(11) NOT NULL AUTO_INCREMENT,
@@ -20,7 +21,7 @@ CREATE TABLE `Mapping_ETL_Rules` (
   `Rule` varchar(10000) NOT NULL,
   `FlagType` varchar(50) NOT NULL,
   PRIMARY KEY (`ETL_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB;
 
 CREATE TABLE `MappingFacultyStudent` (
   `FSMap_ID` int(11) NOT NULL AUTO_INCREMENT,
@@ -29,29 +30,30 @@ CREATE TABLE `MappingFacultyStudent` (
   `ExpirationDate` datetime NOT NULL,
   `ActiveFlag` varchar(10) NOT NULL DEFAULT 'False',
   PRIMARY KEY (`FSMap_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB;
 
 CREATE TABLE `MappingTable` (
   `MappingTable_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `SiteID` varchar(10000) NOT NULL,
-  `ModelID` varchar(10000) NOT NULL,
-  `SensorID` varchar(10000) NOT NULL,
-  `Username` varchar(45) NOT NULL,
+  `SiteID` varchar(10000) NOT NULL DEFAULT 'foo',
+  `ModelID` varchar(10000) NOT NULL DEFAULT 'foo',
+  `SensorID` varchar(10000) NOT NULL DEFAULT 'foo',
+  `Username` varchar(45) NOT NULL DEFAULT 'foo',
   `SiteName` varchar(1000) NOT NULL DEFAULT 'No Default Sitename provided',
-  `SensorType` varchar(10000) NOT NULL,
+  `SensorType` varchar(10000) NOT NULL DEFAULT 'foo',
   `Location` varchar(1000) DEFAULT NULL,
-  `NumColumn` int(11) NOT NULL,
-  `Delimiter` varchar(50) NOT NULL,
-  `RangeBetweenReadings` varchar(50) NOT NULL,
+  `NumColumn` int(11) NOT NULL DEFAULT '-1',
+  `Delimiter` varchar(50) NOT NULL DEFAULT 'foo',
+  `RangeBetweenReadings` varchar(50) NOT NULL DEFAULT 'foo',
   `AcceptableRange` varchar(50) DEFAULT NULL,
-  `TypeSensor_BaseTable` varchar(10) NOT NULL,
-  `Site_BaseTable` varchar(10) NOT NULL,
-  `Public` varchar(10) NOT NULL,
-  `TableName` varchar(10000) NOT NULL,
-  `ColumnNames` varchar(10000) NOT NULL,
-  `Row_To_Skip` int(11) NOT NULL,
+  `TypeSensor_BaseTable` varchar(10) DEFAULT 'foo',
+  `Site_BaseTable` varchar(10) DEFAULT 'foo',
+  `Public` varchar(10) NOT NULL DEFAULT 'foo',
+  `TableName` varchar(10000) NOT NULL DEFAULT 'foo',
+  `ColumnNames` varchar(10000) NOT NULL DEFAULT 'foo',
+  `Row_To_Skip` int(11) NOT NULL DEFAULT '-1',
+  `Comment_Delimiter` varchar(5) DEFAULT NULL,
   PRIMARY KEY (`MappingTable_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB;
 
 CREATE TABLE `User` (
   `User_ID` int(11) NOT NULL AUTO_INCREMENT,
@@ -63,5 +65,4 @@ CREATE TABLE `User` (
   `Password` varchar(100) NOT NULL,
   PRIMARY KEY (`User_ID`),
   UNIQUE KEY `UserName_UNIQUE` (`Username`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
+) ENGINE=InnoDB;
