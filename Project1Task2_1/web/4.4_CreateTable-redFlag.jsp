@@ -12,6 +12,7 @@
 <%@page import="org.xml.sax.*"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 <%  
+    //String xmlInput = (String) request.getAttribute("xmlInput");
         String xmlInput =  "<xmlInput>" +
             "<foo> 'x-y' </foo>"+
             "<NumCol> 5 </NumCol>"+
@@ -68,9 +69,6 @@
                case 3: list.add("col"+i+"_lowerThan");break;
                case 4: list.add("col"+i+"_andOr");break;
                case 5: list.add("col"+i+"_greaterThan");break;
-               //case 6: list.add("col"+i+"_variance");break;
-               //case 7: list.add("col"+i+"_sign");break;
-               //case 8: list.add("col"+i+"_value");break;
            }
        }
    }
