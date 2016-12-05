@@ -134,7 +134,7 @@
         </div>
 
         <div class="w3-container">
-          <p>You have successfully created a table!</p>
+          <p>You have successfully created a new table in the database!</p>
           
         </div>
 

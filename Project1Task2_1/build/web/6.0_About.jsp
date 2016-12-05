@@ -43,7 +43,7 @@
         </div>
 
         <div class="w3-container">
-            <p>This portal handles data storage and querying.<BR> </p>
+            <p>This portal handles data storage and querying for Chatham University Eden Hall Campus.<BR> </p>
         </div>
 
 
