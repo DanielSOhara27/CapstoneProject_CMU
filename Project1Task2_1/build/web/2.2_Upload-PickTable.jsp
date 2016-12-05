@@ -33,7 +33,7 @@
             <span><a href='2.1_Upload-ChooseType.jsp'>Upload</a></span> &nbsp;| &nbsp;
             <span><a href='3.1_Query-ChooseType.jsp'>Query/Download</a></span> &nbsp;| &nbsp;
             <span><a href='4.0_CreateTable-initialize.jsp'>Create Table</a></span> &nbsp;| &nbsp;
-            <span><a href='5.0_Admin-Choose.jsp.jsp'>Admin</span> &nbsp;| &nbsp;
+            <span><a href='5.0_Admin-Choose.jsp.jsp'>Admi</a></span> &nbsp;| &nbsp;
             <span><a href='6.0_About.jsp'>About</a></span>
         </div>
         <!-- End of header -->
@@ -43,12 +43,18 @@
         </div>
 
         <div class="w3-container">
-            <p>Please choose 1 existing table you wish to upload to.<BR> </p>
+            <p>Please choose the form you would like to upload to below.<BR> </p>
         </div>
 
         <div class="w3-container">
             <BR>
-            DATA TABLE HERE!!
+            <form action ="UploadChooseForm" method ="POST">               
+            <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+            <select name="observationType" id="observationType">         
+                <c:forEach items="${observationChoices}" var="observationChoices">
+                    <option value="${observationChoices}"><c:out value="${observationChoices}" /></option>
+                </c:forEach>
+            </select>
             <BR><BR><BR>
         </div>
         

@@ -117,7 +117,7 @@
         
         <input style = "margin-bottom: 1cm; width: 3cm;" 
                type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Before" />
-        <BR>
+        <BR><BR><BR>
         
         <div class="w3-container w3-bottom" style="margin-top: 0.5cm; height: 1.3cm; line-height: 1.3cm; background-color: #533678;color: white; ">
             <center><span>Woodland Road | Pittsburgh, PA 15232 | Main: 412-365-1100 | Admission: 800-837-1290</span></center>
