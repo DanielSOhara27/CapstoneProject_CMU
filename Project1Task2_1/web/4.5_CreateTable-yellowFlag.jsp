@@ -12,8 +12,8 @@
 <%@page import="org.xml.sax.*"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 <%  
-    //String xmlInput = (String) request.getAttribute("xmlInput");
-        String xmlInput =  "<xmlInput>" +
+    String xmlInput = (String) request.getAttribute("xmlInput");
+    /*    String xmlInput =  "<xmlInput>" +
             "<foo> 'x-y' </foo>"+
             "<NumCol> 5 </NumCol>"+
             "<Column1> Column1 a </Column1>"+
@@ -21,7 +21,7 @@
             "<Column3> Column3 c </Column3>"+
             "<Column4> Column4 d </Column4>"+
             "<Column5> Column5 e </Column5>"+
-        "</xmlInput>";
+        "</xmlInput>"; */
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         // use the factory to create a documentbuilder
         Document apixml = null;
@@ -120,7 +120,11 @@
         </div>
 
         <div class="w3-container">
-           <p>Your new table contains below columns. Please input the data validation rules for <mark><b>YELLOW</b></mark> flag (optional).</p>
+            <p>Your new table contains below columns. Please input the data validation rules for <mark><b>YELLOW</b></mark> flag (optional).<BR>
+                Once you assign a yellow flag, you will have a choice to include this in your query in the future. </p>
+            <p>If you would like to remove missing values or do not want a certain range in your data, please click the check box and fill the blanks.<BR>
+               For numeric range, provide a range for the column(s) with atypical values. <BR>
+           </p>
         </div>
                
         <form action="CreateTableForm" method="POST" style = "margin-left: 0.25cm">    
@@ -130,14 +134,16 @@
                 
                 <%
                     int count=1;
-                  out.print("<b>Column#: Column Names &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp &nbsp &nbsp Remove Missing Values  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Numeric Range </b><BR>");
+                  out.print("<b>Column#: Column Names &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp &nbsp &nbsp Remove Missing Values  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Numeric Range </b><BR>");
+                  out.print("<b> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp"
+                            + "&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Lower Than &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Greater Than</b><BR>");
                   for(int i=1; i<=list.size();i++){
                     if((i % 5)==1)
                     {out.print("Column "+ count +": <input name=\"" + list.get(i-1) + "\"onfocus=\"if (this.value=='"+ columnList.get((i%5)*count-1) +"') this.value='';\" type=\"text\" value=\""+columnList.get((i%5)*count-1)+"\"style=\"color: grey\"/disabled>"
                             + " &nbsp <input name=\"" + list.get(i-1) +"\" type=\"checkbox\" value=\"true\" style=\"color: grey\"/><input name=\"" + list.get(i-1) +"\" type=\"hidden\" value=\"false\" style=\"color: grey\"/> Remove Missing Value | " );
                     count=count+1;}
                     if((i % 5)==2)
-                    {out.print(" <input name=\"" + list.get(i-1) +"\" type=\"checkbox\" value=\"true\" style=\"color: grey\"/><input name=\"" + list.get(i-1) +"\" type=\"hidden\" value=\"false\" style=\"color: grey\"/> Range : &nbsp" );}
+                    {out.print(" <input name=\"" + list.get(i-1) +"\" type=\"checkbox\" value=\"true\" style=\"color: grey\"/><input name=\"" + list.get(i-1) +"\" type=\"hidden\" value=\"false\" style=\"color: grey\"/> Range : " );}
                     if((i % 5)==3)
                     {out.print("<input name=\"" + list.get(i-1) + "\"onfocus=\"if (this.value=='"+ list.get(i-1) +"') this.value='';\" type=\"text\" style=\"color: grey; width: 2.8cm;\"/> " );}
                     if((i % 5)==4)

@@ -12,8 +12,8 @@
 <%@page import="org.xml.sax.*"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 <%  
-//String xmlInput = (String) request.getAttribute("xmlInput");
-    String xmlInput =  "<xmlInput>" +
+    String xmlInput = (String) request.getAttribute("xmlInput");
+    /*String xmlInput =  "<xmlInput>" +
             "<foo> 'x-y' </foo>"+
             "<NumCol> 5 </NumCol>"+
             "<Column1> Column1 a </Column1>"+
@@ -21,7 +21,7 @@
             "<Column3> Column3 c </Column3>"+
             "<Column4> Column4 d </Column4>"+
             "<Column5> Column5 e </Column5>"+
-        "</xmlInput>";
+        "</xmlInput>"; */
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         // use the factory to create a documentbuilder
         Document apixml = null;
@@ -70,6 +70,7 @@
             int option = 3;
             session.setAttribute("option",3);
             session.setAttribute("colNum",numColumns);
+            session.setAttribute("xmlInput", request.getAttribute("xmlInput"));
             pageContext.setAttribute("list", list);
 %>
 <!DOCTYPE html>
@@ -78,6 +79,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Create Table</title>
         <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+        <script src="gen_validatorv4.js" type="text/javascript"></script>
     </head>
     
     <style> 
@@ -120,31 +122,32 @@
           <p>If your date formate is UNIX (looks like this "1448057460") then, choose "Datetime [UNIX]". If you choose "Datetime [Custom]" from the data type drop box, please fill the text box with appropriate date format. For example, YYYY:MM:DD or YY:MM:DD HH:MM:SS. You must use <b> Colon (:)</b> to represent your format.</p>
         </div>
                
-        <form action="CreateTableForm" method="POST" style = "margin-left: 0.25cm">    
+        <form id="form" action="CreateTableForm" method="POST" style="margin-left: 0.25cm">    
             <div class="w3-row-padding">
                     
                 <%
                     int count=1;
-                out.print("<b>Column#: Column Names &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; New Column Names &nbsp &nbsp &nbsp Re-name?&nbsp;&nbsp;Data Type &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Custom Datetime Format</b><BR>");
+                out.print("<b>Column#: Column Names &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Re-name?  &nbsp New Column Names &nbsp &nbsp &nbsp &nbsp Data Type &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Custom Datetime Format</b><BR>");
                   for(int i=1; i<= list.size();i++){   
                     if((i % 5)==1)
                     {out.print("Column "+ count +": &nbsp<input name=\"" + list.get(i-1) + "\"onfocus=\"if (this.value=='"+ columnList.get((i%5)*count-1) +"') this.value='';\" type=\"text\" value=\""+columnList.get((i%5)*count-1)+"\"style=\"color: grey\"/disabled> |" );}
                     if((i % 5)==2)
-                    {out.print("<input name=\"" + list.get(i-1) + "\"onfocus=\"if (this.value=='"+ columnList.get(((i%5)-1)*count-1) +"') this.value='';\" type=\"text\" value=\""+columnList.get(((i%5)-1)*count-1)+"\"style=\"color: grey\"/> |" );
-                    count++;}   
-                    if((i % 5)==3)
                     {out.print("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type=\"checkbox\" name=\"" + list.get(i-1) + "\" value=\"true\"><input type=\"hidden\" name=\"" + list.get(i-1) + "\" value=\"false\"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|" );}
+                    if((i % 5)==3)
+                    {out.print("&nbsp <input name=\"" + list.get(i-1) + "\"onfocus=\"if (this.value=='"+ columnList.get(((i%5)-2)*count-1) +"') this.value='';\" type=\"text\" value=\""+columnList.get(((i%5)-2)*count-1)+"\"style=\"color: grey\"/> |" ); count++;}
                     if((i % 5)==4)
                     {out.print("&nbsp<select name=\"" + list.get(i-1)+"\"class=\"form-control\" style=\"color: grey; height: 0.75cm;\"> "
-                            + "<option disabled selected>Select Data Type</option>"
-                            + "<option value='  String'>String/Alphanumeric [ Abc123 ]</option>"
+                            + "<option value='000' disabled selected>Select Data Type</option>"
+                            + "<option value='String'>String/Alphanumeric [ Abc123 ]</option>"
                             + "<option value='String'>Numeric with Symbol [ +3.00 ]</option>"
-                            + "<option value='Double'>Numeric without Symbol [ 3.00 ]</option>"
-                            + "<option value='String'>Datetime [UNIX]</option>"
-                            + "<option value='String'>Datetime [Custom]</option>"
+                            + "<option value='String'>Numeric without Symbol [ 3.00 ]</option>"
+                            + "<option value='UNIX'>Datetime [UNIX]</option>"
+                            + "<option value='CUSTOM-DATETIME'>Datetime [Custom Date and Time]</option>"
+                            + "<option value='CUSTTOM-DATE'>Datetime [Custom Date Only]</option>"
+                            + "<option value='CUSTTOM-TIME'>Datetime [Custom Time Only]</option>"
                             + "</select>");}
                     if((i%5)==0)
-                    {out.print("<input name=\"" + list.get(i-1) +"\" type=\"text\" style=\"color: grey\"/><BR>");}
+                    {out.print(" &nbsp<input name=\"" + list.get(i-1) + "\"onfocus=\"if (this.value=='n/a') this.value='';\" type=\"text\" value=\"n/a\"style=\"color: grey\"/><BR>");}
                   }
                 %>
 
@@ -161,6 +164,24 @@
         <div class="w3-container w3-bottom" style="margin-top: 0.5cm; height: 1.3cm; line-height: 1.3cm; background-color: #533678;color: white; ">
             <center><span>Woodland Road | Pittsburgh, PA 15232 | Main: 412-365-1100 | Admission: 800-837-1290</span></center>
         </div>
+                
+
+        
+        <script type="text/javascript">
+ var frmvalidator = new Validator("form");  
+    <%   
+    int counts=1;    
+    for(int i=1; i<=list.size();i++){
+        if((i%5)==2){
+        out.print("frmvalidator.addValidation(\""+ list.get(i-1) +"\",\"req\",\"Please input the value in the [New Column Names] field of column: " + ((i%5)-1)*counts + "\");");}
+        if((i % 5)==4)
+        {out.print("frmvalidator.addValidation(\""+ list.get(i-1) +"\",\"dontselect=000\",\"Please choose the datatype in the [Data Type] field of column: " + ((i%5)-3)*counts + "\");");}
+        if((i%5)==0)
+        {out.print("frmvalidator.addValidation(\""+ list.get(i-1) +"\",\"req\",\"Please input [n/a] if the value in the [Custom Datetime Format] field of column: " + ((i%5)+1)*counts + " is not a Datetime format\");");
+        counts++;}
+     }
+    %>
+</script>
 
     </body>
 </html>

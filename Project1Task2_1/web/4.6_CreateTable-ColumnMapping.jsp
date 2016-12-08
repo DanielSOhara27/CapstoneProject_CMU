@@ -6,7 +6,6 @@
 <%@page import="org.xml.sax.*"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 <%  
-    //String xmlInput = (String) request.getAttribute("xmlInput");
         String xmlInput =  "<xmlInput>"
 	+"<foo> 'x-y' </foo>"
 	+ "<bNumCol> 4 </bNumCol>"
@@ -97,6 +96,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Create Table</title>
         <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+        <script src="gen_validatorv4.js" type="text/javascript"></script>
     </head>
     
     <style> 
@@ -138,7 +138,7 @@
           <p>Put corresponding base table column numbers next to the new column names. </p>
         </div>
                
-        <form action="CreateTableForm" method="POST" style = "margin-left: 0.25cm">    
+        <form id="test" action="4.7_CreateTable-Successful.jsp" method="POST" style = "margin-left: 0.25cm">    
             
             <div class="w3-row-padding">
                 <div class="w3-half">
@@ -183,6 +183,17 @@
         <div class="w3-container w3-bottom" style="margin-top: 0.5cm; height: 1.3cm; line-height: 1.3cm; background-color: #533678;color: white; ">
             <center><span>Woodland Road | Pittsburgh, PA 15232 | Main: 412-365-1100 | Admission: 800-837-1290</span></center>
         </div>
+    <script type="text/javascript">
+     var frmvalidator = new Validator("test");  
+        <%   
+        for(int i=1; i<=NEWlist.size();i++){
+            if((i%2)==0){
+            out.print("frmvalidator.addValidation(\""+ NEWlist.get(i-1) +"\",\"req\",\"Please fill the matching column number in column: " + i/2 + "\");");
+            out.print("frmvalidator.addValidation(\""+ NEWlist.get(i-1) +"\",\"numeric\",\"Please input numeric value in column: " + i/2 + "\");"); 
+            }
+         }
+        %>
+    </script>
 
     </body>
 </html>
