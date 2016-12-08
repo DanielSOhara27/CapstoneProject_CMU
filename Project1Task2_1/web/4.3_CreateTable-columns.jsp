@@ -119,7 +119,9 @@
         <div class="w3-container">
           <p>Your new table contains below columns. Please input the information for each column.</p>
           <p>If you would like to name your columns with a new name, re-name and check the box so that we know you would like to change the column name.</p>
-          <p>If your date formate is UNIX (looks like this "1448057460") then, choose "Datetime [UNIX]". If you choose "Datetime [Custom]" from the data type drop box, please fill the text box with appropriate date format. For example, YYYY:MM:DD or YY:MM:DD HH:MM:SS. You must use <b> Colon (:)</b> to represent your format.</p>
+          <p>If your date formate is UNIX (looks like this "1448057460") then, choose "Datetime [UNIX]". <BR>
+              If you choose "Datetime [Custom]" from the data type drop box, please fill the text box with appropriate date format.<BR>
+              For example, YYYY:MM:DD or YY:MM:DD HH:MM:SS. You may use something other than Colon (:) to represent your format as well. </p>
         </div>
                
         <form id="form" action="CreateTableForm" method="POST" style="margin-left: 0.25cm">    
