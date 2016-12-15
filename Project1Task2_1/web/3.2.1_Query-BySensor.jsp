@@ -1,16 +1,20 @@
+<%-- 
+    Document   : QuerySensorType(Vertical join)
+    Created on : Nov 4, 2016, 12:46:52 AM
+    Author     : Anshu Agrawal
+--%>
 
+<%@page import="capstone.connection.DBConnectionManager"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.*" %>
+<%@ page import="java.sql.*" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
-<%  
-   // create a list for testing
-   int NumSensor=4;
-   List<String> list = new ArrayList<String>();
-   for(int i=1; i<=NumSensor; i++){
-      list.add("Sensor "+i);
-   }
 
-   pageContext.setAttribute("list", list);
+<%
+    DBConnectionManager DBManager = DBConnectionManager.getInstance();
+    Connection connection = DBManager.getConnection();
+    Statement statement = connection.createStatement();
+    ResultSet resultset = statement.executeQuery("SELECT distinct `SensorType` FROM `MappingTable`");
 %>
 <!DOCTYPE html>
 <html>
@@ -19,7 +23,6 @@
         <title>Query</title>
         <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
     </head>
-    
     <style> 
         span {
             display: inline-block;
@@ -27,9 +30,7 @@
             line-height: normal;      
         }
     </style>
-    
     <body>
-        
         <!-- Start header -->
         <div class="w3-container" style="height: 3.1cm; background-color: #533678;align-content: center; ">
             <br>
@@ -45,42 +46,35 @@
             <span><a href='2.1_Upload-ChooseType.jsp'>Upload</a></span> &nbsp;| &nbsp;
             <span><a href='3.1_Query-ChooseType.jsp'>Query/Download</a></span> &nbsp;| &nbsp;
             <span><a href='4.0_CreateTable-initialize.jsp'>Create Table</a></span> &nbsp;| &nbsp;
-            <span><a href='5.0_Admin-Choose.jsp.jsp'>Admin</span> &nbsp;| &nbsp;
+            <span><a href='5.0_Admin-Choose.jsp.jsp'>Admin</a></span> &nbsp;| &nbsp;
             <span><a href='6.0_About.jsp'>About</a></span>
         </div>
         <!-- End of header-->
-        
         <div class="w3-container w3-white" >
-            <h1 style="color: #533678;"> Query/Download </h1>
+            <h1 style="color: #533678;"> Query by Sensor Step 1</h1>
         </div>
-
-        <div class="w3-container">
-          <p>There are 4 sensor types associated with your account. Please select the sensor type you want to query.</p>
-        </div>
-               
-        <form action="Palindrome" method="GET" style = "margin-left: 0.25cm">    
+       <form action="QuerySensorTypeSite.jsp" method="GET" style = "margin-left: 0.25cm">    
             <div class="w3-row-padding">
-                    
-                <%
-                  
-                  for(int i=1; i<=list.size();i++){
-                                      
-                    out.print("<input type=\"checkbox\" name=\"" + list.get(i-1) + "\" value=\"entryYes\"> " + list.get(i-1) + "<br>");  
-                  }
-                %>
-
-                    <br><br><br>
-                <input style = "margin-left: 0cm; margin-bottom: 1cm; width: 2.5cm;" 
-                       type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Previous"/> 
-                <input style = "margin-left: 0.25cm; margin-bottom: 1cm; width: 2.5cm;" 
-                   type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Next" />
-            </div>
-            <br><br>
+                <div class="w3-container">
+                    <p>Available SensorTypes(Vertical Join)</p>
+                </div>
+                <!-- http://www.java2s.com/Tutorial/Java/0360__JSP/OutputResultSet.htm -->
+                <TABLE  BORDER="1" style = "margin-left: 0.5cm">
+                 <TR>
+                        <% while (resultset.next()) {
+                        %>       
+                    <tr>
+                        <td><input type="radio" name="sensorType" value="<%= resultset.getString(1)%>"></td>
+                        <td><%= resultset.getString(1)%></td>
+                    </tr>
+                    <% }%>
+                    </TR>
+                </TABLE>
+                    <br>    
+                    <input type="submit" name="submit" value="Submit">
+                    <BR>
         </form>
-
-
-        
-        <div class="w3-container w3-bottom" style="height: 1.3cm; line-height: 1.3cm; background-color: #533678;color: white; ">
+       <div class="w3-container w3-bottom" style="height: 1.3cm; line-height: 1.3cm; background-color: #533678;color: white; ">
             <span>Copy Right - Heinz College</span>
         </div>
 

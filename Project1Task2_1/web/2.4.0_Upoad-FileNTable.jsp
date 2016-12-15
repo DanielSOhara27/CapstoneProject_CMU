@@ -1,17 +1,28 @@
-    <%-- 
+<%-- 
     Document   : result
     Created on : Feb 1, 2016, 8:18:26 PM
     Author     : Ellie
 --%>
 
-
-
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="capstone.connection.DBConnectionManager"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    DBConnectionManager DBManager = DBConnectionManager.getInstance();
+    Connection connection = DBManager.getConnection();
+    Statement statement = connection.createStatement();
+    //String sensorType = request.getParameter("sensorType");
+    //String sensorType = "DO";
+    ResultSet resultset = statement.executeQuery("SELECT `SensorType`,`TableName`,`SiteID`,`ModelID`,`SensorID`,`Username` FROM `MappingTable`");
+%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Upload</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
     </head>
     
@@ -49,44 +60,46 @@
             <h1 style="color: #533678;"> Upload Form</h1>
         </div>
 
+        <%
+            if(request.getAttribute("message")!=null)
+               out.println("<td>" + request.getAttribute("message") + "</td>");
+        %>
+        
         <div class="w3-container">
-            <p><b>Please submit your zipped file here:</b></p>
+          <p>Please submit your zipped file here: </p>
         </div>
         
-        <form style="margin-left: 0.5cm;" action ="UploadFileServlet" method ="POST" enctype="multipart/form-data">  
+        <form style="margin-left: 0.5cm;margin-right: 2 cm" action ="UploadFileServlet" method ="POST" enctype="multipart/form-data">  
             
             <input type="file" name="file" /> <br/><br>
-            <p><b>Please choose each category from each drop box for the appropriate table you wish to upload the file. </b></p>
-            <label for="letter">Enter the site name:</label>
-            <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>            
-            <select name="site" id="site">         
-                <c:forEach items="${site}" var="site">
-                    <option value="${site}"><c:out value="${site}" /></option>
-                </c:forEach>
-            </select>            
-            <br><br><br>
-            <label for="letter">Enter the sensor name:</label>
-            <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>            
-            <select name="sensor" id="sensor">         
-                <c:forEach items="${sensor}" var="sensor">
-                    <option value="${sensor}"><c:out value="${sensor}" /></option>
-                </c:forEach>
-            </select>                     
-            <br><br><br>
-            <label for="letter">Enter the model:</label>
-            <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>            
-            <select name="model" id="model">         
-                <c:forEach items="${model}" var="model">
-                    <option value="${model}"><c:out value="${model}" /></option>
-                </c:forEach>
-            </select>   
-            <br><br><br>            
-            <label for="letter">Enter the folder name:</label>            
-            <input type="text" name="folderName" value="" /><br><br>            
+            
+            <TABLE class="w3-table w3-striped w3-bordered w3-border" BORDER="1" style = "margin-left: 0.5cm; margin-right: 2 cm">
+                    <tr>
+                        <td>Choose</td>
+                        <td>SensorType</td>
+                        <td>TableName</td>
+                        <td>SiteID</td>
+                        <td>ModelID</td>
+                        <td>SensorID</td>
+                        <td>Username</td>
+                    </tr>
+                    <% while (resultset.next()) {
+                    %>       
+                    <tr>
+                        <td><input type="radio" name="tables" value="<%= resultset.getString(2)%>"></td>
+                        <td><%= resultset.getString(1)%></td>
+                        <td><%= resultset.getString(2)%></td>
+                        <td><%= resultset.getString(3)%></td>
+                        <td><%= resultset.getString(4)%></td>
+                        <td><%= resultset.getString(5)%></td>
+                        <td><%= resultset.getString(6)%></td>
+                    </tr>
+                    <% }%>
+                </TABLE>
+            <br><br>           
             <input style = "margin-bottom: 1cm; width: 3cm;" 
-                   type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Upload File" />
-            <BR><BR>
-        </form>                 
+                   type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Upload File" onclick="document.body.style.cursor='wait'; return true;" />
+        </form>                
         
         <div class="w3-container w3-bottom" style="margin-top: 0.5cm; height: 1.3cm; line-height: 1.3cm; background-color: #533678;color: white; ">
             <center><span>Woodland Road | Pittsburgh, PA 15232 | Main: 412-365-1100 | Admission: 800-837-1290</span></center>

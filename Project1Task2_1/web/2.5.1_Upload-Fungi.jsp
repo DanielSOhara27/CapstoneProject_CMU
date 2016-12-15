@@ -99,8 +99,8 @@
             <input type="submit" value="Submit" />   
             </BR>
 
-
-        </div><BR><BR>
+        </div>
+        <BR><BR>
     
         
         <input style = "margin-bottom: 1cm; width: 3cm;" 

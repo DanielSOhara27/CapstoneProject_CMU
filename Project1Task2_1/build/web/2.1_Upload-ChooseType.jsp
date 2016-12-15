@@ -6,6 +6,13 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Upload</title>
         <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+        <script type="text/javsacript">
+    //Set the cursor ASAP to "Wait"
+    document.body.style.cursor='wait';
+
+    //When the window has finished loading, set it back to default...
+    window.onload=function(){document.body.style.cursor='default';}
+</script>
     </head>
     
     <style> 
@@ -33,7 +40,7 @@
             <span><a href='2.1_Upload-ChooseType.jsp'>Upload</a></span> &nbsp;| &nbsp;
             <span><a href='3.1_Query-ChooseType.jsp'>Query/Download</a></span> &nbsp;| &nbsp;
             <span><a href='4.0_CreateTable-initialize.jsp'>Create Table</a></span> &nbsp;| &nbsp;
-            <span><a href='5.0_Admin-Choose.jsp.jsp'>Admin</span> &nbsp;| &nbsp;
+            <span><a href='5.0_Admin-Choose.jsp.jsp'>Admin</a></span> &nbsp;| &nbsp;
             <span><a href='6.0_About.jsp'>About</a></span>
         </div>
         <!-- End of header -->
@@ -41,25 +48,25 @@
         <div class="w3-container w3-white" >
             <h1 style="color: #533678;"> Choose Upload type</h1>
         </div>
-
+        <form action ="UploadChooseTypeServlet" method ="POST">
         <div class="w3-container">
-            <p>Please choose type of upload.<BR> </p>
-        </div>
-
-        <div class="w3-container">
+            <%
+            if(request.getAttribute("message")!=null)
+               out.println("<td>" + request.getAttribute("message") + "</td>");
+            %>
             <BR>
             <input TYPE="radio" NAME="uploadType" VALUE="existing" CHECKED>
-            Upload to an existing table. (using .csv zipped files).
-            <BR><BR><BR>
+            Upload to an existing table. (using zipped files).
+            <BR><BR>
             <input TYPE="radio" NAME="uploadType" VALUE="observation">
             Upload observations.
-            <BR><BR><BR>
+            <BR><BR>
         </div>
-        
+        <BR>
         <input style = "margin-bottom: 1cm; width: 3cm;" 
                type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Next" />
         
-        
+        </form>
         <div class="w3-container w3-bottom" style="margin-top: 0.5cm; height: 1.3cm; line-height: 1.3cm; background-color: #533678;color: white; ">
             <center><span>Woodland Road | Pittsburgh, PA 15232 | Main: 412-365-1100 | Admission: 800-837-1290</span></center>
         </div>

@@ -1,16 +1,23 @@
+<%-- 
+    Document   : QuerySensorTypeSite(Vertical join)
+    Created on : Nov 4, 2016, 12:46:52 AM
+    Author     : Anshu Agrawal
+--%>
+
+<%@page import="capstone.connection.DBConnectionManager"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.*" %>
+<%@ page import="java.sql.*" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
-<%  
-   // create a list for testing
-   int NumSites=6;
-   List<String> list = new ArrayList<String>();
-   for(int i=1; i<=NumSites; i++){
-      list.add("Site "+i);
-   }
-
-   pageContext.setAttribute("list", list);
+<%
+    DBConnectionManager DBManager = DBConnectionManager.getInstance();
+    Connection connection = DBManager.getConnection();
+    Statement statement = connection.createStatement();
+    String sensorType = request.getParameter("sensorType");
+    //String sensorType = "DO";
+    ResultSet resultset = statement.executeQuery("SELECT `SensorType`,`TableName`,`SiteID`,`ModelID`,`SensorID`,`Username` FROM `MappingTable` where `SensorType`='" + sensorType + "'");
 %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,7 +25,6 @@
         <title>Query</title>
         <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
     </head>
-    
     <style> 
         span {
             display: inline-block;
@@ -26,9 +32,7 @@
             line-height: normal;      
         }
     </style>
-    
     <body>
-        
         <!-- Start header -->
         <div class="w3-container" style="height: 3.1cm; background-color: #533678;align-content: center; ">
             <br>
@@ -44,44 +48,85 @@
             <span><a href='2.1_Upload-ChooseType.jsp'>Upload</a></span> &nbsp;| &nbsp;
             <span><a href='3.1_Query-ChooseType.jsp'>Query/Download</a></span> &nbsp;| &nbsp;
             <span><a href='4.0_CreateTable-initialize.jsp'>Create Table</a></span> &nbsp;| &nbsp;
-            <span><a href='5.0_Admin-Choose.jsp.jsp'>Admin</span> &nbsp;| &nbsp;
+            <span><a href='5.0_Admin-Choose.jsp.jsp'>Admin</a></span> &nbsp;| &nbsp;
             <span><a href='6.0_About.jsp'>About</a></span>
         </div>
         <!-- End of header-->
-        
         <div class="w3-container w3-white" >
-            <h1 style="color: #533678;"> Query/Download</h1>
+            <h1 style="color: #533678;"> Query by Sensor Step 2</h1>
         </div>
-
-        <div class="w3-container">
-          <p>There are 6 sites associated with "Sensor 1". Please select sites that you want to query.</p>
-        </div>
-               
-        <form action="Palindrome" method="GET" style = "margin-left: 0.25cm">    
+        <form id= "querysensorsite" action="QuerySensorTypeSiteServlet" method="POST" style = "margin-left: 0.25cm">    
             <div class="w3-row-padding">
-                    
-                <%
-                  
-                  for(int i=1; i<=list.size();i++){
-                                      
-                    out.print("<input type=\"checkbox\" name=\"" + list.get(i-1) + "\" value=\"entryYes\"> " + list.get(i-1) + "<br>");  
-                  }
-                %>
-
-                    <br><br><br>
-                <input style = "margin-left: 0cm; margin-bottom: 1cm; width: 2.5cm;" 
-                       type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Previous"/> 
-                <input style = "margin-left: 0.25cm; margin-bottom: 1cm; width: 2.5cm;" 
-                   type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Next" />
-            </div>
-            <br><br>
+                <div class="w3-container">
+                    <p>Choose the sites you want to get the data from.</p>
+                </div>
+                <!-- http://www.java2s.com/Tutorial/Java/0360__JSP/OutputResultSet.htm -->
+                <TABLE class="w3-table w3-striped w3-bordered w3-border" BORDER="1" style = "margin-left: 0.5cm">
+                    <tr>
+                        <td>Select</td>
+                        <td>SensorType</td>
+                        <td>TableName</td>
+                        <td>SiteID</td>
+                        <td>ModelID</td>
+                        <td>SensorID</td>
+                        <td>Username</td>
+                    </tr>
+                    <% while (resultset.next()) {
+                    %>       
+                    <tr>
+                        <td><input type="checkbox" name="tables" value="<%= resultset.getString(2)%>"></td>
+                        <td><%= resultset.getString(1)%></td>
+                        <td><%= resultset.getString(2)%></td>
+                        <td><%= resultset.getString(3)%></td>
+                        <td><%= resultset.getString(4)%></td>
+                        <td><%= resultset.getString(5)%></td>
+                        <td><%= resultset.getString(6)%></td>
+                    </tr>
+                    <% }%>
+                </TABLE>
+                <br>
+                <div class="w3-row-padding">
+                    <div class="w3-half">
+                        <p><b>Start Date:</b></p>
+                        <input style = "margin-bottom: 1cm; width: 8cm;" 
+                               type="date" class="w3-btn w3-blue-grey w3-center" name="start_date" value="StartDate" />
+                        <BR>
+                    </div>
+                    <div class = "w3-half">
+                        <p><b>Choose Start Date Time:</b></p>
+                        <input style = "margin-bottom: 1cm; width: 8cm;" 
+                               type="time" class="w3-btn w3-blue-grey w3-center" name="start_time" value="start_time" />
+                        <br
+                    </div>
+                </div>
+                <div class="w3-row-padding">
+                    <div class ="w3-half">
+                        <p><b>End Date:</b><BR></p>
+                        <input style = "margin-bottom: 1cm; width: 8cm;" 
+                               type="date" class="w3-btn w3-blue-grey w3-center" name="end_date" value="EndDate" />
+                        <BR>
+                    </div>
+                    <div class = "w3-half">
+                        <p><b>Choose End Date Time:</b></p>
+                        <input style = "margin-bottom: 1cm; width: 8cm;" 
+                               type="time" class="w3-btn w3-blue-grey w3-center" name="end_time" value="end_time" />
+                        <BR>
+                    </div>
+                </div>
+                <div>
+                    <label for ="letter">Include Yellow flag?</label>
+                    <select name ="flag">
+                        <option value="yes"> Include</option>
+                        <option value="no"> Do not include</option>
+                    </select>
+                    <BR>
+                </div>
+                <div>
+                    <input style = "margin-left: 18cm; margin-bottom: 2cm; width: 3cm;" 
+                           type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Previous" />
+                    <input style = " margin-bottom: 2cm; width: 3cm;" 
+                           type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Query" />
+                </div>
         </form>
-
-
-        
-        <div class="w3-container w3-bottom" style="height: 1.3cm; line-height: 1.3cm; background-color: #533678;color: white; ">
-            <span>Copy Right - Heinz College</span>
-        </div>
-
     </body>
 </html>

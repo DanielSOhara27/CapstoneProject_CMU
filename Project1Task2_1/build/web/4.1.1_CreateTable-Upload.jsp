@@ -52,6 +52,7 @@
 
         <div class="w3-container">
           <p>Please upload the example data file for validation: </p>
+          <p>Make sure your column names and input does not include the delimiter you chose in the last slide. </p>
         </div>
         
 
