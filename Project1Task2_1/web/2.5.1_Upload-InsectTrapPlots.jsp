@@ -1,3 +1,4 @@
+<!--2.5.1_Upload-InsectTrapPlots-->
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -33,13 +34,13 @@
             <span><a href='2.1_Upload-ChooseType.jsp'>Upload</a></span> &nbsp;| &nbsp;
             <span><a href='3.1_Query-ChooseType.jsp'>Query/Download</a></span> &nbsp;| &nbsp;
             <span><a href='4.0_CreateTable-initialize.jsp'>Create Table</a></span> &nbsp;| &nbsp;
-            <span><a href='5.0_Admin-Choose.jsp.jsp'>Admin</span> &nbsp;| &nbsp;
+            <span><a href='5.0_Admin-Choose.jsp.jsp'>Admin</a></span> &nbsp;| &nbsp;
             <span><a href='6.0_About.jsp'>About</a></span>
         </div>
         <!-- End of header -->
         
         <div class="w3-container w3-white" >
-            <h1 style="color: #533678;"> Upload Observation.</h1>
+            <h1 style="color: #533678;"> Upload Insect Trap Plots Observation.</h1>
         </div>
 
         <div class="w3-container">

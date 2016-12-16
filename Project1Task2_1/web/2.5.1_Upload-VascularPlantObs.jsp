@@ -1,3 +1,5 @@
+<!--2.5.1_Upload-VascularPlantObs-->
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -33,13 +35,13 @@
             <span><a href='2.1_Upload-ChooseType.jsp'>Upload</a></span> &nbsp;| &nbsp;
             <span><a href='3.1_Query-ChooseType.jsp'>Query/Download</a></span> &nbsp;| &nbsp;
             <span><a href='4.0_CreateTable-initialize.jsp'>Create Table</a></span> &nbsp;| &nbsp;
-            <span><a href='5.0_Admin-Choose.jsp.jsp'>Admin</span> &nbsp;| &nbsp;
+            <span><a href='5.0_Admin-Choose.jsp.jsp'>Admin</a></span> &nbsp;| &nbsp;
             <span><a href='6.0_About.jsp'>About</a></span>
         </div>
         <!-- End of header -->
         
         <div class="w3-container w3-white" >
-            <h1 style="color: #533678;"> Upload Observation.</h1>
+            <h1 style="color: #533678;"> Vascular Plant Observation.</h1>
         </div>
 
         <div class="w3-container">
@@ -48,10 +50,10 @@
         
         
         <div>
-            Species: <input type ="text" name ="Species"><BR>
+            Species: <input type ="text" style = "height: 0.75cm;" name ="Species"><BR><BR>
           
             <label for="letter">Common Name:</label>
-            <select name = "Family">
+            <select name = "Family" style = "height: 0.75cm;" >
                 <option value="Aceraceae">Aceraceae</option> 
                 <option value="Amaryllidaceae">Amaryllidaceae</option> 
                 <option value="Anacardiaceae">Anacardiaceae</option> 
@@ -76,61 +78,45 @@
                 <option value="Rosaceae">Rosaceae</option> 
                 <option value="Sapindaceae">Sapindaceae</option> 
                 <option value="Simaroubaceae">Simaroubaceae</option> 
-            </select>
-
-            </br>
+            </select><BR><BR>
 
             <label for="letter">Vegetation Type:</label>
-            <select name = "VegetationType">
+            <select name = "VegetationType" style = "height: 0.75cm;" >
                 <option value ="herb"> Herb</option>
                 <option value ="shrub"> Shrub</option>
                 <option value="tree"> Tree</option>
                 <option value="vine"> Vine</option>
-            </select>
-
-            </br>
+            </select><BR><BR>
 
             <label for ="letter">Habitat:</label>
-            <select name ="Habitat">
+            <select name ="Habitat" style = "height: 0.75cm;" >
                 <option value="forest"> Forest</option>
                 <option value="meadow"> Meadow</option>
                 <option value="edge"> Edge</option>
                 <option value="disturbed"> Disturbed</option>
-            </select>
-
-            </br>
+            </select><BR><BR>
+            
             <label for="letter">Origin:</label>
-            <select name="Origin">
+            <select name="Origin" style = "height: 0.75cm;" >
                 <option value="wild"> Wild</option>
                 <option value="planted"> Planted</option>
-            </select>
-
-            </br>
+            </select><BR><BR>
+            
             <label for="letter">Native Status:</label>
-            <select name="NativeStatus">
+            <select name="NativeStatus" style = "height: 0.75cm;" >
                 <option value="native"> Native</option>
                 <option value="nonnative">Non-Native</option>
                 <option value="invasiv">Invasive</option>
-            </select>
-
-            </br>
-            Date: <input type ="text" name ="Date">
-            </br>
-            Personnel Name: <input type ="text" name ="PersonnelName">
-            </br> 
-            <BR>
-            <input type="submit" value="Submit" />   
+            </select><BR><BR>
+            
+            Date: <input type ="text" style = "height: 0.75cm;" name ="Date">
+            <BR><BR>
+            Personnel Name: <input type ="text" style = "height: 0.75cm;" name ="PersonnelName">
+            <BR><BR>
+                    <input style = "margin-bottom: 1cm; width: 3cm;" 
+               type="submit" class="w3-btn w3-blue-grey w3-center" value="Submit" /> 
             </BR>
-
-
         </div><BR><BR>
-    
-        
-        <input style = "margin-bottom: 1cm; width: 3cm;" 
-               type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Next" />
-        
-        <input style = "margin-bottom: 1cm; width: 3cm;" 
-               type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Before" />
         <BR>
         
         <div class="w3-container w3-bottom" style="margin-top: 0.5cm; height: 1.3cm; line-height: 1.3cm; background-color: #533678;color: white; ">

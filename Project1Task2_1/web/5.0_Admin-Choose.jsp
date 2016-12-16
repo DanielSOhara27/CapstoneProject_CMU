@@ -51,20 +51,11 @@
             <input TYPE="radio" NAME="queryType" VALUE="createUser" CHECKED>
             Create user id & password
             <BR><BR>
-            <input TYPE="radio" NAME="queryType" VALUE="password">
-            Delete user
-            <BR><BR>
             <input TYPE="radio" NAME="queryType" VALUE="createAccess">
             Create access
             <BR><BR>
             <input TYPE="radio" NAME="queryType" VALUE="deleteAccess">
             Delete access
-            <BR><BR>
-            <input TYPE="radio" NAME="queryType" VALUE="showAccess">
-            Show access
-            <BR><BR>
-            <input TYPE="radio" NAME="queryType" VALUE="changeYelloFlag">
-            Change yellow flag.
             <BR><BR>
         </div>
         

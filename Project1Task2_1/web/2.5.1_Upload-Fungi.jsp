@@ -33,7 +33,7 @@
             <span><a href='2.1_Upload-ChooseType.jsp'>Upload</a></span> &nbsp;| &nbsp;
             <span><a href='3.1_Query-ChooseType.jsp'>Query/Download</a></span> &nbsp;| &nbsp;
             <span><a href='4.0_CreateTable-initialize.jsp'>Create Table</a></span> &nbsp;| &nbsp;
-            <span><a href='5.0_Admin-Choose.jsp.jsp'>Admin</span> &nbsp;| &nbsp;
+            <span><a href='5.0_Admin-Choose.jsp.jsp'>Admin</a></span> &nbsp;| &nbsp;
             <span><a href='6.0_About.jsp'>About</a></span>
         </div>
         <!-- End of header -->
@@ -47,68 +47,71 @@
         </div>
         
         
-        <div>
-            Genus: <input type ="text" name ="Genus"><BR>
-            Species: <input type ="text" name ="Species"><BR>
-            Common Name: <input type ="text" name ="CommonName"><BR>
+        <div class="w3-row-padding" style = "margin-left: 0.5cm">
+            <div class="w3-half">
+            Genus: <input type ="text" style = "height: 0.75cm;"  name ="Genus"><BR><BR>
+            Species: <input type ="text" style = "height: 0.75cm;"  name ="Species"><BR><BR>
+            Common Name: <input type ="text" style = "height: 0.75cm;" name ="CommonName"><BR><BR>
           
             <label for="letter">Family:</label>
-            <select name = "Family">
-                <option value="Aceraceae">Amanitaceae</option> 
-                <option value="Crambidae">Auriscalpiaceae</option>
-                <option value="Depressariidae">Boletaceae</option>               
-                <option value="Erebidae">Cantharellaceae</option>
-                <option value="Geometridae">Cortinariaceae</option>              
-                <option value="Lasiocampidae">Fomitopsidaceae</option>
-                <option value="Limacodidae">Ganodermataceae</option> 
-                <option value="Noctuidae">Hygrophoropsidaceae</option>
-                <option value="Notodontidae">Hymenochaetaceae</option>
-                <option value="Oecophoridae">Hypocreaceae</option>
-                <option value="Pyralidae">Meripilaceae</option>
-                <option value="Saturniidae">Phallaceae</option>
-                <option value="Sphingidae">Pleurotaceae</option>
-                <option value="Tortricidae">Polyporaceae</option>
-                <option value="Yponomeutidae">Russulaceae</option>
-                <option value="Yponomeutidae">Tricholomataceae</option>
-                <option value="Yponomeutidae">Xylariaceae</option>
-            </select><BR>
+            <select name = "Family" style = "height: 0.75cm;" >
+                <option value="Amanitaceae">Amanitaceae</option> 
+                <option value="Auriscalpiaceae">Auriscalpiaceae</option>
+                <option value="Boletaceae">Boletaceae</option>               
+                <option value="Cantharellaceae">Cantharellaceae</option>
+                <option value="Cortinariaceae">Cortinariaceae</option>              
+                <option value="Fomitopsidaceae">Fomitopsidaceae</option>
+                <option value="Ganodermataceae">Ganodermataceae</option> 
+                <option value="Hygrophoropsidaceae">Hygrophoropsidaceae</option>
+                <option value="Hymenochaetaceae">Hymenochaetaceae</option>
+                <option value="Hypocreaceae">Hypocreaceae</option>
+                <option value="Meripilaceae">Meripilaceae</option>
+                <option value="Phallaceae">Phallaceae</option>
+                <option value="Pleurotaceae">Pleurotaceae</option>
+                <option value="Polyporaceae">Polyporaceae</option>
+                <option value="Russulaceae">Russulaceae</option>
+                <option value="Tricholomataceae">Tricholomataceae</option>
+                <option value="Xylariaceae">Xylariaceae</option>
+            </select><BR><BR>
+            
             
             <label for="letter">Feeding Type: </label>
-            <select name = "Feeding">
+            
+            <select name = "Feeding" style = "height: 0.75cm;">
                 <option value="Saprotrophic">Saprotrophic</option>
                 <option value="Parasitic">Parasitic</option> 
-                <option value="Parasitic">Mycorrhizal</option> 
-                <option value="Parasitic">Ecto-mycorrhizal</option> 
-                <option value="Parasitic">Arbuscular mycorrhizal</option> 
-                <option value="Parasitic">Unspedified</option> 
-            </select><BR>
-
-            
-            Identified by: <input type ="text" name ="identifiedBy"><BR>
+                <option value="Mycorrhizal">Mycorrhizal</option> 
+                <option value="Ecto-mycorrhizal">Ecto-mycorrhizal</option> 
+                <option value="Arbuscular mycorrhizal">Arbuscular mycorrhizal</option> 
+                <option value="Unspedified">Unspedified</option> 
+            </select><BR><BR>
+            </div>
+            <div class="w3-half">
+            Identified by: <input type ="text"  style = "height: 0.75cm;" name ="identifiedBy"><BR><BR>
             <p>Date of Discovery:</p>
-            <input style = "margin-bottom: 1cm; width: 5cm;" 
-                   type="date" class="w3-btn w3-grey w3-center" name="refDate" value="refDate" /><BR>
+            <input style = "height: 0.75cm;"
+                   type="date" class="w3-btn w3-grey w3-center" name="refDate" value="refDate" /><BR><BR>
 
             
             <label for="letter">Collected and Archived: </label>
-            <select name = "Collected">
+            <select name = "Collected" style = "height: 0.75cm;">
                 <option value="Yes">Yes</option>
                 <option value="No">No</option> 
             </select>
-            <BR>
-            <input type="submit" value="Submit" />   
-            </BR>
-
+            </div>
         </div>
+            <BR><BR>
+            <input style = "margin-left: 20cm; width: 3cm;" 
+               type="submit" class="w3-btn w3-blue-grey w3-center" value="Submit" /> 
+            </BR>
+            
+        
         <BR><BR>
     
         
-        <input style = "margin-bottom: 1cm; width: 3cm;" 
-               type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Next" />
         
-        <input style = "margin-bottom: 1cm; width: 3cm;" 
-               type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Before" />
-        <BR><BR><BR>
+
+        <BR><BR>
         
         <div class="w3-container w3-bottom" style="margin-top: 0.5cm; height: 1.3cm; line-height: 1.3cm; background-color: #533678;color: white; ">
             <center><span>Woodland Road | Pittsburgh, PA 15232 | Main: 412-365-1100 | Admission: 800-837-1290</span></center>

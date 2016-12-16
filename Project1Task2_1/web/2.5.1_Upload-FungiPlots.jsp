@@ -39,7 +39,7 @@
         <!-- End of header -->
         
         <div class="w3-container w3-white" >
-            <h1 style="color: #533678;"> Upload Observation.</h1>
+            <h1 style="color: #533678;"> Upload Fungi Plots Observation.</h1>
         </div>
 
         <div class="w3-container">
@@ -47,26 +47,33 @@
         </div>
         
         
-        <div>
-        Plot ID: <input type ="text" name ="plotID"><BR><BR>
-        Tree ID: <input type ="text" name ="treeID"><BR><BR>
-        Location: <input type ="text" name ="location"><BR><BR>
-        Date: <input type ="text" name ="date"><BR><BR>
-        Personnel: <input type ="text" name ="personnel"><BR><BR>
+        <div class="w3-row-padding" style = "margin-left: 0.5cm">
+        <div class="w3-half">
+        Plot ID: <input type ="text" style = "height: 0.75cm;" name ="plotID"><BR><BR>
+        Tree ID: <input type ="text" style = "height: 0.75cm;" name ="treeID"><BR><BR>
+        Location: <input type ="text" style = "height: 0.75cm;" name ="location"><BR><BR>
+        Date: <input type ="text" style = "height: 0.75cm;" name ="date"><BR><BR>
+        Personnel: <input type ="text" style = "height: 0.75cm;" name ="personnel"><BR><BR>
         <label for="letter">Direction:</label>
-        <select name = "direction">
+        <select name = "direction" style = "height: 0.75cm;" >
             <option value="N">North</option> 
             <option value="S">South</option> 
             <option value="E">East</option> 
             <option value="W">West</option>
-        </select><BR><BR>   
-        Acer Count: <input type ="text" name ="acerCount"><BR><BR>
-        Largest Acer: <input type ="text" name ="largestAcer"><BR><BR>
-        Smallest Acer <input type ="text" name ="smallestAcer"><BR><BR>
-        Quercus Count: <input type ="text" name ="quercusCount"><BR><BR>
-        Largest Quercus: <input type ="text" name ="largestQuercus"><BR><BR>
-        Smallest Quercus: <input type ="text" name ="smallestQuercus"><BR><BR>
-        Notes: <input type ="text" name ="notes"><BR><BR>
+        </select><BR><BR>  
+        </div>
+        <div class="w3-half">
+        Acer Count: <input type ="text" style = "height: 0.75cm;" name ="acerCount"><BR><BR>
+        Largest Acer: <input type ="text" style = "height: 0.75cm;" name ="largestAcer"><BR><BR>
+        Smallest Acer <input type ="text" style = "height: 0.75cm;" name ="smallestAcer"><BR><BR>
+        Quercus Count: <input type ="text" style = "height: 0.75cm;" name ="quercusCount"><BR><BR>
+        Largest Quercus: <input type ="text" style = "height: 0.75cm;" name ="largestQuercus"><BR><BR>
+        Smallest Quercus: <input type ="text" style = "height: 0.75cm;" name ="smallestQuercus"><BR><BR>
+
+        </div>
+            <div>
+              Notes: <input type ="text" style = "height:5cm; width:15cm;" name ="notes"><BR><BR>
+            </div>
         </div><BR>
     
         
