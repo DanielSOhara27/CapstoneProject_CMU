@@ -11,6 +11,13 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Main</title>
         <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+        
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     
     <style> 
@@ -19,6 +26,23 @@
             vertical-align: middle;
             line-height: normal;      
         }
+        body { 
+        background: url('sf_chatham_02.jpg') no-repeat center center fixed; 
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        
+       }
+
+       .panel-default {
+        opacity: 1.0;
+        margin-top:100px;
+       
+       }
+       .form-group.last {
+        margin-bottom:0px;
+       }
     </style>   
     
     <body>
@@ -34,20 +58,21 @@
         <div class="w3-container w3-white" style="height: 0.07cm;">
         </div>
         <div class="w3-container" style="height: 1cm; line-height: 0.9cm; background-color: #46434A; color: whitesmoke;">
-            <span>Log-in</span> &nbsp;| &nbsp;
-            <span>Upload</span> &nbsp;| &nbsp;
-            <span>Query/Download</span> &nbsp;| &nbsp;
-            <span>Create Table</span> &nbsp;| &nbsp;
-            <span>Admin</span> &nbsp;| &nbsp;
-            <span>About</span>
+            <span><a href='login.jsp'>Log-in</a></span> &nbsp;| &nbsp;
+            <span><a href='UploadHomePage.jsp'>Upload</a></span> &nbsp;| &nbsp;
+            <span><a href='QueryHomePage.jsp'>Query/Download</a></span> &nbsp;| &nbsp;
+            <span><a href='4.0_CreateTable-initialize.jsp'>Create Table</a></span> &nbsp;| &nbsp;
+            <span><a href='5.0_Admin-Choose.jsp'>Admin</a></span> &nbsp;| &nbsp;
+            <span><a href='6.0_About.jsp'>About</a></span> &nbsp;| &nbsp;
+            <span><a href='logout.jsp'>Log out</a></span>
+                                    <%
+            if(request.getSession().getAttribute("Username") != null){
+                out.print("<span align=\"right;\"> (User: "+request.getSession().getAttribute("Username").toString()+" )</span>");
+            } 
+            %>
         </div>
         <!-- End of header -->
-       
- 
-        <center>
-        <img src = "sf_chatham_01.jpg" alt="Chatham" width="100%">
-        </center>
-        </form>
+  
         
 
         
@@ -58,31 +83,3 @@
     </body>
 </html>
 
-<!--
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Falk School Data Portal</title>
-    </head>
-    <body>
-        <h1 style="color:purple;"><b>Chatham University Falk School of Sustainability & Environment</b></h1>
-        <form action ="UploadDownloadServlet" method ="GET">   
-        <h1 style="color:purple;">Data Portal</h1>     
-        <label for="letter">Please select operation:</label> <br>
-        <select name ="operation">
-                <option value="DownloadData">Download Data</option>            
-                <option value="UploadFiles">Upload Files</option>
-                <option value="HumanObservation">Human Observation Submittal</option>
-                <option value="CreateTableJSP">Create Table</option>
-        </select>
-        <input type="submit" value="Go" />
-        <br><br><br>
-        <center>
-        <img src = "ehc.png">
-        </center>
-    </form>
-
-    </body>
-</html>
--->

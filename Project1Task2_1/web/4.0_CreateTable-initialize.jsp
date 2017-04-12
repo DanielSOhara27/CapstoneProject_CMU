@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% session.setAttribute("option",0);%>
-<% session.setAttribute("Username", "Ryan1"); %>
+<%-- <% session.setAttribute("Username", "Ryan1"); %> --%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -28,6 +28,7 @@
         <!--<h5>${option}</h5>
         <h5>${Username}</h5>
         <!-- Start header -->
+        
         <div class="w3-container" style="height: 3.1cm; background-color: #533678;align-content: center; ">
             <br>
             <a href="http://www.chatham.edu">
@@ -38,12 +39,21 @@
         <div class="w3-container w3-white" style="height: 0.07cm;">
         </div>
         <div class="w3-container" style="height: 1cm; line-height: 0.9cm; background-color: #46434A; color: whitesmoke;">
-            <span><a href='1.1_login.jsp'>Log-in</a></span> &nbsp;| &nbsp;
-            <span><a href='2.1_Upload-ChooseType.jsp'>Upload</a></span> &nbsp;| &nbsp;
-            <span><a href='3.1_Query-ChooseType.jsp'>Query/Download</a></span> &nbsp;| &nbsp;
+            <span><a href='login.jsp'>Log-in</a></span> &nbsp;| &nbsp;
+            <span><a href='UploadHomePage.jsp'>Upload</a></span> &nbsp;| &nbsp;
+            <span><a href='QueryHomePage.jsp'>Query/Download</a></span> &nbsp;| &nbsp;
             <span><a href='4.0_CreateTable-initialize.jsp'>Create Table</a></span> &nbsp;| &nbsp;
-            <span><a href='5.0_Admin-Choose.jsp.jsp'>Admin</a></span> &nbsp;| &nbsp;
-            <span><a href='6.0_About.jsp'>About</a></span>
+            <span><a href='5.0_Admin-Choose.jsp'>Admin</a></span> &nbsp;| &nbsp;
+            <span><a href='6.0_About.jsp'>About</a></span> &nbsp;| &nbsp;
+            <span><a href='logout.jsp'>Log out</a></span>
+            
+            <%
+            if(request.getSession().getAttribute("Username") != null){
+                out.print("<span align=\"right;\"> (User: "+request.getSession().getAttribute("Username").toString()+" )</span>");
+            } 
+            %>
+            
+            
         </div>
         <!-- End of header -->
         
@@ -75,15 +85,15 @@
                     <input type="text" name="typeSensor" value="" /><br><br>
                     <label for="letter"> Site Prefix: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</label>
                     <input type="text" name="sitePrefix" value="" /><br><br>
-                    <label for="letter"> Sensor Model: &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    <label for="letter"> Sensor ID: &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                     <input type="text" name="sensorModel" value="" /><br><br>
-                    <label for="letter"> Sensor Manufacturer: </label>
+                    <label for="letter"> Sensor Manufacturer/Model: </label>
                     <input type="text" name="manufacturer" value="" /><br><br>
                     <label for="letter"> Location: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</label>
                     <input type="text" name="location" value="" /><br><br><br>
                 </div>
                 
-            <input style = "margin-left: 0.25cm; margin-bottom: 1cm; width: 2.5cm;" 
+            <input style = "margin-left: 0.25cm; margin-bottom: 2cm; width: 2.5cm;" 
                    type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Next" />
             </div>
         </form>
@@ -99,7 +109,7 @@
          frmvalidator.addValidation("typeDelimeter","req","Please input the value in the \"Type of Delimeter\" field");
          frmvalidator.addValidation("typeDelimeter","maxlen=1","The value in \"Type of Delimeter\" should be 1 character long");
 
-         frmvalidator.addValidation("commentSignifier","req","Please input the value in the \"Comment Line Signifier:\" field");
+         
          frmvalidator.addValidation("commentSignifier","maxlen=1","The value in \"Comment Line Signifier:\" should be 1 character long");
 
          frmvalidator.addValidation("numHeader","req","Please input the value in the \"Number of header's line\" field");

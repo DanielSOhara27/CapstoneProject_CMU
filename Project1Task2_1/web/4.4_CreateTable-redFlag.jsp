@@ -73,7 +73,7 @@
        }
    }
    session.setAttribute("option",4);
-   session.setAttribute("colNum",numColumns);
+   session.setAttribute("colNum", numColumns);
    pageContext.setAttribute("list", list);
 %>
 <!DOCTYPE html>
@@ -109,12 +109,18 @@
         <div class="w3-container w3-white" style="height: 0.07cm;">
         </div>
         <div class="w3-container" style="height: 1cm; line-height: 0.9cm; background-color: #46434A; color: whitesmoke;">
-            <span><a href='1.1_login.jsp'>Log-in</a></span> &nbsp;| &nbsp;
-            <span><a href='2.1_Upload-ChooseType.jsp'>Upload</a></span> &nbsp;| &nbsp;
-            <span><a href='3.1_Query-ChooseType.jsp'>Query/Download</a></span> &nbsp;| &nbsp;
+            <span><a href='login.jsp'>Log-in</a></span> &nbsp;| &nbsp;
+            <span><a href='UploadHomePage.jsp'>Upload</a></span> &nbsp;| &nbsp;
+            <span><a href='QueryHomePage.jsp'>Query/Download</a></span> &nbsp;| &nbsp;
             <span><a href='4.0_CreateTable-initialize.jsp'>Create Table</a></span> &nbsp;| &nbsp;
-            <span><a href='5.0_Admin-Choose.jsp.jsp'>Admin</a></span> &nbsp;| &nbsp;
-            <span><a href='6.0_About.jsp'>About</a></span>
+            <span><a href='5.0_Admin-Choose.jsp'>Admin</a></span> &nbsp;| &nbsp;
+            <span><a href='6.0_About.jsp'>About</a></span> &nbsp;| &nbsp;
+            <span><a href='logout.jsp'>Log out</a></span>
+                        <%
+            if(request.getSession().getAttribute("Username") != null){
+                out.print("<span align=\"right;\"> (User: "+request.getSession().getAttribute("Username").toString()+" )</span>");
+            } 
+            %>
         </div>
         <!-- End of header-->
         
@@ -162,8 +168,7 @@
                 %>
 
                     <br><br><br>
-                <input style = "margin-left: 0cm; margin-bottom: 1cm; width: 2.5cm;" 
-                       type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Previous"/> 
+   
                 <input style = "margin-left: 0.25cm; margin-bottom: 1cm; width: 2.5cm;" 
                    type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Next" />
             </div>

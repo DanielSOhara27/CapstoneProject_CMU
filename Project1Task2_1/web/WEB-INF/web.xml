@@ -1,47 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
-    <servlet>
-        <servlet-name>CreateTableFormServlet</servlet-name>
-        <servlet-class>Capstone.CreateTableFormServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>UserTableServlet</servlet-name>
-        <servlet-class>Capstone.UserTableServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>UploadFileServlet</servlet-name>
-        <servlet-class>Capstone.UploadFileServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>SelectFormType</servlet-name>
-        <servlet-class>Capstone.SelectFormType</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>CreateTableFormServlet</servlet-name>
-        <url-pattern>/CreateTableForm</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>UserTableServlet</servlet-name>
-        <url-pattern>/UserTableServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SelectFormType</servlet-name>
-        <url-pattern>/SelectFormType</url-pattern>
-    </servlet-mapping>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/1.3_error.jsp</location>
+    </error-page>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
-    <welcome-file-list>
-        <welcome-file>4.0_CreateTable-initialize.jsp</welcome-file>
-    </welcome-file-list>
-    <error-page>
-        <error-code>500</error-code>
-        <location>/1.3_error.jsp</location>
-    </error-page>
-    <error-page>
-        <error-code>404</error-code>
-        <location>/1.3_error.jsp</location>
-    </error-page>
 </web-app>

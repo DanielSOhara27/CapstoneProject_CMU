@@ -27,14 +27,20 @@
             <span style="color: white;font-size: 17px;font-family: proxima-nova;"> FALK SCHOOL OF SUSTAINABILITY & ENVIRONMENT</span>
         </div>
         <div class="w3-container w3-white" style="height: 0.07cm;">
-        </div>
+        </div > 
         <div class="w3-container" style="height: 1cm; line-height: 0.9cm; background-color: #46434A; color: whitesmoke;">
-            <span><a href='1.1_login.jsp'>Log-in</a></span> &nbsp;| &nbsp;
-            <span><a href='2.1_Upload-ChooseType.jsp'>Upload</a></span> &nbsp;| &nbsp;
-            <span><a href='3.1_Query-ChooseType.jsp'>Query/Download</a></span> &nbsp;| &nbsp;
+            <span><a href='login.jsp'>Log-in</a></span> &nbsp;| &nbsp;
+            <span><a href='UploadHomePage.jsp'>Upload</a></span> &nbsp;| &nbsp;
+            <span><a href='QueryHomePage.jsp'>Query/Download</a></span> &nbsp;| &nbsp;
             <span><a href='4.0_CreateTable-initialize.jsp'>Create Table</a></span> &nbsp;| &nbsp;
-            <span><a href='5.0_Admin-Choose.jsp.jsp'>Admin</a></span> &nbsp;| &nbsp;
-            <span><a href='6.0_About.jsp'>About</a></span>
+            <span><a href='5.0_Admin-Choose.jsp'>Admin</a></span> &nbsp;| &nbsp;
+            <span><a href='6.0_About.jsp'>About</a></span> &nbsp;| &nbsp;
+            <span><a href='logout.jsp'>Log out</a></span>
+            <%
+            if(request.getSession().getAttribute("Username") != null){
+                out.print("<span align=\"right;\"> (User: "+request.getSession().getAttribute("Username").toString()+" )</span>");
+            } 
+            %>
         </div>
         <!-- End of header -->
         
@@ -43,6 +49,7 @@
         </div>
 
         <div class="w3-container">
+            <p style= " color: #533678;">  ${message} </p>
             <p>Enter information below to create a new user:</p>
         </div>
         
@@ -55,9 +62,9 @@
         <label for="letter">Username: </label>
             <input type="text" name="username" value="" /><br><br><br>              
         <label for="letter">Password: </label>
-            <input type="text" name="password1" value="" /><br><br><br>             
+            <input type="password" name="password1" value="" /><br><br><br>             
         <label for="letter">Confirm Password: </label>
-            <input type="text" name="password2" value="" /><br><br><br>             
+            <input type="password" name="password2" value="" /><br><br><br>             
         <INPUT TYPE="radio" NAME="radios" VALUE="faculty" CHECKED>
             Faculty 
          

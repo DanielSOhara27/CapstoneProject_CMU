@@ -11,9 +11,12 @@
 <%@page import="org.w3c.dom.*"%>
 <%@page import="org.xml.sax.*"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+
+
+
 <%  
-    //String xmlInput = (String) request.getAttribute("xmlInput");
-    String xmlInput =  "<xmlInput>" +
+    String xmlInput = (String) request.getAttribute("xmlInput");
+    /*String xmlInput =  "<xmlInput>" +
             "<foo> 'x-y' </foo>"+
             "<NumCol> 5 </NumCol>"+
             "<Column1> Column1 a </Column1>"+
@@ -21,7 +24,7 @@
             "<Column3> Column3 c </Column3>"+
             "<Column4> Column4 d </Column4>"+
             "<Column5> Column5 e </Column5>"+
-        "</xmlInput>"; 
+        "</xmlInput>"; */
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         // use the factory to create a documentbuilder
         Document apixml = null;
@@ -91,7 +94,7 @@
     </style>
     
     <body>
-        
+      
         <!-- Start header -->
         <div class="w3-container" style="height: 3.1cm; background-color: #533678;align-content: center; ">
             <br>
@@ -103,12 +106,18 @@
         <div class="w3-container w3-white" style="height: 0.07cm;">
         </div>
         <div class="w3-container" style="height: 1cm; line-height: 0.9cm; background-color: #46434A; color: whitesmoke;">
-            <span><a href='1.1_login.jsp'>Log-in</a></span> &nbsp;| &nbsp;
-            <span><a href='2.1_Upload-ChooseType.jsp'>Upload</a></span> &nbsp;| &nbsp;
-            <span><a href='3.1_Query-ChooseType.jsp'>Query/Download</a></span> &nbsp;| &nbsp;
+            <span><a href='login.jsp'>Log-in</a></span> &nbsp;| &nbsp;
+            <span><a href='UploadHomePage.jsp'>Upload</a></span> &nbsp;| &nbsp;
+            <span><a href='QueryHomePage.jsp'>Query/Download</a></span> &nbsp;| &nbsp;
             <span><a href='4.0_CreateTable-initialize.jsp'>Create Table</a></span> &nbsp;| &nbsp;
-            <span><a href='5.0_Admin-Choose.jsp.jsp'>Admin</a></span> &nbsp;| &nbsp;
-            <span><a href='6.0_About.jsp'>About</a></span>
+            <span><a href='5.0_Admin-Choose.jsp'>Admin</a></span> &nbsp;| &nbsp;
+            <span><a href='6.0_About.jsp'>About</a></span> &nbsp;| &nbsp;
+            <span><a href='logout.jsp'>Log out</a></span>
+                 <%
+            if(request.getSession().getAttribute("Username") != null){
+                out.print("<span align=\"right;\"> (User: "+request.getSession().getAttribute("Username").toString()+" )</span>");
+            } 
+            %> 
         </div>
         <!-- End of header-->
         
@@ -142,11 +151,11 @@
                             + "<option value='000' disabled selected>Select Data Type</option>"
                             + "<option value='String'>String/Alphanumeric [ Abc123 ]</option>"
                             + "<option value='String'>Numeric with Symbol [ +3.00 ]</option>"
-                            + "<option value='String'>Numeric without Symbol [ 3.00 ]</option>"
+                            + "<option value='Double'>Numeric without Symbol [ 3.00 ]</option>"
                             + "<option value='UNIX'>Datetime [UNIX]</option>"
                             + "<option value='CUSTOM-DATETIME'>Datetime [Custom Date and Time]</option>"
-                            + "<option value='CUSTTOM-DATE'>Datetime [Custom Date Only]</option>"
-                            + "<option value='CUSTTOM-TIME'>Datetime [Custom Time Only]</option>"
+                            + "<option value='CUSTOM-DATE'>Datetime [Custom Date Only]</option>"
+                            + "<option value='CUSTOM-TIME'>Datetime [Custom Time Only]</option>"
                             + "</select>");}
                     if((i%5)==0)
                     {out.print(" &nbsp<input name=\"" + list.get(i-1) + "\"onfocus=\"if (this.value=='n/a') this.value='';\" type=\"text\" value=\"n/a\"style=\"color: grey\"/><BR>");}
@@ -154,8 +163,7 @@
                 %>
 
                     <br><br><br>
-                <input style = "margin-left: 0cm; margin-bottom: 1cm; width: 2.5cm;" 
-                    type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Previous"/> 
+
                 <input style = "margin-left: 0.25cm; margin-bottom: 1cm; width: 2.5cm;" 
                     type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Next" />
             </div>

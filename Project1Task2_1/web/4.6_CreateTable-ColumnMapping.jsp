@@ -6,7 +6,7 @@
 <%@page import="org.xml.sax.*"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 <%  
-        String xmlInput =  "<xmlInput>"
+        /*String xmlInput =  "<xmlInput>"
 	+"<foo> 'x-y' </foo>"
 	+ "<bNumCol> 4 </bNumCol>"
 	+ "<bColumn1> bColumn1 </bColumn1>"
@@ -19,7 +19,8 @@
 	+ "<nColumn3> nColumn3 </nColumn3>"
 	+ "<nColumn4> nColumn4 </nColumn4>"
 	+ "<nColumn5> nColumn5 </nColumn5>"
-        + "</xmlInput>";
+        + "</xmlInput>";*/
+       String xmlInput = (String) request.getAttribute("xmlInput");
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         // use the factory to create a documentbuilder
         Document apixml = null;
@@ -88,6 +89,7 @@
    session.setAttribute("colNum",NEWnumColumns);
    pageContext.setAttribute("list", BASElist);
    pageContext.setAttribute("list", NEWlist);
+   session.setAttribute("xmlInput", request.getAttribute("xmlInput"));
    
 %>
 <!DOCTYPE html>
@@ -108,7 +110,9 @@
     </style>
     
     <body>
-        
+        ${option}
+        ${Username}
+        ${xmlInput}
         <!-- Start header -->
         <div class="w3-container" style="height: 3.1cm; background-color: #533678;align-content: center; ">
             <br>
@@ -120,12 +124,18 @@
         <div class="w3-container w3-white" style="height: 0.07cm;">
         </div>
         <div class="w3-container" style="height: 1cm; line-height: 0.9cm; background-color: #46434A; color: whitesmoke;">
-            <span><a href='1.1_login.jsp'>Log-in</a></span> &nbsp;| &nbsp;
-            <span><a href='2.1_Upload-ChooseType.jsp'>Upload</a></span> &nbsp;| &nbsp;
-            <span><a href='3.1_Query-ChooseType.jsp'>Query/Download</a></span> &nbsp;| &nbsp;
+            <span><a href='login.jsp'>Log-in</a></span> &nbsp;| &nbsp;
+            <span><a href='UploadHomePage.jsp'>Upload</a></span> &nbsp;| &nbsp;
+            <span><a href='QueryHomePage.jsp'>Query/Download</a></span> &nbsp;| &nbsp;
             <span><a href='4.0_CreateTable-initialize.jsp'>Create Table</a></span> &nbsp;| &nbsp;
             <span><a href='5.0_Admin-Choose.jsp.jsp'>Admin</a></span> &nbsp;| &nbsp;
-            <span><a href='6.0_About.jsp'>About</a></span>
+            <span><a href='6.0_About.jsp'>About</a></span> &nbsp;| &nbsp;
+            <span><a href='logout.jsp'>Log out</a></span>
+                        <%
+            if(request.getSession().getAttribute("Username") != null){
+                out.print("<span align=\"right;\"> (User: "+request.getSession().getAttribute("Username").toString()+" )</span>");
+            } 
+            %>
         </div>
         <!-- End of header-->
         
@@ -138,7 +148,7 @@
           <p>Put corresponding base table column numbers next to the new column names. </p>
         </div>
                
-        <form id="test" action="4.7_CreateTable-Successful.jsp" method="POST" style = "margin-left: 0.25cm">    
+        <form id="test" action="CreateTableForm" method="POST" style = "margin-left: 0.25cm">    
             
             <div class="w3-row-padding">
                 <div class="w3-half">
@@ -171,8 +181,7 @@
             </div>
                     <BR><BR>
                     <div>
-                        <input style = "margin-left: 0cm; margin-bottom: 1cm; width: 2.5cm;" 
-                               type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Previous"/> 
+   
                         <input style = "margin-left: 0.25cm; margin-bottom: 1cm; width: 2.5cm;" 
                                type="submit" class="w3-btn w3-blue-grey w3-center" name="button" value="Next" />
                     </div>
@@ -183,12 +192,13 @@
         <div class="w3-container w3-bottom" style="margin-top: 0.5cm; height: 1.3cm; line-height: 1.3cm; background-color: #533678;color: white; ">
             <center><span>Woodland Road | Pittsburgh, PA 15232 | Main: 412-365-1100 | Admission: 800-837-1290</span></center>
         </div>
+    
     <script type="text/javascript">
      var frmvalidator = new Validator("test");  
-        <%   
+        <%    
         for(int i=1; i<=NEWlist.size();i++){
             if((i%2)==0){
-            out.print("frmvalidator.addValidation(\""+ NEWlist.get(i-1) +"\",\"req\",\"Please fill the matching column number in column: " + i/2 + "\");");
+            //out.print("frmvalidator.addValidation(\""+ NEWlist.get(i-1) +"\",\"req\",\"Please fill the matching column number in column: " + i/2 + "\");");
             out.print("frmvalidator.addValidation(\""+ NEWlist.get(i-1) +"\",\"numeric\",\"Please input numeric value in column: " + i/2 + "\");"); 
             }
          }
